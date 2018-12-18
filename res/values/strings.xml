@@ -1,0 +1,13 @@
+<resources>
+    <string name="startLipadTitle01">Start LIPAD</string>
+    <string name="startLipadSub01">Launch the panel to navigate LIPAD.</string>
+    <string name="startLipadButton01">START</string>
+    <string name="startLipadImage01">LIPAD logo</string>
+    <string name="app_name" translatable="false">LIPAD</string>
+    <string name="darkSkyDisclaimer" translatable="false">Weather forecast powered by Dark Sky</string>
+    <string name="weatherButton01">REFRESH</string>
+    <string name="weatherButton02">EXPLORE</string>
+    <string name="weatherTitle01">Temperature</string>
+    <string name="weatherSub01">Details</string>
+    <string name="weatherImage01" translatable="false">Weather condition</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="startLipadTitle01">I-start ang LIPAD</string>
+    <string name="startLipadSub01">Buksan ang panel upang i-navigate ang LIPAD.</string>
+    <string name="startLipadButton01">I-START</string>
+    <string name="startLipadImage01">Logo ng LIPAD</string>
+    <string name="weatherButton01">I-REFRESH</string>
+    <string name="weatherButton02">I-EXPLORE</string>
+    <string name="weatherTitle01">Temperatura</string>
+    <string name="weatherSub01">Mga detalye</string>
+</resources>
