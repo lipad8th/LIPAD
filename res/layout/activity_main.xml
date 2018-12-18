@@ -55,7 +55,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="8dp"
-                        android:fontFamily="@font/work_sans_bold"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/startLipadTitle01"
                         android:textColor="@color/colorText"
                         android:textSize="24sp"
@@ -68,9 +68,9 @@
                         android:layout_below="@+id/startLipadTitle01"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="-1dp"
-                        android:layout_marginBottom="12dp"
-                        android:fontFamily="@font/work_sans_medium"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="9dp"
+                        android:fontFamily="@font/ubuntu_medium"
                         android:text="@string/startLipadSub01"
                         android:textAllCaps="false"
                         android:textColor="@color/colorText" />
@@ -104,7 +104,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="80dp"
                         android:layout_marginTop="16dp"
-                        android:fontFamily="@font/work_sans_bold"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/weatherTitle01"
                         android:textColor="@color/colorText"
                         android:textSize="24sp"
@@ -118,7 +118,7 @@
                         android:layout_alignStart="@+id/weatherTitle01"
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="0dp"
-                        android:fontFamily="@font/work_sans_medium"
+                        android:fontFamily="@font/ubuntu"
                         android:text="@string/weatherSub01"
                         android:textColor="@color/colorText" />
 
@@ -143,7 +143,7 @@
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
                         android:layout_toStartOf="@+id/weatherButton02"
-                        android:fontFamily="@font/work_sans_bold"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/weatherButton01"
                         android:textAlignment="center" />
 
@@ -156,7 +156,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:fontFamily="@font/work_sans_bold"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/weatherButton02"
                         android:textAlignment="center" />
                 </RelativeLayout>
