@@ -6,6 +6,7 @@
     <string name="startLipadImage01">Logo ng LIPAD</string>
     <string name="weatherButton01">I-REFRESH</string>
     <string name="weatherButton02">I-EXPLORE</string>
-    <string name="weatherTitle01">Temperatura</string>
+    <string name="weatherTitle01">Ulat panahon</string>
     <string name="weatherSub01">Mga detalye</string>
+    <string name="weatherTime11">10PM</string>
 </resources>

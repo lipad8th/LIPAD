@@ -18,7 +18,10 @@
         android:id="@+id/scrollablContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/headerView" >
+        android:layout_below="@+id/headerView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp">
 
         <LinearLayout
             android:id="@+id/content"
@@ -29,20 +32,20 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/card01"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/colorAccent"
                 app:cardCornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:focusable="true">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -57,7 +60,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/startLipadTitle01"
-                        android:textColor="@color/colorText"
+                        android:textColor="@android:color/white"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -73,7 +76,7 @@
                         android:fontFamily="@font/ubuntu_medium"
                         android:text="@string/startLipadSub01"
                         android:textAllCaps="false"
-                        android:textColor="@color/colorText" />
+                        android:textColor="@android:color/white" />
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -85,8 +88,8 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
                 app:cardCornerRadius="12dp"
-                app:cardBackgroundColor="@color/colorBgd"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,16 +97,16 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="160dp">
+                    android:layout_height="310dp">
 
                     <TextView
                         android:id="@+id/weatherTitle01"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="80dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
+                        android:layout_toEndOf="@+id/weatherImage01"
                         android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/weatherTitle01"
                         android:textColor="@color/colorText"
@@ -122,17 +125,286 @@
                         android:text="@string/weatherSub01"
                         android:textColor="@color/colorText" />
 
+                    <TextView
+                        android:id="@+id/weatherSub11"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherTemp11"
+                        android:layout_alignEnd="@id/weatherSub12"
+                        android:layout_marginEnd="76dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherSub11"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <TextView
+                        android:id="@+id/weatherSub12"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherTemp11"
+                        android:layout_alignEnd="@id/weatherSub13"
+                        android:layout_marginEnd="76dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherSub11"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <TextView
+                        android:id="@+id/weatherSub13"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherTemp13"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherSub11"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <TextView
+                        android:id="@+id/weatherSub14"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherTemp11"
+                        android:layout_alignStart="@id/weatherTemp13"
+                        android:layout_marginStart="76dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherSub11"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <TextView
+                        android:id="@+id/weatherSub15"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherTemp11"
+                        android:layout_alignStart="@id/weatherTime14"
+                        android:layout_marginStart="76dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherSub11"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/weatherImage01"
-                        android:layout_width="wrap_content"
+                        android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
                         android:contentDescription="@string/weatherImage01"
                         android:scaleType="center"
-                        app:srcCompat="@drawable/cloudmdpi" />
+                        app:srcCompat="@drawable/ic_cloud" />
+
+                    <TextView
+                        android:id="@+id/weatherTemp01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherImage01"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="-8dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTemp01"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <View
+                        android:id="@+id/separator"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/weatherTitle01"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="76dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/weatherTime11"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/separator"
+                        android:layout_alignEnd="@id/weatherTime12"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="76dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTime11"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/weatherImage11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/weatherTime11"
+                        android:layout_alignEnd="@id/weatherImage12"
+                        android:layout_marginTop="-8dp"
+                        android:layout_marginEnd="80dp"
+                        android:contentDescription="@string/weatherImage01"
+                        android:scaleType="center"
+                        app:srcCompat="@drawable/ic_cloud" />
+
+                    <TextView
+                        android:id="@+id/weatherTemp11"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherImage11"
+                        android:layout_alignEnd="@id/weatherTemp12"
+                        android:layout_marginTop="-8dp"
+                        android:layout_marginEnd="76dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTemp01"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <TextView
+                        android:id="@+id/weatherTime12"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/separator"
+                        android:layout_alignEnd="@id/weatherTime13"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="76dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTime11"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/weatherImage12"
+                        android:layout_width="52dp"
+                        android:layout_height="48dp"
+                        android:layout_below="@id/weatherTime12"
+                        android:layout_alignEnd="@id/weatherImage13"
+                        android:layout_marginTop="-8dp"
+                        android:layout_marginEnd="76dp"
+                        android:contentDescription="@string/weatherImage01"
+                        android:scaleType="center"
+                        app:srcCompat="@drawable/ic_cloud" />
+
+                    <TextView
+                        android:id="@+id/weatherTemp12"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherImage12"
+                        android:layout_alignEnd="@id/weatherTime13"
+                        android:layout_marginTop="-8dp"
+                        android:layout_marginEnd="76dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTemp01"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <TextView
+                        android:id="@+id/weatherTime13"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/separator"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTime11"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/weatherImage13"
+                        android:layout_width="52dp"
+                        android:layout_height="48dp"
+                        android:layout_below="@id/weatherTime13"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-8dp"
+                        android:contentDescription="@string/weatherImage01"
+                        android:scaleType="center"
+                        app:srcCompat="@drawable/ic_cloud" />
+
+                    <TextView
+                        android:id="@+id/weatherTemp13"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherImage13"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-8dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTemp01"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <TextView
+                        android:id="@+id/weatherTime14"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/separator"
+                        android:layout_alignStart="@+id/weatherTime13"
+                        android:layout_marginStart="76dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTime11"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/weatherImage14"
+                        android:layout_width="52dp"
+                        android:layout_height="48dp"
+                        android:layout_below="@id/weatherTime14"
+                        android:layout_alignStart="@id/weatherImage13"
+                        android:layout_marginStart="76dp"
+                        android:layout_marginTop="-8dp"
+                        android:contentDescription="@string/weatherImage01"
+                        android:scaleType="center"
+                        app:srcCompat="@drawable/ic_cloud" />
+
+                    <TextView
+                        android:id="@+id/weatherTemp14"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherImage14"
+                        android:layout_alignStart="@id/weatherTemp13"
+                        android:layout_marginStart="76dp"
+                        android:layout_marginTop="-8dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTemp01"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <TextView
+                        android:id="@+id/weatherTime15"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/separator"
+                        android:layout_alignStart="@+id/weatherTime14"
+                        android:layout_marginStart="76dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTime11"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/weatherImage15"
+                        android:layout_width="52dp"
+                        android:layout_height="48dp"
+                        android:layout_below="@id/weatherTime15"
+                        android:layout_alignStart="@id/weatherImage14"
+                        android:layout_marginStart="76dp"
+                        android:layout_marginTop="-8dp"
+                        android:contentDescription="@string/weatherImage01"
+                        android:scaleType="center"
+                        app:srcCompat="@drawable/ic_cloud" />
+
+                    <TextView
+                        android:id="@+id/weatherTemp15"
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weatherImage15"
+                        android:layout_alignStart="@id/weatherTemp14"
+                        android:layout_marginStart="76dp"
+                        android:layout_marginTop="-8dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:text="@string/weatherTemp01"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText" />
 
                     <Button
                         android:id="@+id/weatherButton01"
@@ -159,6 +431,8 @@
                         android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/weatherButton02"
                         android:textAlignment="center" />
+
+
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
@@ -391,7 +665,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/work_sans_bold"
+                android:fontFamily="@font/ubuntu_bold"
                 android:text="@string/darkSkyDisclaimer"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp" />
