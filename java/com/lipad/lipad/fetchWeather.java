@@ -1,7 +1,8 @@
 package com.lipad.lipad;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,10 +15,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.List;
+import java.util.Locale;
 
 public class fetchWeather extends AsyncTask<Void, Void, Void> {
     String data = "";
@@ -44,12 +45,25 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     private String weatherTime13 = "";
     private String weatherTime14 = "";
     private String weatherTime15 = "";
+    private String darkSkyURL = "";
 
+    public static String longitudeValue;
+    public static String latitudeValue;
 
     @Override
     protected Void doInBackground(Void... voids) {
+        //https://api.darksky.net/forecast/25518f5c378769e6bca4ac90e65f3010/15.132353,120.589614?units=si
+
         try {
-            URL url = new URL("https://api.darksky.net/forecast/25518f5c378769e6bca4ac90e65f3010/15.132353,120.589614?units=si");
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        darkSkyURL = "https://api.darksky.net/forecast/25518f5c378769e6bca4ac90e65f3010/" + latitudeValue + "," +  longitudeValue + "?units=si";
+
+        try {
+            URL url = new URL(darkSkyURL);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -69,6 +83,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             JSONObject JDark = (JSONObject) new JSONObject(data);
             JSONObject JCurrently = (JSONObject) JDark.getJSONObject("currently");
             JSONObject JHourly = (JSONObject) JDark.getJSONObject("hourly");
+
             JSONArray JHourlyData = (JSONArray) JHourly.getJSONArray("data");
             JSONObject JHourly11 = (JSONObject) JHourlyData.getJSONObject(1);
             JSONObject JHourly12 = (JSONObject) JHourlyData.getJSONObject(2);
@@ -88,20 +103,20 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
                     "Humidity: " + Math.round(JCurrently.getDouble("humidity") * 100) + "%" + "\n" +
                     "Chance of Rain: " + Math.round(JCurrently.getDouble("precipProbability")) + "%" + "\n";
             weatherSub11 = JHourly11.getDouble("windSpeed") + "m/s" + "\n" +
-                    "\uD83D\uDCA7 " + Math.round(JHourly11.getDouble("humidity") * 100) + "%" + "\n" +
-                    "\uD83C\uDF27 " + Math.round(JHourly11.getDouble("precipProbability") * 100) + "%" + "\n";
+                    "H: " + Math.round(JHourly11.getDouble("humidity") * 100) + "%" + "\n" +
+                    "R: " + Math.round(JHourly11.getDouble("precipProbability") * 100) + "%" + "\n";
             weatherSub12 = JHourly12.getDouble("windSpeed") + "m/s" + "\n" +
-                    "\uD83D\uDCA7 " + Math.round(JHourly12.getDouble("humidity") * 100) + "%" + "\n" +
-                    "\uD83C\uDF27 " + Math.round(JHourly12.getDouble("precipProbability") * 100) + "%" + "\n";
+                    "H: " + Math.round(JHourly12.getDouble("humidity") * 100) + "%" + "\n" +
+                    "R: " + Math.round(JHourly12.getDouble("precipProbability") * 100) + "%" + "\n";
             weatherSub13 = JHourly13.getDouble("windSpeed") + "m/s" + "\n" +
-                    "\uD83D\uDCA7 " + Math.round(JHourly13.getDouble("humidity") * 100) + "%" + "\n" +
-                    "\uD83C\uDF27 " + Math.round(JHourly13.getDouble("precipProbability") * 100) + "%" + "\n";
+                    "H: " + Math.round(JHourly13.getDouble("humidity") * 100) + "%" + "\n" +
+                    "R: " + Math.round(JHourly13.getDouble("precipProbability") * 100) + "%" + "\n";
             weatherSub14 = JHourly14.getDouble("windSpeed") + "m/s" + "\n" +
-                    "\uD83D\uDCA7 " + Math.round(JHourly14.getDouble("humidity") * 100) + "%" + "\n" +
-                    "\uD83C\uDF27 " + Math.round(JHourly14.getDouble("precipProbability") * 100) + "%" + "\n";
+                    "H: " + Math.round(JHourly14.getDouble("humidity") * 100) + "%" + "\n" +
+                    "R: " + Math.round(JHourly14.getDouble("precipProbability") * 100) + "%" + "\n";
             weatherSub15 = JHourly15.getDouble("windSpeed") + "m/s" + "\n" +
-                    "\uD83D\uDCA7 " + Math.round(JHourly15.getDouble("humidity") * 100) + "%" + "\n" +
-                    "\uD83C\uDF27 " + Math.round(JHourly15.getDouble("precipProbability") * 100) + "%" + "\n";
+                    "H: " + Math.round(JHourly15.getDouble("humidity") * 100) + "%" + "\n" +
+                    "R: " + Math.round(JHourly15.getDouble("precipProbability") * 100) + "%" + "\n";
 
             weatherImage01 = JCurrently.getString("icon");
             weatherImage11 = JHourly11.getString("icon");
@@ -326,6 +341,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
                 break;
         }
 
+        MainActivity.weatherTitle01.setText("Now");
         MainActivity.weatherSub01.setText(this.weatherSub01);
         MainActivity.weatherTemp01.setText(this.weatherTemp01);
         MainActivity.weatherTemp11.setText(this.weatherTemp11);
@@ -344,7 +360,9 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
         MainActivity.weatherTime14.setText(this.weatherTime14);
         MainActivity.weatherTime15.setText(this.weatherTime15);
 
+        MainActivity.testView3.setText(this.darkSkyURL);
 
     }
+
 
 }

@@ -452,6 +452,7 @@
                     android:layout_height="110dp">
 
                     <TextView
+                        android:id="@+id/testView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -464,6 +465,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/testView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
@@ -508,6 +510,7 @@
                     android:layout_height="110dp">
 
                     <TextView
+                        android:id="@+id/testView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"

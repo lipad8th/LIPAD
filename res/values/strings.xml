@@ -7,8 +7,8 @@
     <string name="darkSkyDisclaimer" translatable="false">Weather forecast powered by Dark Sky</string>
     <string name="weatherButton01">REFRESH</string>
     <string name="weatherButton02">EXPLORE</string>
-    <string name="weatherTitle01">Now</string>
-    <string name="weatherSub01">Summary \nWind \nHumidity \nChance of Rain</string>
+    <string name="weatherTitle01">Checking up weather...</string>
+    <string name="weatherSub01">This may take a few seconds</string>
     <string name="weatherImage01" translatable="false">Weather condition</string>
     <string name="weatherTemp01" translatable="false">"  °C"</string>
     <string name="weatherTime11">10PM</string>
