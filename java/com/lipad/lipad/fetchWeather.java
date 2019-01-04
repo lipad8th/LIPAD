@@ -17,7 +17,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class fetchWeather extends AsyncTask<Void, Void, Void> {
-    String data = "";
+    String darkSkyData = "";
+    String mapQuestData = "";
+    private String weatherTitle01 = "";
     private String weatherSub01 = "";
     private String weatherSub11 = "";
     private String weatherSub12 = "";
@@ -30,18 +32,29 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     private String weatherTemp13 = "";
     private String weatherTemp14 = "";
     private String weatherTemp15 = "";
+    private String weatherTemp21 = "";
+    private String weatherTemp22 = "";
+    private String weatherTemp23 = "";
     private String weatherImage01 = "";
     private String weatherImage11 = "";
     private String weatherImage12 = "";
     private String weatherImage13 = "";
     private String weatherImage14 = "";
     private String weatherImage15 = "";
+    private String weatherImage21 = "";
+    private String weatherImage22 = "";
+    private String weatherImage23 = "";
     private String weatherTime11 = "";
     private String weatherTime12 = "";
     private String weatherTime13 = "";
     private String weatherTime14 = "";
     private String weatherTime15 = "";
+    private String weatherDay21 = "";
+    private String weatherDay22 = "";
+    private String weatherDay23 = "";
+
     private String darkSkyURL = "";
+    private String mapQuestURL = "";
 
     public static String longitudeValue;
     public static String latitudeValue;
@@ -65,6 +78,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
         }
 
         darkSkyURL = "https://api.darksky.net/forecast/25518f5c378769e6bca4ac90e65f3010/" + latitudeValue + "," +  longitudeValue + "?units=si";
+        mapQuestURL =  "http://open.mapquestapi.com/geocoding/v1/reverse?key=mJg3p2K8gwlMWtM9pOiku2ZTu9UB5SAl&location=" + latitudeValue + "," + longitudeValue;
 
         try {
             URL url = new URL(darkSkyURL);
@@ -74,7 +88,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             String line = "";
             while(line != null){
                 line = bufferedReader.readLine();
-                data = data + line;
+                darkSkyData = darkSkyData + line;
             }
         } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -83,10 +97,41 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
         }
 
         try {
+            URL url = new URL(mapQuestURL);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line = "";
+            while(line != null){
+                line = bufferedReader.readLine();
+                mapQuestData = mapQuestData + line;
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            JSONObject JDark = (JSONObject) new JSONObject(data);
+        try {
+
+            JSONObject JMap = (JSONObject) new JSONObject(mapQuestData);
+            JSONArray JResults = (JSONArray) JMap.getJSONArray("results");
+            JSONObject JResultsElement = (JSONObject) JResults.getJSONObject(0);
+            JSONArray JLocations = (JSONArray) JResultsElement.getJSONArray("locations");
+            JSONObject JLocationElement = (JSONObject) JLocations.getJSONObject(0);
+
+            weatherTitle01 = "" + JLocationElement.getString("adminArea5");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            JSONObject JDark = (JSONObject) new JSONObject(darkSkyData);
             JSONObject JCurrently = (JSONObject) JDark.getJSONObject("currently");
             JSONObject JHourly = (JSONObject) JDark.getJSONObject("hourly");
+            JSONObject JDaily = (JSONObject) JDark.getJSONObject("daily");
 
             JSONArray JHourlyData = (JSONArray) JHourly.getJSONArray("data");
             JSONObject JHourly11 = (JSONObject) JHourlyData.getJSONObject(1);
@@ -95,12 +140,21 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             JSONObject JHourly14 = (JSONObject) JHourlyData.getJSONObject(4);
             JSONObject JHourly15 = (JSONObject) JHourlyData.getJSONObject(5);
 
+            JSONArray JDailyData = (JSONArray) JDaily.getJSONArray("data");
+            JSONObject JDaily21 = (JSONObject) JDailyData.getJSONObject(1);
+            JSONObject JDaily22 = (JSONObject) JDailyData.getJSONObject(2);
+            JSONObject JDaily23 = (JSONObject) JDailyData.getJSONObject(3);
+
             weatherTemp01 = Math.round(JCurrently.getDouble("temperature")) + "°C";
             weatherTemp11 = Math.round(JHourly11.getDouble("temperature")) + "°C";
             weatherTemp12 = Math.round(JHourly12.getDouble("temperature")) + "°C";
             weatherTemp13 = Math.round(JHourly13.getDouble("temperature")) + "°C";
             weatherTemp14 = Math.round(JHourly14.getDouble("temperature")) + "°C";
             weatherTemp15 = Math.round(JHourly15.getDouble("temperature")) + "°C";
+
+            weatherTemp21 = Math.round(JDaily21.getDouble("temperatureHigh")) + "°C" + " / " + Math.round(JDaily21.getDouble("temperatureLow")) + "°C";
+            weatherTemp22 = Math.round(JDaily22.getDouble("temperatureHigh")) + "°C" + " / " + Math.round(JDaily22.getDouble("temperatureLow")) + "°C";
+            weatherTemp23 = Math.round(JDaily23.getDouble("temperatureHigh")) + "°C" + " / " + Math.round(JDaily23.getDouble("temperatureLow")) + "°C";
 
             String weatherCondition = "" + JCurrently.get("summary");
             switch (weatherCondition){
@@ -144,6 +198,9 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             weatherImage13 = JHourly13.getString("icon");
             weatherImage14 = JHourly14.getString("icon");
             weatherImage15 = JHourly15.getString("icon");
+            weatherImage21 = JDaily21.getString("icon");
+            weatherImage22 = JDaily22.getString("icon");
+            weatherImage23 = JDaily23.getString("icon");
 
             weatherTime11 = JHourly11.getString("time") + "";
             long unixTime11 = Long.valueOf(weatherTime11) * 1000;
@@ -170,12 +227,33 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             Date javaTime15 = new java.util.Date(unixTime15);
             weatherTime15 = new SimpleDateFormat("hha").format(javaTime15);
 
+            weatherDay21 = JDaily21.getString("time") + "";
+            long unixTime21 = Long.valueOf(weatherDay21) * 1000;
+            Date javaTime21 = new java.util.Date(unixTime21);
+            weatherDay21 = new SimpleDateFormat("EEEE").format(javaTime21);
+
+            weatherDay22 = JDaily22.getString("time") + "";
+            long unixTime22 = Long.valueOf(weatherDay22) * 1000;
+            Date javaTime22 = new java.util.Date(unixTime22);
+            weatherDay22 = new SimpleDateFormat("EEEE").format(javaTime22);
+
+            weatherDay23 = JDaily23.getString("time") + "";
+            long unixTime23 = Long.valueOf(weatherDay23) * 1000;
+            Date javaTime23 = new java.util.Date(unixTime23);
+            weatherDay23 = new SimpleDateFormat("EEEE").format(javaTime23);
+
+
+
             } catch (JSONException e) {
             e.printStackTrace();
         }
 
         return null;
     }
+
+
+
+
 
 
     @Override
@@ -362,7 +440,97 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
                 break;
         }
 
-        MainActivity.weatherTitle01.setText("Now");
+        switch (weatherImage21) {
+            case "clear-night":
+                MainActivity.weatherImage21.setImageResource(R.drawable.ic_clearnight);
+                break;
+            case "clear-day":
+                MainActivity.weatherImage21.setImageResource(R.drawable.ic_clearday);
+                break;
+            case "rain":
+                MainActivity.weatherImage21.setImageResource(R.drawable.ic_rain);
+                break;
+            case "wind":
+                MainActivity.weatherImage21.setImageResource(R.drawable.ic_wind);
+                break;
+            case "fog":
+                MainActivity.weatherImage21.setImageResource(R.drawable.ic_fog);
+                break;
+            case "cloudy":
+                MainActivity.weatherImage21.setImageResource(R.drawable.ic_cloudy);
+                break;
+            case "partly-cloudy-day":
+                MainActivity.weatherImage21.setImageResource(R.drawable.ic_partlycloudyday);
+                break;
+            case "partly-cloudy-night":
+                MainActivity.weatherImage21.setImageResource(R.drawable.ic_partlycloudynight);
+                break;
+            case "thunderstorm":
+                MainActivity.weatherImage21.setImageResource(R.drawable.ic_thunderstorm);
+                break;
+        }
+
+        switch (weatherImage22) {
+            case "clear-night":
+                MainActivity.weatherImage22.setImageResource(R.drawable.ic_clearnight);
+                break;
+            case "clear-day":
+                MainActivity.weatherImage22.setImageResource(R.drawable.ic_clearday);
+                break;
+            case "rain":
+                MainActivity.weatherImage22.setImageResource(R.drawable.ic_rain);
+                break;
+            case "wind":
+                MainActivity.weatherImage22.setImageResource(R.drawable.ic_wind);
+                break;
+            case "fog":
+                MainActivity.weatherImage22.setImageResource(R.drawable.ic_fog);
+                break;
+            case "cloudy":
+                MainActivity.weatherImage22.setImageResource(R.drawable.ic_cloudy);
+                break;
+            case "partly-cloudy-day":
+                MainActivity.weatherImage22.setImageResource(R.drawable.ic_partlycloudyday);
+                break;
+            case "partly-cloudy-night":
+                MainActivity.weatherImage22.setImageResource(R.drawable.ic_partlycloudynight);
+                break;
+            case "thunderstorm":
+                MainActivity.weatherImage22.setImageResource(R.drawable.ic_thunderstorm);
+                break;
+        }
+
+        switch (weatherImage23) {
+            case "clear-night":
+                MainActivity.weatherImage23.setImageResource(R.drawable.ic_clearnight);
+                break;
+            case "clear-day":
+                MainActivity.weatherImage23.setImageResource(R.drawable.ic_clearday);
+                break;
+            case "rain":
+                MainActivity.weatherImage23.setImageResource(R.drawable.ic_rain);
+                break;
+            case "wind":
+                MainActivity.weatherImage23.setImageResource(R.drawable.ic_wind);
+                break;
+            case "fog":
+                MainActivity.weatherImage23.setImageResource(R.drawable.ic_fog);
+                break;
+            case "cloudy":
+                MainActivity.weatherImage23.setImageResource(R.drawable.ic_cloudy);
+                break;
+            case "partly-cloudy-day":
+                MainActivity.weatherImage23.setImageResource(R.drawable.ic_partlycloudyday);
+                break;
+            case "partly-cloudy-night":
+                MainActivity.weatherImage23.setImageResource(R.drawable.ic_partlycloudynight);
+                break;
+            case "thunderstorm":
+                MainActivity.weatherImage23.setImageResource(R.drawable.ic_thunderstorm);
+                break;
+        }
+
+        MainActivity.weatherTitle01.setText(this.weatherTitle01);
         MainActivity.weatherSub01.setText(this.weatherSub01);
         MainActivity.weatherTemp01.setText(this.weatherTemp01);
         MainActivity.weatherTemp11.setText(this.weatherTemp11);
@@ -370,6 +538,9 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
         MainActivity.weatherTemp13.setText(this.weatherTemp13);
         MainActivity.weatherTemp14.setText(this.weatherTemp14);
         MainActivity.weatherTemp15.setText(this.weatherTemp15);
+        MainActivity.weatherSub21.setText(this.weatherTemp21);
+        MainActivity.weatherSub22.setText(this.weatherTemp22);
+        MainActivity.weatherSub23.setText(this.weatherTemp23);
         MainActivity.weatherSub11.setText(this.weatherSub11);
         MainActivity.weatherSub12.setText(this.weatherSub12);
         MainActivity.weatherSub13.setText(this.weatherSub13);
@@ -380,6 +551,9 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
         MainActivity.weatherTime13.setText(this.weatherTime13);
         MainActivity.weatherTime14.setText(this.weatherTime14);
         MainActivity.weatherTime15.setText(this.weatherTime15);
+        MainActivity.weatherDay21.setText(this.weatherDay21);
+        MainActivity.weatherDay22.setText(this.weatherDay22);
+        MainActivity.weatherDay23.setText(this.weatherDay23);
 
         MainActivity.testView3.setText(this.darkSkyURL);
 

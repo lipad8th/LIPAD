@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     public static TextView weatherSub13;
     public static TextView weatherSub14;
     public static TextView weatherSub15;
+    public static TextView weatherSub21;
+    public static TextView weatherSub22;
+    public static TextView weatherSub23;
     public static TextView weatherTemp01;
     public static TextView weatherTemp11;
     public static TextView weatherTemp12;
@@ -53,11 +56,17 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     public static AppCompatImageView weatherImage13;
     public static AppCompatImageView weatherImage14;
     public static AppCompatImageView weatherImage15;
+    public static AppCompatImageView weatherImage21;
+    public static AppCompatImageView weatherImage22;
+    public static AppCompatImageView weatherImage23;
     public static TextView weatherTime11;
     public static TextView weatherTime12;
     public static TextView weatherTime13;
     public static TextView weatherTime14;
     public static TextView weatherTime15;
+    public static TextView weatherDay21;
+    public static TextView weatherDay22;
+    public static TextView weatherDay23;
 
     public static TextView testView;
     public static TextView testView2;
@@ -103,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         weatherSub13 = findViewById(R.id.weatherSub13);
         weatherSub14 = findViewById(R.id.weatherSub14);
         weatherSub15 = findViewById(R.id.weatherSub15);
+        weatherSub21 = findViewById(R.id.weatherSub21);
+        weatherSub22 = findViewById(R.id.weatherSub22);
+        weatherSub23 = findViewById(R.id.weatherSub23);
         weatherTemp01 = findViewById(R.id.weatherTemp01);
         weatherTemp11 = findViewById(R.id.weatherTemp11);
         weatherTemp12 = findViewById(R.id.weatherTemp12);
@@ -115,11 +127,18 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         weatherImage13 = findViewById(R.id.weatherImage13);
         weatherImage14 = findViewById(R.id.weatherImage14);
         weatherImage15 = findViewById(R.id.weatherImage15);
+        weatherImage21 = findViewById(R.id.weatherImage21);
+        weatherImage22 = findViewById(R.id.weatherImage22);
+        weatherImage23 = findViewById(R.id.weatherImage23);
         weatherTime11 = findViewById(R.id.weatherTime11);
         weatherTime12 = findViewById(R.id.weatherTime12);
         weatherTime13 = findViewById(R.id.weatherTime13);
         weatherTime14 = findViewById(R.id.weatherTime14);
         weatherTime15 = findViewById(R.id.weatherTime15);
+        weatherDay21 = findViewById(R.id.weatherDay21);
+        weatherDay22 = findViewById(R.id.weatherDay22);
+        weatherDay23 = findViewById(R.id.weatherDay23);
+
         testView = findViewById(R.id.testView);
         testView2 = findViewById(R.id.testView2);
         testView3 = findViewById(R.id.testView3);

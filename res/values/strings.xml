@@ -22,4 +22,5 @@
     <string name="mostlyCloudyText">Mostly Cloudy</string>
     <string name="clearText">Clear</string>
     <string name="drizzleText">Drizzle</string>
+    <string name="weatherSub21">MWF</string>
 </resources>
