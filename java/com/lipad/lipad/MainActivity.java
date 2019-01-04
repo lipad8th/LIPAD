@@ -27,13 +27,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
-
-
 public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
 
-    Button weatherButton01;
-    Button weatherButton02;
-    Button darkSkyDisclaimer;
+    public static final int RequestPermissionCode = 1;
     public static TextView weatherTitle01;
     public static TextView weatherSub01;
     public static TextView weatherSub11;
@@ -67,14 +63,14 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     public static TextView weatherDay21;
     public static TextView weatherDay22;
     public static TextView weatherDay23;
-
     public static TextView testView;
     public static TextView testView2;
     public static TextView testView3;
-
+    Button weatherButton01;
+    Button weatherButton02;
+    Button darkSkyDisclaimer;
     private GoogleApiClient googleApiClient;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    public static final int RequestPermissionCode = 1;
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -170,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("https://darksky.net/forecast/"+ fetchWeather.latitudeValue +","+ fetchWeather.longitudeValue +"/ca12/en"));
+                intent.setData(Uri.parse("https://darksky.net/forecast/" + fetchWeather.latitudeValue + "," + fetchWeather.longitudeValue + "/ca12/en"));
                 startActivity(intent);
             }
         });
@@ -225,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.e("fetchWeather","Connection suspended");
+        Log.e("fetchWeather", "Connection suspended");
     }
 
     @Override

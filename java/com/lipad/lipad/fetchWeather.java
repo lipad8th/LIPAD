@@ -17,6 +17,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class fetchWeather extends AsyncTask<Void, Void, Void> {
+    public static String longitudeValue;
+    public static String latitudeValue;
+    public static String windText;
+    public static String humidityText;
+    public static String chanceOfRainText;
+    public static String humidityInitial;
+    public static String chanceOfRainInitial;
+    public static String partlyCloudyText;
+    public static String mostlyCloudyText;
+    public static String clearText;
+    public static String drizzleText;
     String darkSkyData = "";
     String mapQuestData = "";
     private String weatherTitle01 = "";
@@ -52,21 +63,8 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     private String weatherDay21 = "";
     private String weatherDay22 = "";
     private String weatherDay23 = "";
-
     private String darkSkyURL = "";
     private String mapQuestURL = "";
-
-    public static String longitudeValue;
-    public static String latitudeValue;
-    public static String windText;
-    public static String humidityText;
-    public static String chanceOfRainText;
-    public static String humidityInitial;
-    public static String chanceOfRainInitial;
-    public static String partlyCloudyText;
-    public static String mostlyCloudyText;
-    public static String clearText;
-    public static String drizzleText;
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -77,8 +75,8 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             e.printStackTrace();
         }
 
-        darkSkyURL = "https://api.darksky.net/forecast/25518f5c378769e6bca4ac90e65f3010/" + latitudeValue + "," +  longitudeValue + "?units=si";
-        mapQuestURL =  "http://open.mapquestapi.com/geocoding/v1/reverse?key=mJg3p2K8gwlMWtM9pOiku2ZTu9UB5SAl&location=" + latitudeValue + "," + longitudeValue;
+        darkSkyURL = "https://api.darksky.net/forecast/25518f5c378769e6bca4ac90e65f3010/" + latitudeValue + "," + longitudeValue + "?units=si";
+        mapQuestURL = "http://open.mapquestapi.com/geocoding/v1/reverse?key=mJg3p2K8gwlMWtM9pOiku2ZTu9UB5SAl&location=" + latitudeValue + "," + longitudeValue;
 
         try {
             URL url = new URL(darkSkyURL);
@@ -86,14 +84,14 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
-            while(line != null){
+            while (line != null) {
                 line = bufferedReader.readLine();
                 darkSkyData = darkSkyData + line;
             }
         } catch (MalformedURLException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         } catch (IOException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
 
         try {
@@ -102,7 +100,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
-            while(line != null){
+            while (line != null) {
                 line = bufferedReader.readLine();
                 mapQuestData = mapQuestData + line;
             }
@@ -118,9 +116,9 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             JSONArray JResults = (JSONArray) JMap.getJSONArray("results");
             JSONObject JResultsElement = (JSONObject) JResults.getJSONObject(0);
             JSONArray JLocations = (JSONArray) JResultsElement.getJSONArray("locations");
-            JSONObject JLocationElement = (JSONObject) JLocations.getJSONObject(0);
+            JSONObject JLocationsElement = (JSONObject) JLocations.getJSONObject(0);
 
-            weatherTitle01 = "" + JLocationElement.getString("adminArea5");
+            weatherTitle01 = "" + JLocationsElement.getString("adminArea5");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -157,7 +155,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             weatherTemp23 = Math.round(JDaily23.getDouble("temperatureHigh")) + "°C" + " / " + Math.round(JDaily23.getDouble("temperatureLow")) + "°C";
 
             String weatherCondition = "" + JCurrently.get("summary");
-            switch (weatherCondition){
+            switch (weatherCondition) {
                 case "Partly Cloudy":
                     weatherCondition = partlyCloudyText;
                     break;
@@ -172,7 +170,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
                     break;
             }
 
-            weatherSub01 =   "" + weatherCondition + "\n" +
+            weatherSub01 = "" + weatherCondition + "\n" +
                     windText + JCurrently.getDouble("windSpeed") + " m/s" + "\n" +
                     humidityText + Math.round(JCurrently.getDouble("humidity") * 100) + "%" + "\n" +
                     chanceOfRainText + Math.round(JCurrently.getDouble("precipProbability")) + "%" + "\n";
@@ -205,27 +203,27 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             weatherTime11 = JHourly11.getString("time") + "";
             long unixTime11 = Long.valueOf(weatherTime11) * 1000;
             Date javaTime11 = new java.util.Date(unixTime11);
-            weatherTime11 = new SimpleDateFormat("hha").format(javaTime11);
+            weatherTime11 = new SimpleDateFormat("ha").format(javaTime11);
 
             weatherTime12 = JHourly12.getString("time") + "";
             long unixTime12 = Long.valueOf(weatherTime12) * 1000;
             Date javaTime12 = new java.util.Date(unixTime12);
-            weatherTime12 = new SimpleDateFormat("hha").format(javaTime12);
+            weatherTime12 = new SimpleDateFormat("ha").format(javaTime12);
 
             weatherTime13 = JHourly13.getString("time") + "";
             long unixTime13 = Long.valueOf(weatherTime13) * 1000;
             Date javaTime13 = new java.util.Date(unixTime13);
-            weatherTime13 = new SimpleDateFormat("hha").format(javaTime13);
+            weatherTime13 = new SimpleDateFormat("ha").format(javaTime13);
 
             weatherTime14 = JHourly14.getString("time") + "";
             long unixTime14 = Long.valueOf(weatherTime14) * 1000;
             Date javaTime14 = new java.util.Date(unixTime14);
-            weatherTime14 = new SimpleDateFormat("hha").format(javaTime14);
+            weatherTime14 = new SimpleDateFormat("ha").format(javaTime14);
 
             weatherTime15 = JHourly15.getString("time") + "";
             long unixTime15 = Long.valueOf(weatherTime15) * 1000;
             Date javaTime15 = new java.util.Date(unixTime15);
-            weatherTime15 = new SimpleDateFormat("hha").format(javaTime15);
+            weatherTime15 = new SimpleDateFormat("ha").format(javaTime15);
 
             weatherDay21 = JDaily21.getString("time") + "";
             long unixTime21 = Long.valueOf(weatherDay21) * 1000;
@@ -243,17 +241,12 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             weatherDay23 = new SimpleDateFormat("EEEE").format(javaTime23);
 
 
-
-            } catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
         return null;
     }
-
-
-
-
 
 
     @Override
