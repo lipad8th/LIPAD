@@ -6,7 +6,16 @@
     <string name="startLipadImage01">Logo ng LIPAD</string>
     <string name="weatherButton01">I-REFRESH</string>
     <string name="weatherButton02">I-EXPLORE</string>
-    <string name="weatherTitle01">Ulat panahon</string>
-    <string name="weatherSub01">Mga detalye</string>
+    <string name="weatherTitle01">Tinitignan ang panahon…</string>
+    <string name="weatherSub01">Mangyaring maghintay ng ilang saglit</string>
     <string name="weatherTime11">10PM</string>
+    <string name="windText">"Bilis ng hangin: "</string>
+    <string name="chanceOfRainText">"Tsansa ng pag-ulan: "</string>
+    <string name="humidityText">"Halumigmig: "</string>
+    <string name="humidityInitial">"H: "</string>
+    <string name="chanceOfRainInitial">"U: "</string>
+    <string name="partlyCloudyText">Bahagyang maulap</string>
+    <string name="mostlyCloudyText">Maulap-ulap</string>
+    <string name="clearText">Maaliwalas</string>
+    <string name="drizzleText">Ambon</string>
 </resources>

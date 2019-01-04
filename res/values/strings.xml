@@ -7,10 +7,19 @@
     <string name="darkSkyDisclaimer" translatable="false">Weather forecast powered by Dark Sky</string>
     <string name="weatherButton01">REFRESH</string>
     <string name="weatherButton02">EXPLORE</string>
-    <string name="weatherTitle01">Checking up weather...</string>
+    <string name="weatherTitle01">Checking up weather…</string>
     <string name="weatherSub01">This may take a few seconds</string>
     <string name="weatherImage01" translatable="false">Weather condition</string>
     <string name="weatherTemp01" translatable="false">"  °C"</string>
-    <string name="weatherTime11">10PM</string>
+    <string name="weatherTime11">AM/PM</string>
     <string name="weatherSub11" translatable="false">m/s\n%\n%</string>
+    <string name="windText">"Wind: "</string>
+    <string name="humidityText">"Humidity: "</string>
+    <string name="chanceOfRainText">"Chance of Rain: "</string>
+    <string name="humidityInitial">"H: "</string>
+    <string name="chanceOfRainInitial">"R: "</string>
+    <string name="partlyCloudyText">Partly Cloudy</string>
+    <string name="mostlyCloudyText">Mostly Cloudy</string>
+    <string name="clearText">Clear</string>
+    <string name="drizzleText">Drizzle</string>
 </resources>

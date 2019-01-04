@@ -1,7 +1,5 @@
 package com.lipad.lipad;
 
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -17,8 +15,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class fetchWeather extends AsyncTask<Void, Void, Void> {
     String data = "";
@@ -49,10 +45,18 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
 
     public static String longitudeValue;
     public static String latitudeValue;
+    public static String windText;
+    public static String humidityText;
+    public static String chanceOfRainText;
+    public static String humidityInitial;
+    public static String chanceOfRainInitial;
+    public static String partlyCloudyText;
+    public static String mostlyCloudyText;
+    public static String clearText;
+    public static String drizzleText;
 
     @Override
     protected Void doInBackground(Void... voids) {
-        //https://api.darksky.net/forecast/25518f5c378769e6bca4ac90e65f3010/15.132353,120.589614?units=si
 
         try {
             Thread.sleep(2000);
@@ -98,25 +102,41 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             weatherTemp14 = Math.round(JHourly14.getDouble("temperature")) + "°C";
             weatherTemp15 = Math.round(JHourly15.getDouble("temperature")) + "°C";
 
-            weatherSub01 =   "" + JCurrently.get("summary") + "\n" +
-                    "Wind: " + JCurrently.getDouble("windSpeed") + " m/s" + "\n" +
-                    "Humidity: " + Math.round(JCurrently.getDouble("humidity") * 100) + "%" + "\n" +
-                    "Chance of Rain: " + Math.round(JCurrently.getDouble("precipProbability")) + "%" + "\n";
+            String weatherCondition = "" + JCurrently.get("summary");
+            switch (weatherCondition){
+                case "Partly Cloudy":
+                    weatherCondition = partlyCloudyText;
+                    break;
+                case "Mostly Cloudy":
+                    weatherCondition = mostlyCloudyText;
+                    break;
+                case "Clear":
+                    weatherCondition = clearText;
+                    break;
+                case "Drizzle":
+                    weatherCondition = drizzleText;
+                    break;
+            }
+
+            weatherSub01 =   "" + weatherCondition + "\n" +
+                    windText + JCurrently.getDouble("windSpeed") + " m/s" + "\n" +
+                    humidityText + Math.round(JCurrently.getDouble("humidity") * 100) + "%" + "\n" +
+                    chanceOfRainText + Math.round(JCurrently.getDouble("precipProbability")) + "%" + "\n";
             weatherSub11 = JHourly11.getDouble("windSpeed") + "m/s" + "\n" +
-                    "H: " + Math.round(JHourly11.getDouble("humidity") * 100) + "%" + "\n" +
-                    "R: " + Math.round(JHourly11.getDouble("precipProbability") * 100) + "%" + "\n";
+                    humidityInitial + Math.round(JHourly11.getDouble("humidity") * 100) + "%" + "\n" +
+                    chanceOfRainInitial + Math.round(JHourly11.getDouble("precipProbability") * 100) + "%" + "\n";
             weatherSub12 = JHourly12.getDouble("windSpeed") + "m/s" + "\n" +
-                    "H: " + Math.round(JHourly12.getDouble("humidity") * 100) + "%" + "\n" +
-                    "R: " + Math.round(JHourly12.getDouble("precipProbability") * 100) + "%" + "\n";
+                    humidityInitial + Math.round(JHourly12.getDouble("humidity") * 100) + "%" + "\n" +
+                    chanceOfRainInitial + Math.round(JHourly12.getDouble("precipProbability") * 100) + "%" + "\n";
             weatherSub13 = JHourly13.getDouble("windSpeed") + "m/s" + "\n" +
-                    "H: " + Math.round(JHourly13.getDouble("humidity") * 100) + "%" + "\n" +
-                    "R: " + Math.round(JHourly13.getDouble("precipProbability") * 100) + "%" + "\n";
+                    humidityInitial + Math.round(JHourly13.getDouble("humidity") * 100) + "%" + "\n" +
+                    chanceOfRainInitial + Math.round(JHourly13.getDouble("precipProbability") * 100) + "%" + "\n";
             weatherSub14 = JHourly14.getDouble("windSpeed") + "m/s" + "\n" +
-                    "H: " + Math.round(JHourly14.getDouble("humidity") * 100) + "%" + "\n" +
-                    "R: " + Math.round(JHourly14.getDouble("precipProbability") * 100) + "%" + "\n";
+                    humidityInitial + Math.round(JHourly14.getDouble("humidity") * 100) + "%" + "\n" +
+                    chanceOfRainInitial + Math.round(JHourly14.getDouble("precipProbability") * 100) + "%" + "\n";
             weatherSub15 = JHourly15.getDouble("windSpeed") + "m/s" + "\n" +
-                    "H: " + Math.round(JHourly15.getDouble("humidity") * 100) + "%" + "\n" +
-                    "R: " + Math.round(JHourly15.getDouble("precipProbability") * 100) + "%" + "\n";
+                    humidityInitial + Math.round(JHourly15.getDouble("humidity") * 100) + "%" + "\n" +
+                    chanceOfRainInitial + Math.round(JHourly15.getDouble("precipProbability") * 100) + "%" + "\n";
 
             weatherImage01 = JCurrently.getString("icon");
             weatherImage11 = JHourly11.getString("icon");
@@ -161,6 +181,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+
         switch (weatherImage01) {
             case "clear-night":
                 MainActivity.weatherImage01.setImageResource(R.drawable.ic_clearnight);

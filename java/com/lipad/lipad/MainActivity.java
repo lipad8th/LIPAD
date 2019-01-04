@@ -133,6 +133,15 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                 .addApi(LocationServices.API)
                 .build();
 
+        fetchWeather.windText = getString(R.string.windText);
+        fetchWeather.humidityText = getString(R.string.humidityText);
+        fetchWeather.chanceOfRainText = getString(R.string.chanceOfRainText);
+        fetchWeather.humidityInitial = getString(R.string.humidityInitial);
+        fetchWeather.chanceOfRainInitial = getString(R.string.chanceOfRainInitial);
+        fetchWeather.partlyCloudyText = getString(R.string.partlyCloudyText);
+        fetchWeather.mostlyCloudyText = getString(R.string.mostlyCloudyText);
+        fetchWeather.clearText = getString(R.string.clearText);
+        fetchWeather.drizzleText = getString(R.string.drizzleText);
         fetchWeather process = new fetchWeather();
         process.execute();
 
