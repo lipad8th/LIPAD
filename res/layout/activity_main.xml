@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/headerView"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" >
-    </LinearLayout>
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"></LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollablContent"
@@ -60,6 +58,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/startLipadTitle01"
+                        android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -518,6 +517,7 @@
                     <Button
                         android:id="@+id/weatherButton01"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:textColor="@color/colorAccent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
@@ -531,6 +531,7 @@
                     <Button
                         android:id="@+id/weatherButton02"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:textColor="@color/colorAccent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -658,7 +659,9 @@
                         android:layout_marginBottom="0dp"
                         android:text="START" />
                 </RelativeLayout>
+
             </android.support.v7.widget.CardView>
+
 
             <Button
                 android:id="@+id/darkSkyDisclaimer"

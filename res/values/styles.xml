@@ -5,10 +5,16 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">#000000</item>
         <item name="android:colorBackground">@color/cardview_light_background</item>
     </style>
 
     <style name="LIPADThemeFresh" parent="LIPADTheme" />
+    
+    <style name="LIPADThemeDark" parent="LIPADTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        </style>
 
 </resources>

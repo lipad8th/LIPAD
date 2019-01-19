@@ -1,5 +1,6 @@
 package com.lipad.lipad;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -20,14 +21,15 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.FusedLocationProviderApi;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
-public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     public static final int RequestPermissionCode = 1;
     public static TextView weatherTitle01;
@@ -69,28 +71,10 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     Button weatherButton01;
     Button weatherButton02;
     Button darkSkyDisclaimer;
+
     private GoogleApiClient googleApiClient;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermission();
-        } else {
-            fusedLocationProviderClient.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            if (location != null) {
-                                fetchWeather.latitudeValue = String.valueOf(location.getLatitude());
-                                fetchWeather.longitudeValue = String.valueOf(location.getLongitude());
-
-                            }
-                        }
-                    });
-        }
-    }
+    private LocationRequest locationRequest;
+    private FusedLocationProviderApi locationProvider = LocationServices.FusedLocationApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,14 +123,16 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         testView2 = findViewById(R.id.testView2);
         testView3 = findViewById(R.id.testView3);
 
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(1000);
+        locationRequest.setFastestInterval(500);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         fetchWeather.windText = getString(R.string.windText);
         fetchWeather.humidityText = getString(R.string.humidityText);
@@ -220,6 +206,28 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (googleApiClient.isConnected()){
+            requestLocationUpdates();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermission();
+        }
+        requestLocationUpdates();
+    }
+
+    @Override
     public void onConnectionSuspended(int i) {
         Log.e("fetchWeather", "Connection suspended");
     }
@@ -229,8 +237,24 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         Log.e("fetchWeather", "Connection failed: " + connectionResult.getErrorCode());
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        fetchWeather.latitudeValue = String.valueOf(location.getLatitude());
+        fetchWeather.longitudeValue = String.valueOf(location.getLongitude());
+
+    }
+
     private void requestPermission() {
         ActivityCompat.requestPermissions(MainActivity.this, new
-                String[]{ACCESS_FINE_LOCATION}, RequestPermissionCode);
+                    String[]{ACCESS_FINE_LOCATION}, RequestPermissionCode);
+    }
+
+    private void requestLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermission();
+        }
+        else {
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+        }
     }
 }
