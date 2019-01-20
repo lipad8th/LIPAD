@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical" />
 
     <ScrollView
         android:id="@+id/scrollablContent"
@@ -35,7 +35,6 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
-                android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/colorAccent"
@@ -59,7 +58,7 @@
                         android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/startLipadTitle01"
                         android:textAllCaps="false"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorText"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -75,7 +74,7 @@
                         android:fontFamily="@font/ubuntu_medium"
                         android:text="@string/startLipadSub01"
                         android:textAllCaps="false"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@color/colorText" />
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -547,11 +546,14 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/card99"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardCornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -561,46 +563,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="110dp">
 
-                    <TextView
-                        android:id="@+id/testView"
+                    <Button
+                        android:id="@+id/weatherButton98"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:textColor="@color/colorAccent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="80dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Placeholder"
-                        android:textColor="@color/colorText"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/testView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp"
-                        android:text="Placeholder"
-                        android:textColor="@color/colorText" />
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        app:srcCompat="@drawable/lipadlogo" />
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toStartOf="@+id/weatherButton99"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/weatherButton01"
+                        android:textAlignment="center" />
 
                     <Button
+                        android:id="@+id/weatherButton99"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:textColor="@color/colorAccent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginEnd="0dp"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="0dp"
-                        android:text="START" />
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/weatherButton02"
+                        android:textAlignment="center" />
+
+
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 

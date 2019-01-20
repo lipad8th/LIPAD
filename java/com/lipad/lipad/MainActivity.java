@@ -1,16 +1,20 @@
 package com.lipad.lipad;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +33,7 @@ import com.google.android.gms.location.LocationServices;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, View.OnClickListener {
 
     public static final int RequestPermissionCode = 1;
     public static TextView weatherTitle01;
@@ -76,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private LocationRequest locationRequest;
     private FusedLocationProviderApi locationProvider = LocationServices.FusedLocationApi;
 
+    private CardView card01;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,8 +125,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         weatherDay22 = findViewById(R.id.weatherDay22);
         weatherDay23 = findViewById(R.id.weatherDay23);
 
-        testView = findViewById(R.id.testView);
-        testView2 = findViewById(R.id.testView2);
         testView3 = findViewById(R.id.testView3);
 
         googleApiClient = new GoogleApiClient.Builder(this)
@@ -133,6 +137,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         locationRequest.setInterval(1000);
         locationRequest.setFastestInterval(500);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        card01 = (CardView) findViewById(R.id.card01);
+
+        card01.setOnClickListener(this);
 
         fetchWeather.windText = getString(R.string.windText);
         fetchWeather.humidityText = getString(R.string.humidityText);
@@ -169,15 +177,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         //Button startLipadButton01 = (Button)findViewById(R.id.startLipadButton01);
 
-       /* startLipadButton01.setOnClickListener(new View.OnClickListener() {
+        /*startLipadButton01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(MainActivity.this, lipadPanel.class));
                 Intent cameraIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
                 startActivity(cameraIntent);
             }
-        });
-        */
+        });*/
+
         weatherButton01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -255,6 +263,21 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
         else {
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+        }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        Intent i;
+        switch (v.getId()){
+            case R.id.card01:
+                i = new Intent(this, startLipad.class);
+                startActivity(i);
+                break;
+            default:
+                break;
+
         }
     }
 }
