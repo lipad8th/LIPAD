@@ -1,20 +1,17 @@
 package com.lipad.lipad;
 
 import android.Manifest;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,8 +20,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -32,6 +27,10 @@ import com.google.android.gms.location.LocationServices;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
+/*  TODO: Create LinearLayouts programmatically. Use global [x][y] variables.
+ *   TODO: Display all created fields on
+ *   TODO: Create Activity to mark field cells.
+ */
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, View.OnClickListener {
 
@@ -72,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public static TextView testView;
     public static TextView testView2;
     public static TextView testView3;
+    public static TextView startLipadTitle01;
+    public static int themeId = 1;
     Button weatherButton01;
     Button weatherButton02;
     Button darkSkyDisclaimer;
@@ -90,6 +91,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         weatherButton01 = findViewById(R.id.weatherButton01);
         weatherButton02 = findViewById(R.id.weatherButton02);
         darkSkyDisclaimer = findViewById(R.id.darkSkyDisclaimer);
+
+        startLipadTitle01 = findViewById(R.id.startLipadTitle01);
 
         weatherTitle01 = findViewById(R.id.weatherTitle01);
         weatherSub01 = findViewById(R.id.weatherSub01);
@@ -142,6 +145,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         card01.setOnClickListener(this);
 
+        if (themeId == 1) {
+
+        }
+
         fetchWeather.windText = getString(R.string.windText);
         fetchWeather.humidityText = getString(R.string.humidityText);
         fetchWeather.chanceOfRainText = getString(R.string.chanceOfRainText);
@@ -153,7 +160,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         fetchWeather.drizzleText = getString(R.string.drizzleText);
         fetchWeather process = new fetchWeather();
         process.execute();
-
 
         weatherButton02.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -174,17 +180,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 startActivity(intent);
             }
         });
-
-        //Button startLipadButton01 = (Button)findViewById(R.id.startLipadButton01);
-
-        /*startLipadButton01.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //startActivity(new Intent(MainActivity.this, lipadPanel.class));
-                Intent cameraIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
-                startActivity(cameraIntent);
-            }
-        });*/
 
         weatherButton01.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     protected void onResume() {
         super.onResume();
-        if (googleApiClient.isConnected()){
+        if (googleApiClient.isConnected()) {
             requestLocationUpdates();
         }
     }
@@ -254,14 +249,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private void requestPermission() {
         ActivityCompat.requestPermissions(MainActivity.this, new
-                    String[]{ACCESS_FINE_LOCATION}, RequestPermissionCode);
+                String[]{ACCESS_FINE_LOCATION}, RequestPermissionCode);
     }
 
     private void requestLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermission();
-        }
-        else {
+        } else {
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         }
     }
@@ -270,9 +264,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     public void onClick(View v) {
         Intent i;
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.card01:
-                i = new Intent(this, startLipad.class);
+                i = new Intent(this, fieldSelection.class);
                 startActivity(i);
                 break;
             default:

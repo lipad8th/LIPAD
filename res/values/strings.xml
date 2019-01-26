@@ -23,4 +23,6 @@
     <string name="clearText">Clear</string>
     <string name="drizzleText">Drizzle</string>
     <string name="weatherSub21">MWF</string>
+    <string name="editString">EDIT</string>
+    <string name="selectString">SELECT</string>
 </resources>

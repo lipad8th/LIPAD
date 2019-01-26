@@ -13,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LIPADTheme">
+        <activity android:name=".fieldSelection"></activity>
+        <activity android:name=".createField" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/LIPADThemeFresh">
@@ -31,7 +33,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".startLipad"></activity>
+        <activity android:name=".startLipad" />
     </application>
 
 </manifest>

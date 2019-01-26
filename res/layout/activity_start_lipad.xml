@@ -77,7 +77,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/card02"
+                android:id="@+id/field01card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
@@ -92,9 +92,10 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="250dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/field01text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -106,40 +107,51 @@
                         android:textColor="@color/colorText"
                         android:textSize="24sp" />
 
+                    <GridLayout
+                        android:id="@+id/field01grid"
+                        android:padding="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="10"
+                        android:layout_below="@id/field01text">
+
+                    </GridLayout>
+
                     <Button
-                        android:id="@+id/weatherButton01"
+                        android:id="@+id/field01button01"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/field01grid"
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:layout_toStartOf="@+id/weatherButton02"
+                        android:layout_toStartOf="@+id/field01button02"
                         android:fontFamily="@font/ubuntu_bold"
-                        android:text="@string/weatherButton01"
+                        android:text="@string/editString"
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent" />
 
                     <Button
-                        android:id="@+id/weatherButton02"
+                        android:id="@+id/field01button02"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/field01grid"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="0dp"
                         android:fontFamily="@font/ubuntu_bold"
-                        android:text="@string/weatherButton02"
+                        android:text="@string/selectString"
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent" />
-
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/card99"
+                android:id="@+id/field02card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
@@ -154,9 +166,10 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="110dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/field02text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -168,31 +181,113 @@
                         android:textColor="@color/colorText"
                         android:textSize="24sp" />
 
+                    <GridLayout
+                        android:id="@+id/field02grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field02text">
+
+                    </GridLayout>
+
                     <Button
-                        android:id="@+id/weatherButton98"
+                        android:id="@+id/field02button01"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/field02grid"
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:layout_toStartOf="@+id/weatherButton99"
+                        android:layout_toStartOf="@+id/field02button02"
                         android:fontFamily="@font/ubuntu_bold"
-                        android:text="@string/weatherButton01"
+                        android:text="@string/editString"
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent" />
 
                     <Button
-                        android:id="@+id/weatherButton99"
+                        android:id="@+id/field02button02"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/field02grid"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="0dp"
                         android:fontFamily="@font/ubuntu_bold"
-                        android:text="@string/weatherButton02"
+                        android:text="@string/selectString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/field03card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/field03text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="Field 3"
+                        android:textColor="@color/colorText"
+                        android:textSize="24sp" />
+
+                    <GridLayout
+                        android:id="@+id/field03grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field03text">
+
+                    </GridLayout>
+
+                    <Button
+                        android:id="@+id/field03button01"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field03grid"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toStartOf="@+id/field03button02"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/editString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+                    <Button
+                        android:id="@+id/field03button02"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/field03grid"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/selectString"
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent" />
 
@@ -201,11 +296,14 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/field04card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardCornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -213,50 +311,358 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="110dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/testView3"
+                        android:id="@+id/field04text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="80dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Placeholder"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="Field 4"
                         android:textColor="@color/colorText"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textSize="24sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <GridLayout
+                        android:id="@+id/field04grid"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp"
-                        android:text="Placeholder"
-                        android:textColor="@color/colorText" />
+                        android:layout_below="@id/field04text">
 
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        app:srcCompat="@drawable/lipadlogo" />
+                    </GridLayout>
 
                     <Button
+                        android:id="@+id/field04button01"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/field04grid"
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:text="START" />
-                </RelativeLayout>
+                        android:layout_toStartOf="@+id/field04button02"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/editString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
 
+                    <Button
+                        android:id="@+id/field04button02"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/field04grid"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/selectString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+
+                </RelativeLayout>
             </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/field05card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/field05text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="Field 5"
+                        android:textColor="@color/colorText"
+                        android:textSize="24sp" />
+
+                    <GridLayout
+                        android:id="@+id/field05grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field05text">
+
+                    </GridLayout>
+
+                    <Button
+                        android:id="@+id/field05button01"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field05grid"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toStartOf="@+id/field05button02"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/editString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+                    <Button
+                        android:id="@+id/field05button02"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/field05grid"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/selectString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/field06card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/field06text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="Field 6"
+                        android:textColor="@color/colorText"
+                        android:textSize="24sp" />
+
+                    <GridLayout
+                        android:id="@+id/field06grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field06text">
+
+                    </GridLayout>
+
+                    <Button
+                        android:id="@+id/field06button01"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field06grid"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toStartOf="@+id/field06button02"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/editString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+                    <Button
+                        android:id="@+id/field06button02"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/field06grid"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/selectString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/field07card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/field07text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="Field 7"
+                        android:textColor="@color/colorText"
+                        android:textSize="24sp" />
+
+                    <GridLayout
+                        android:id="@+id/field07grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field07text">
+
+                    </GridLayout>
+
+                    <Button
+                        android:id="@+id/field07button01"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field07grid"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toStartOf="@+id/field07button02"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/editString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+                    <Button
+                        android:id="@+id/field07button02"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/field07grid"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/selectString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/field08card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/field08text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="Field 8"
+                        android:textColor="@color/colorText"
+                        android:textSize="24sp" />
+
+                    <GridLayout
+                        android:id="@+id/field08grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field08text">
+
+                    </GridLayout>
+
+                    <Button
+                        android:id="@+id/field08button01"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/field08grid"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toStartOf="@+id/field08button02"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/editString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+                    <Button
+                        android:id="@+id/field08button02"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/field08grid"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/selectString"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent" />
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12dp"/>
 
         </LinearLayout>
     </ScrollView>

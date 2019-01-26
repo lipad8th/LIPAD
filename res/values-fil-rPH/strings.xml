@@ -19,4 +19,6 @@
     <string name="clearText">Maaliwalas</string>
     <string name="drizzleText">Ambon</string>
     <string name="weatherSub21">MWF</string>
+    <string name="editString">BAGUHIN</string>
+    <string name="selectString">PILIIN</string>
 </resources>

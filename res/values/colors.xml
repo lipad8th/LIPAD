@@ -2,12 +2,19 @@
 <resources>
     <color name="colorPrimary">#344955</color>
     <color name="colorPrimaryDark">#232f34</color>
-    <color name="colorAccent">#86e096</color>
-    //309f28
-    <color name="colorBgd">#ffffff</color>
-    <color name="colorBgdDark">#000000</color>
+
+    <!--Light theme-->
+    <color name="colorAccent">#86e096</color> //309f28
     <color name="colorText">#081d36</color>
-    <color name="colorTextDark">#ffffff</color>
     <color name="colorCard">#ffffff</color>
-    <color name="colorCardDark">#1A1A1B</color>
+    <color name="colorBackground">#ffffff</color>
+    <color name="colorTextAgainst">#081d36</color>
+
+    <!--Dark theme-->
+    <color name="colorAccentDark">#f28883</color>
+    <color name="colorTextDark">#9daaec</color>
+    <color name="colorCardDark">#101340</color>
+    <color name="colorBackgroundDark">#131a53</color>
+    <color name="colorTextAgainstDark">#101340</color>
+
 </resources>

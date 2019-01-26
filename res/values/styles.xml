@@ -10,6 +10,27 @@
     </style>
 
     <style name="LIPADThemeFresh" parent="LIPADTheme" />
+
+    <style name="LIPADLight" parent="LIPADTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:background">@color/colorCard</item>
+        <item name="editTextColor">@color/colorTextAgainst</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+
+    </style>
+
+    <style name="LIPADDark" parent="LIPADTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccentDark</item>
+        <item name="android:textColor">@color/colorTextDark</item>
+        <item name="android:background">@color/colorCardDark</item>
+        <item name="android:colorBackground">@color/colorBackgroundDark</item>
+
+    </style>
     
     <style name="LIPADThemeDark" parent="LIPADTheme">
         <item name="colorPrimary">@color/colorPrimary</item>
