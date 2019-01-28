@@ -49,7 +49,7 @@ public class startLipad extends AppCompatActivity implements classDialog.Example
     }
 
     @Override
-    public void applyTexts(String fieldNameString) {
+    public void applyTexts(String fieldNameString, String rowValue, String columnValue) {
 
     }
 }

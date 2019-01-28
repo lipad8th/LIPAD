@@ -28,6 +28,8 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     public static String mostlyCloudyText;
     public static String clearText;
     public static String drizzleText;
+    public static String breezyPartlyCloudyText;
+    public static String breezyMostlyCloudyText;
     String darkSkyData = "";
     String mapQuestData = "";
     private String weatherTitle01 = "";
@@ -167,6 +169,12 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
                     break;
                 case "Drizzle":
                     weatherCondition = drizzleText;
+                    break;
+                case "Breezy and Partly Cloudy":
+                    weatherCondition = breezyPartlyCloudyText;
+                    break;
+                case "Breezy and Mostly Cloudy":
+                    weatherCondition = breezyMostlyCloudyText;
                     break;
             }
 

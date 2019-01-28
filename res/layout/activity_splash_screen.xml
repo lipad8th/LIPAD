@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="412dp"
+        android:layout_marginTop="0dp"
+        app:srcCompat="@drawable/lipadlogosplash" />
+
+    <TextView
+        android:id="@+id/lipadName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu_bold"
+        android:textSize="50sp"
+        android:text="@string/app_name"
+        android:textColor="@color/colorText"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:layout_above="@id/teamName"/>
+
+    <TextView
+        android:id="@+id/teamName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:text="THE 8-TEAM"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:layout_marginBottom="160dp"/>
+
+</RelativeLayout>

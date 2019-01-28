@@ -3,8 +3,10 @@ package com.lipad.lipad;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -158,6 +160,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         fetchWeather.mostlyCloudyText = getString(R.string.mostlyCloudyText);
         fetchWeather.clearText = getString(R.string.clearText);
         fetchWeather.drizzleText = getString(R.string.drizzleText);
+        fetchWeather.breezyPartlyCloudyText = getString(R.string.breezyPartlyCloudyText);
+        fetchWeather.breezyMostlyCloudyText = getString(R.string.breezyMostlyCloudyText);
         fetchWeather process = new fetchWeather();
         process.execute();
 
@@ -186,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             public void onClick(View view) {
                 fetchWeather process = new fetchWeather();
                 process.execute();
-                Toast.makeText(getApplicationContext(), "Updating weather...", Toast.LENGTH_SHORT).show();
+                toastMessage("Updating weather...", "positive");
 
             }
         });
@@ -273,5 +277,30 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 break;
 
         }
+    }
+
+    private void toastMessage(String message, String messageType) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        View toastView = toast.getView();
+
+        TextView text = toastView.findViewById(android.R.id.message);
+
+        switch (messageType) {
+            case "positive":
+                text.setTextColor(getResources().getColor(R.color.colorAccentDark));
+                toastView.getBackground().setColorFilter(getResources().getColor(R.color.colorBackgroundDark), PorterDuff.Mode.SRC_IN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text.setTypeface(getResources().getFont(R.font.ubuntu_medium));
+                }
+                break;
+            case "negative":
+                text.setTextColor(getResources().getColor(R.color.colorBackgroundDark));
+                toastView.getBackground().setColorFilter(getResources().getColor(R.color.colorAccentDark), PorterDuff.Mode.SRC_IN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text.setTypeface(getResources().getFont(R.font.ubuntu_medium));
+                }
+        }
+
+        toast.show();
     }
 }

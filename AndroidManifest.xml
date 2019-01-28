@@ -13,16 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LIPADTheme">
-        <activity android:name=".fieldSelection"></activity>
-        <activity android:name=".createField" />
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/LIPADThemeFresh">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".fieldSelection" />
+        <activity android:name=".createField" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/LIPADThemeFresh">
+
         </activity>
         <activity android:name=".lipadPanel" />
 

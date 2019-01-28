@@ -1,14 +1,16 @@
 package com.lipad.lipad;
 
 import android.database.Cursor;
+import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,16 +37,31 @@ public class fieldSelection extends AppCompatActivity implements classDialog.Exa
 
     }
 
-    private void populateListView() {
+    public void populateListView() {
+
+        FieldClass fieldClass;
+
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
         Cursor data = databaseHelper.getData();
-        ArrayList<String> listData = new ArrayList<>();
+        final ArrayList<String> listData = new ArrayList<>();
+        /*final ArrayList<FieldClass> fieldClasses = new ArrayList<FieldClass>();*/
         while (data.moveToNext()) {
+
             listData.add(data.getString(1));
 
-            ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
-            listView01.setAdapter(adapter);
+            /*
+            String rowValue = data.getString(2);
+            String columnValue = data.getString(3);
+            String fieldSize = rowValue + " × " + columnValue + " field";
 
+            fieldClass = new FieldClass();
+            fieldClass.setName(data.getString(1));
+            fieldClass.setSize(fieldSize);
+            */
+
+
+            ListAdapter adapter = new customListViewAdapter(this, android.R.layout.simple_list_item_1, listData);
+            listView01.setAdapter(adapter);
         }
     }
 
@@ -52,7 +69,6 @@ public class fieldSelection extends AppCompatActivity implements classDialog.Exa
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.card01:
-                //Tapping card01
                 fieldDialog();
                 break;
             default:
@@ -66,22 +82,124 @@ public class fieldSelection extends AppCompatActivity implements classDialog.Exa
         mclassDialog.show(getSupportFragmentManager(), "example dialog");
     }
 
-    public void addData(String newEntry) {
-        boolean insertData = databaseHelper.addData(newEntry);
+    @Override
+    public void applyTexts(String fieldNameString, String rowValue, String columnValue) {
+        addData(fieldNameString, rowValue, columnValue);
+    }
+
+    public void addData(String fieldNameString, String rowValue, String columnValue) {
+        boolean insertData = databaseHelper.addData(fieldNameString, rowValue, columnValue);
         if (insertData) {
-            toastMessage("Data added.");
+            toastMessage("\"" + fieldNameString + "\" added.", "positive");
             populateListView();
         } else {
-            toastMessage("Something went wrong. Please try again.");
+            toastMessage("Something went wrong. Please try again.", "negative");
         }
     }
 
-    private void toastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    private void toastMessage(String message, String messageType) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        View toastView = toast.getView();
+
+        TextView text = toastView.findViewById(android.R.id.message);
+
+        switch (messageType) {
+            case "positive":
+                text.setTextColor(getResources().getColor(R.color.colorAccentDark));
+                toastView.getBackground().setColorFilter(getResources().getColor(R.color.colorBackgroundDark), PorterDuff.Mode.SRC_IN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text.setTypeface(getResources().getFont(R.font.ubuntu_medium));
+                }
+                break;
+            case "negative":
+                text.setTextColor(getResources().getColor(R.color.colorBackgroundDark));
+                toastView.getBackground().setColorFilter(getResources().getColor(R.color.colorAccentDark), PorterDuff.Mode.SRC_IN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text.setTypeface(getResources().getFont(R.font.ubuntu_medium));
+                }
+        }
+
+        toast.show();
+    }
+}
+            /*
+            ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_2, android.R.id.text1, list) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+            TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+            text1.setText(persons.get(position).getName());
+            text2.setText(persons.get(position).getAge());
+            return view;
+            }
+            };
+            */
+            /*
+            customListViewAdapter listAdapter = new customListViewAdapter(this, android.R.layout.simple_list_item_1, listData);
+            listView01.setAdapter(listAdapter);
+            */
+            /*
+            customListViewAdapter listAdapter = new customListViewAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, fieldClass);
+            listView01.setAdapter(listAdapter);/*
+        }
     }
 
     @Override
-    public void applyTexts(String fieldNameString) {
-        addData(fieldNameString);
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.card01:
+                fieldDialog();
+                break;
+            default:
+                break;
+
+        }
     }
-}
+
+    public void fieldDialog() {
+        classDialog mclassDialog = new classDialog();
+        mclassDialog.show(getSupportFragmentManager(), "example dialog");
+    }
+
+    public void addData(String fieldNameString, String rowValue, String columnValue) {
+        boolean insertData = databaseHelper.addData(fieldNameString, rowValue, columnValue);
+        if (insertData) {
+            toastMessage("\"" + fieldNameString + "\" added.", "positive");
+            populateListView();
+        } else {
+            toastMessage("Something went wrong. Please try again.", "negative");
+        }
+    }
+
+    private void toastMessage(String message, String messageType) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        View toastView = toast.getView();
+
+        TextView text = toastView.findViewById(android.R.id.message);
+
+        switch (messageType) {
+            case "positive":
+                text.setTextColor(getResources().getColor(R.color.colorAccentDark));
+                toastView.getBackground().setColorFilter(getResources().getColor(R.color.colorBackgroundDark), PorterDuff.Mode.SRC_IN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text.setTypeface(getResources().getFont(R.font.ubuntu_medium));
+                }
+                break;
+            case "negative":
+                text.setTextColor(getResources().getColor(R.color.colorBackgroundDark));
+                toastView.getBackground().setColorFilter(getResources().getColor(R.color.colorAccentDark), PorterDuff.Mode.SRC_IN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text.setTypeface(getResources().getFont(R.font.ubuntu_medium));
+                }
+        }
+
+        toast.show();
+    }
+
+    @Override
+    public void applyTexts(String fieldNameString, String rowValue, String columnValue) {
+        addData(fieldNameString, rowValue, columnValue);
+    }
+}*/

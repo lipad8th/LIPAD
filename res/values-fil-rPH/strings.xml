@@ -21,4 +21,6 @@
     <string name="weatherSub21">MWF</string>
     <string name="editString">BAGUHIN</string>
     <string name="selectString">PILIIN</string>
+    <string name="breezyPartlyCloudyText">Bahagyang ulap at hangin</string>
+    <string name="breezyMostlyCloudyText">Maulap at bahagyang mahangin</string>
 </resources>
