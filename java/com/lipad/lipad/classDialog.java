@@ -32,13 +32,13 @@ public class classDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.layout_dialog, null);
 
         builder.setView(view)
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getText(R.string.cancelText), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
                 })
-                .setPositiveButton("add", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getText(R.string.addText), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String fieldNameString = fieldNameText.getText().toString();
@@ -47,6 +47,8 @@ public class classDialog extends AppCompatDialogFragment {
 
                         if (fieldNameString.equals("") || rowValue.equals("") || columnValue.equals("")) {
                             toastMessage("Incomplete details. No new field added.", "negative");
+                        } else if (fieldNameString.contains("'")) {
+                            toastMessage("Invalid character used in field name. Please use a different name.", "negative");
                         } else {
                             listener.applyTexts(fieldNameString, rowValue, columnValue);
                             fieldSelection.fieldListStatus = true;
@@ -80,7 +82,7 @@ public class classDialog extends AppCompatDialogFragment {
     }
 
     private void toastMessage(String message, String messageType) {
-        Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
         View toastView = toast.getView();
 
         TextView text = toastView.findViewById(android.R.id.message);

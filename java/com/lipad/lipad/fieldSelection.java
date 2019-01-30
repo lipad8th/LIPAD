@@ -1,5 +1,6 @@
 package com.lipad.lipad;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.Build;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,9 +19,11 @@ import java.util.ArrayList;
 
 public class fieldSelection extends AppCompatActivity implements classDialog.ExampleDialogListener, View.OnClickListener {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "fieldSelection";
     public static boolean fieldListStatus;
+    public static int fieldIdValue;
     DatabaseHelper databaseHelper;
+    FieldDatabaseHelper fieldDatabaseHelper;
     private CardView card01;
     private ListView listView01;
 
@@ -32,6 +36,7 @@ public class fieldSelection extends AppCompatActivity implements classDialog.Exa
         card01 = (CardView) findViewById(R.id.card01);
         card01.setOnClickListener(this);
         databaseHelper = new DatabaseHelper(this);
+        fieldDatabaseHelper = new FieldDatabaseHelper(this);
 
         populateListView();
 
@@ -47,7 +52,14 @@ public class fieldSelection extends AppCompatActivity implements classDialog.Exa
         /*final ArrayList<FieldClass> fieldClasses = new ArrayList<FieldClass>();*/
         while (data.moveToNext()) {
 
-            listData.add(data.getString(1));
+            String fieldName = data.getString(1);
+            final String rowValue = data.getString(2);
+            final String columnValue = data.getString(3);
+
+            String fieldSize = rowValue + "×" + columnValue;
+
+            listData.add(fieldName);
+        }
 
             /*
             String rowValue = data.getString(2);
@@ -60,9 +72,43 @@ public class fieldSelection extends AppCompatActivity implements classDialog.Exa
             */
 
 
-            ListAdapter adapter = new customListViewAdapter(this, android.R.layout.simple_list_item_1, listData);
-            listView01.setAdapter(adapter);
-        }
+        final ListAdapter adapter = new customListViewAdapter(this, android.R.layout.simple_list_item_1, listData);
+        listView01.setAdapter(adapter);
+
+        listView01.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String fieldName = adapterView.getItemAtPosition(i).toString();
+                Log.d(TAG, "onItemClick: You clicked on " + fieldName);
+
+                Cursor data = databaseHelper.getItemId(fieldName);
+                Cursor rowData = databaseHelper.getRowValue(fieldName);
+                Cursor columnData = databaseHelper.getColumnValue(fieldName);
+                int fieldID = -1;
+                int rowValue = 1;
+                int columnValue = 1;
+                while (data.moveToNext()) {
+                    fieldID = data.getInt(0);
+                }
+                while (rowData.moveToNext()) {
+                    rowValue = rowData.getInt(0);
+                }
+                while (columnData.moveToNext()) {
+                    columnValue = columnData.getInt(0);
+                }
+                if (fieldID > -1) {
+                    Log.d(TAG, "onItemClick: The ID is: " + fieldID);
+                    Intent editFieldIntent = new Intent(fieldSelection.this, fieldDefinition.class);
+                    editFieldIntent.putExtra("id", fieldID);
+                    editFieldIntent.putExtra("name", fieldName);
+                    editFieldIntent.putExtra("rows", rowValue);
+                    editFieldIntent.putExtra("columns", columnValue);
+                    startActivity(editFieldIntent);
+                } else {
+                    toastMessage("No ID associated with that name", "negative");
+                }
+            }
+        });
     }
 
     @Override
@@ -85,6 +131,20 @@ public class fieldSelection extends AppCompatActivity implements classDialog.Exa
     @Override
     public void applyTexts(String fieldNameString, String rowValue, String columnValue) {
         addData(fieldNameString, rowValue, columnValue);
+        int rows = Integer.parseInt(rowValue);
+        int columns = Integer.parseInt(columnValue);
+        //int fieldSize = rows * columns;
+
+        Cursor data = databaseHelper.getItemId(fieldNameString);
+        int fieldID = -1;
+        while (data.moveToNext()) {
+            fieldID = data.getInt(0);
+        }
+        if (fieldID > -1) {
+            Log.d(TAG, "onItemClick: The ID is: " + fieldID);
+            fieldIdValue = fieldID;
+        }
+        initializeField(rows, columns, fieldID);
     }
 
     public void addData(String fieldNameString, String rowValue, String columnValue) {
@@ -92,6 +152,16 @@ public class fieldSelection extends AppCompatActivity implements classDialog.Exa
         if (insertData) {
             toastMessage("\"" + fieldNameString + "\" added.", "positive");
             populateListView();
+        } else {
+            toastMessage("Something went wrong. Please try again.", "negative");
+        }
+    }
+
+    public void initializeField(int rows, int columns, int fieldID) {
+
+        boolean insertField = fieldDatabaseHelper.initializeField(rows, columns, fieldID);
+        if (insertField) {
+            toastMessage("Cells created.", "positive");
         } else {
             toastMessage("Something went wrong. Please try again.", "negative");
         }
@@ -121,6 +191,7 @@ public class fieldSelection extends AppCompatActivity implements classDialog.Exa
 
         toast.show();
     }
+
 }
             /*
             ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_2, android.R.id.text1, list) {

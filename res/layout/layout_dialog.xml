@@ -2,16 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="24dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
     android:paddingTop="8dp">
 
     <EditText
         android:id="@+id/fieldNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="11"
+        android:ems="9"
         android:fontFamily="@font/ubuntu_medium"
-        android:hint="Field name"
+        android:hint="@string/fieldNameText"
         android:inputType="text" />
 
     <EditText
@@ -19,9 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/fieldNameText"
-        android:ems="5"
+        android:ems="4"
         android:fontFamily="@font/ubuntu_medium"
-        android:hint="Rows"
+        android:hint="@string/rowText"
         android:inputType="number" />
 
     <TextView
@@ -32,8 +33,8 @@
         android:layout_toEndOf="@+id/rowEditText"
         android:fontFamily="@font/ubuntu_medium"
         android:paddingTop="10dp"
-        android:paddingLeft="6dp"
-        android:paddingRight="8dp"
+        android:paddingStart="6dp"
+        android:paddingEnd="8dp"
         android:text="×" />
 
     <EditText
@@ -41,10 +42,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/fieldNameText"
-        android:layout_toRightOf="@id/multiplicationEmoji"
-        android:ems="5"
+        android:layout_toEndOf="@id/multiplicationEmoji"
+        android:ems="4"
         android:fontFamily="@font/ubuntu_medium"
-        android:hint="Columns"
+        android:hint="@string/columnText"
         android:inputType="number"/>
 
 </RelativeLayout>

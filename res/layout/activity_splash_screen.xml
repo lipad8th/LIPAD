@@ -6,11 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreen">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="412dp"
-        android:layout_marginTop="0dp"
-        app:srcCompat="@drawable/lipadlogosplash" />
+
 
     <TextView
         android:id="@+id/lipadName"

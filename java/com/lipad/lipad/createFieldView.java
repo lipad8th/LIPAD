@@ -16,12 +16,12 @@ public class createFieldView extends AppCompatActivity {
         this.ctx = ctx;
     }
 
-    public Button buttonX(Context context, String text) {
-        if (startLipad.viewIteration > 1){
+    public Button button(Context context, String text) {
+        /*if (startLipad.viewIteration > 1) {
             field01grid = findViewById(R.id.field01grid);
             ViewGroup layout = (ViewGroup) field01grid;
             field01grid.removeAllViews();
-        }
+        }*/
         final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT);
         final Button button = new Button(context);
         button.setLayoutParams(layoutParams);

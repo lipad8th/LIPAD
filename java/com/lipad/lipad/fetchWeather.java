@@ -556,7 +556,6 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
         MainActivity.weatherDay22.setText(this.weatherDay22);
         MainActivity.weatherDay23.setText(this.weatherDay23);
 
-        MainActivity.testView3.setText(this.darkSkyURL);
 
     }
 

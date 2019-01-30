@@ -42,7 +42,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="9dp"
                     android:fontFamily="@font/ubuntu_bold"
-                    android:text="Add a field"
+                    android:text="@string/addFieldText"
                     android:textAllCaps="false"
                     android:textColor="@color/colorText"
                     android:textSize="24sp"
@@ -72,6 +72,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/content"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:focusable="false"
         android:paddingHorizontal="12dp">
 
     </ListView>

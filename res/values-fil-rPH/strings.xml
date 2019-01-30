@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="startLipadTitle01">I-start ang LIPAD</string>
-    <string name="startLipadSub01">Buksan ang panel upang i-navigate ang LIPAD.</string>
+    <string name="startLipadSub01">Simulan ang proseso sa pag-navigate sa LIPAD.</string>
     <string name="startLipadButton01">I-START</string>
     <string name="startLipadImage01">Logo ng LIPAD</string>
     <string name="weatherButton01">I-REFRESH</string>
@@ -23,4 +23,10 @@
     <string name="selectString">PILIIN</string>
     <string name="breezyPartlyCloudyText">Bahagyang ulap at hangin</string>
     <string name="breezyMostlyCloudyText">Maulap at bahagyang mahangin</string>
+    <string name="addFieldText">Bagong bukid</string>
+    <string name="fieldNameText">Pangalan ng bukid</string>
+    <string name="rowText">Hilera</string>
+    <string name="columnText">Haligi</string>
+    <string name="cancelText">kumansela</string>
+    <string name="addText">idagdag</string>
 </resources>

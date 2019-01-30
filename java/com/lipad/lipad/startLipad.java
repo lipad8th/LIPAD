@@ -14,13 +14,13 @@ import android.widget.TextView;
 
 public class startLipad extends AppCompatActivity implements classDialog.ExampleDialogListener {
     public static int buttonIndex;
+    public static int viewIteration;
     Button field01button01;
     TextView field02text;
     TextView field03text;
     Context context;
     createFieldView mcreateFieldView;
     private GridLayout field01grid;
-    public static int viewIteration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

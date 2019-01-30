@@ -4,11 +4,12 @@
     <color name="colorPrimaryDark">#232f34</color>
 
     <!--Light theme-->
-    <color name="colorAccent">#86e096</color> //309f28
+    <color name="colorAccent">#86e096</color> //309f28 // #86e096
     <color name="colorText">#081d36</color>
     <color name="colorCard">#ffffff</color>
     <color name="colorBackground">#ffffff</color>
     <color name="colorTextAgainst">#081d36</color>
+    <color name="colorGray">#d3d3d3</color>
 
     <!--Dark theme-->
     <color name="colorAccentDark">#f28883</color>

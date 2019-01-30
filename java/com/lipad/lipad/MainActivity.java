@@ -70,9 +70,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public static TextView weatherDay21;
     public static TextView weatherDay22;
     public static TextView weatherDay23;
-    public static TextView testView;
-    public static TextView testView2;
-    public static TextView testView3;
     public static TextView startLipadTitle01;
     public static int themeId = 1;
     Button weatherButton01;
@@ -130,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         weatherDay22 = findViewById(R.id.weatherDay22);
         weatherDay23 = findViewById(R.id.weatherDay23);
 
-        testView3 = findViewById(R.id.testView3);
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
