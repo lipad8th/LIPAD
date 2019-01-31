@@ -71,10 +71,13 @@ public class FieldDatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public Cursor getData() {
+    public Cursor getData(int fieldId, int row, int column) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + fieldDefinition.selectedId;
+        //String query = "SELECT * FROM " + "field" + fieldId;
+        String query = "SELECT col" + column + " FROM field" + fieldId + " WHERE ID == " + row;
+        //SELECT col3 FROM field1 WHERE ID == 4
         Cursor data = db.rawQuery(query, null);
         return data;
     }
+
 }

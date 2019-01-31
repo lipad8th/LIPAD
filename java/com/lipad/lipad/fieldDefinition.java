@@ -18,9 +18,12 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
     private static final String TAG = "fieldDefinition";
 
     public static int selectedId;
+    public static int cellValue;
     public static String selectedField;
     public static int selectedRow;
     public static int selectedColumn;
+    public static String buttonText;
+    public static int[] cellArray;
     public int fieldSize;
     public float gridWidth;
     public float gridHeight;
@@ -58,33 +61,46 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
         fieldTextView.setText(selectedField);
         fieldSizeTextView.setText(selectedRow + "×" + selectedColumn + " field");
 
-        //initializeDatabase();
+        initializeDatabase();
         initializeGrid();
 
     }
 
     private void initializeGrid() {
         mcreateFieldView = new createFieldView(context);
-        Log.d("fieldDefinition: ", "initializeGrid: " + gridWidth + gridHeight);
+        //Log.d("fieldDefinition: ", "initializeGrid: " + gridWidth + gridHeight);
         for (int i = 0; i < fieldSize; i++) {
+            Log.d("fieldDefinition: ", "initializeGrid: " + cellArray[i]);
+            switch (cellArray[i]) {
+                case 0:
+                    buttonText = "·";
+                    break;
+                case 1:
+                    buttonText = "🌱";
+                    break;
+                case 2:
+                    buttonText = "💧";
+                    break;
+            }
             field01grid.setColumnCount(selectedColumn);
-            field01grid.addView(mcreateFieldView.button(getApplicationContext(), "·", (i + 1)), i);
+            field01grid.addView(mcreateFieldView.button(getApplicationContext(), buttonText, (i + 1)), i);
             buttonX.setOnClickListener(this);
         }
     }
 
     private void initializeDatabase() {
-
         Log.d(TAG, "populateCells: Displaying data through the array of cells.");
-        Cursor data = fieldDatabaseHelper.getData();
-        int[][] cellArray = new int[selectedRow][selectedColumn];
-        while (data.moveToNext()) {
-            int cellState = data.getInt(1);
-
-
+        //public Cursor getData(int fieldId, int row, int column)
+        Cursor data = fieldDatabaseHelper.getData(selectedId, selectedRow, selectedColumn);
+        cellArray = new int[fieldSize];
+        for (int i = 0; i < fieldSize; i++) {
+            while (data.moveToNext()) {
+                cellArray[i] = data.getInt(0);
+            }
         }
 
     }
+
 
     /*
     * @Override
