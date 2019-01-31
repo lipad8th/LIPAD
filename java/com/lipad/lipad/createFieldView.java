@@ -3,12 +3,16 @@ package com.lipad.lipad;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 
 public class createFieldView extends AppCompatActivity {
 
+    public static String buttonValue;
+    public static Button buttonX;
     Context ctx;
     GridLayout field01grid;
 
@@ -16,18 +20,23 @@ public class createFieldView extends AppCompatActivity {
         this.ctx = ctx;
     }
 
-    public Button button(Context context, String text) {
+    public Button button(Context context, String text, int index) {
         /*if (startLipad.viewIteration > 1) {
             field01grid = findViewById(R.id.field01grid);
             ViewGroup layout = (ViewGroup) field01grid;
             field01grid.removeAllViews();
         }*/
-        final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT);
-        final Button button = new Button(context);
-        button.setLayoutParams(layoutParams);
-        button.setTextColor(Color.rgb(0, 0, 0));
-        button.setText(String.format(" %s ", text));
-        return button;
+        final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(120, 120);
+        buttonX = new Button(context);
+        buttonX.setLayoutParams(layoutParams);
+        buttonX.setTextColor(Color.rgb(211,211,211)); //17170432
+        buttonX.setText(String.format(" %s ", text));
+        buttonX.setBackgroundResource(R.drawable.cellshape);
+        Log.d("createFieldView: ", "createFieldView: " + index);
+        buttonX.setId(index);
+        buttonValue = (String) buttonX.getText();
+
+        return buttonX;
     }
 
     public Button buttonY(Context context, String text) {

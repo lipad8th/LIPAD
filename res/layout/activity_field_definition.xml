@@ -30,6 +30,7 @@
         android:textSize="16sp" />
 
     <Button
+        android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -44,14 +45,17 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:layout_below="@id/fieldSizeTextView">
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/fieldSizeTextView"
+        android:padding="12dp">
 
         <GridLayout
             android:id="@+id/field01grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="10">
+            android:alignmentMode="alignBounds"
+            android:columnCount="1">
 
         </GridLayout>
     </ScrollView>

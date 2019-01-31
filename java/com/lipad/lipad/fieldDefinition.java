@@ -6,10 +6,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
-public class fieldDefinition extends AppCompatActivity {
+import static com.lipad.lipad.createFieldView.buttonX;
+
+public class fieldDefinition extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "fieldDefinition";
 
@@ -18,11 +22,14 @@ public class fieldDefinition extends AppCompatActivity {
     public static int selectedRow;
     public static int selectedColumn;
     public int fieldSize;
+    public float gridWidth;
+    public float gridHeight;
     DatabaseHelper databaseHelper;
     createFieldView mcreateFieldView;
     GridLayout field01grid;
     Context context;
     FieldDatabaseHelper fieldDatabaseHelper;
+    Button nextButton;
     private TextView fieldTextView;
     private TextView fieldSizeTextView;
 
@@ -35,6 +42,9 @@ public class fieldDefinition extends AppCompatActivity {
         fieldSizeTextView = (TextView) findViewById(R.id.fieldSizeTextView);
         fieldDatabaseHelper = new FieldDatabaseHelper(this);
         field01grid = (GridLayout) findViewById(R.id.field01grid);
+
+        nextButton = (Button) findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(this);
 
 
         Intent receivedIntent = getIntent();
@@ -55,9 +65,11 @@ public class fieldDefinition extends AppCompatActivity {
 
     private void initializeGrid() {
         mcreateFieldView = new createFieldView(context);
-        field01grid.setColumnCount(selectedColumn);
+        Log.d("fieldDefinition: ", "initializeGrid: " + gridWidth + gridHeight);
         for (int i = 0; i < fieldSize; i++) {
-            field01grid.addView(mcreateFieldView.button(getApplicationContext(), "X"), i);
+            field01grid.setColumnCount(selectedColumn);
+            field01grid.addView(mcreateFieldView.button(getApplicationContext(), "·", (i + 1)), i);
+            buttonX.setOnClickListener(this);
         }
     }
 
@@ -72,5 +84,46 @@ public class fieldDefinition extends AppCompatActivity {
 
         }
 
+    }
+
+    /*
+    * @Override
+    public void onClick(View v) {
+        Intent i;
+        switch (v.getId()) {
+            case R.id.card01:
+                i = new Intent(this, fieldSelection.class);
+                startActivity(i);
+                break;
+            default:
+                break;
+
+        }
+    }
+    * */
+    @Override
+    public void onClick(View v) {
+        /*switch (v.getId()) {
+            case R.id.nextButton:
+                Toast.makeText(this, "Hello world.", Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                Toast.makeText(this, "Hello din sayo world.", Toast.LENGTH_SHORT).show();
+                break;
+        }*/
+        for (int i = 1; i <= fieldSize; i++) {
+            if ((v.getId()) == i) {
+                Button button = (Button) findViewById(v.getId());
+                String buttonText = String.valueOf(button.getText());
+                if (buttonText.contains("·")) {
+                    button.setText("🌱");
+                } else if (buttonText.contains("🌱")) {
+                    button.setText("💧");
+                } else if (buttonText.contains("")) {
+                    button.setText("·");
+                }
+                Log.d("fieldDefinition", "onClick:" + buttonText);
+            }
+        }
     }
 }
