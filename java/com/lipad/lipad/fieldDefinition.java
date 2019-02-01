@@ -83,7 +83,7 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
                     break;
             }
             field01grid.setColumnCount(selectedColumn);
-            field01grid.addView(mcreateFieldView.button(getApplicationContext(), buttonText, (i + 1)), i);
+            field01grid.addView(mcreateFieldView.button(getApplicationContext(), buttonText, i + 1), i);
             buttonX.setOnClickListener(this);
         }
     }
@@ -91,11 +91,23 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
     private void initializeDatabase() {
         Log.d(TAG, "populateCells: Displaying data through the array of cells.");
         //public Cursor getData(int fieldId, int row, int column)
-        Cursor data = fieldDatabaseHelper.getData(selectedId, selectedRow, selectedColumn);
+        Log.d(TAG, "Id,Row,Col: " + selectedId + " " + selectedRow + " " + selectedColumn);
+        /*Cursor data = fieldDatabaseHelper.getData(selectedId, selectedRow, selectedColumn);
         cellArray = new int[fieldSize];
         for (int i = 0; i < fieldSize; i++) {
             while (data.moveToNext()) {
                 cellArray[i] = data.getInt(0);
+            }
+        }*/
+        cellArray = new int[fieldSize];
+        int k = 0;
+        for (int i = 1; i <= selectedRow; i++) {
+            for (int j = 1; j <= selectedColumn; j++) {
+                Log.d(TAG, "i, j, k: " + i + " " + j + " " + k);
+                Cursor data = fieldDatabaseHelper.getData(selectedId, i, j);
+                data.moveToFirst();
+                cellArray[k] = data.getInt(0);
+                k++;
             }
         }
 
@@ -141,5 +153,26 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
                 Log.d("fieldDefinition", "onClick:" + buttonText);
             }
         }
+        if (v.getId() == R.id.nextButton) ;
+        {
+            int k = 1;
+            for (int i = 1; i <= selectedRow; i++) {
+                for (int j = 1; j <= selectedColumn; j++) {
+                    Button button = (Button) findViewById(k);
+                    String buttonText = String.valueOf(button.getText());
+                    if (buttonText.contains("·")) {
+                        fieldDatabaseHelper.addData(selectedId, i, j, 0);
+                    } else if (buttonText.contains("🌱")) {
+                        fieldDatabaseHelper.addData(selectedId, i, j, 1);
+                    } else if (buttonText.contains("💧")) {
+                        fieldDatabaseHelper.addData(selectedId, i, j, 2);
+                    }
+                    Log.d("fieldDefinition", "buttonId" + k);
+                    k++;
+                }
+            }
+
+        }
+
     }
 }

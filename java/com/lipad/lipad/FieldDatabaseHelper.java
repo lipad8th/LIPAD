@@ -80,4 +80,11 @@ public class FieldDatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public void addData(int fieldId, int row, int column, int cellValue){
+        //UPDATE field1 SET col2 = 2 WHERE ID == 3
+        SQLiteDatabase db = this.getWritableDatabase();
+        String dataEntry = "UPDATE field" + fieldId + " SET col" + column + " = " + cellValue + " WHERE ID == " + row;
+        db.execSQL(dataEntry);
+    }
+
 }
