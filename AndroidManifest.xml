@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LIPADTheme">
-        <activity android:name=".fieldDefinition"></activity>
+        <activity android:name=".CoordinateAActivity"></activity>
+        <activity android:name=".fieldDefinition" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +25,7 @@
         <activity android:name=".fieldSelection" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/LIPADThemeFresh"></activity>
+            android:theme="@style/LIPADThemeFresh" />
         <activity android:name=".lipadPanel" />
 
         <meta-data

@@ -10,12 +10,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class classDialog extends AppCompatDialogFragment {
     private EditText fieldNameText;
@@ -47,7 +44,7 @@ public class classDialog extends AppCompatDialogFragment {
 
                         if (fieldNameString.equals("") || rowValue.equals("") || columnValue.equals("")) {
                             toastMessage("Incomplete details. No new field added.", "negative");
-                        } else if (fieldNameString.contains("'")) {
+                        } else if (fieldNameString.contains("\'") || fieldNameString.contains("\"")) {
                             toastMessage("Invalid character used in field name. Please use a different name.", "negative");
                         } else {
                             listener.applyTexts(fieldNameString, rowValue, columnValue);
@@ -77,10 +74,6 @@ public class classDialog extends AppCompatDialogFragment {
         }
     }
 
-    public interface ExampleDialogListener {
-        void applyTexts(String fieldNameString, String rowValue, String columnValue);
-    }
-
     private void toastMessage(String message, String messageType) {
         Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
         View toastView = toast.getView();
@@ -104,5 +97,9 @@ public class classDialog extends AppCompatDialogFragment {
         }
 
         toast.show();
+    }
+
+    public interface ExampleDialogListener {
+        void applyTexts(String fieldNameString, String rowValue, String columnValue);
     }
 }

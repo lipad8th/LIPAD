@@ -47,7 +47,30 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
         field01grid = (GridLayout) findViewById(R.id.field01grid);
 
         nextButton = (Button) findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(this);
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int k = 1;
+                for (int i = 1; i <= selectedRow; i++) {
+                    for (int j = 1; j <= selectedColumn; j++) {
+                        Button button = (Button) findViewById(k);
+                        String buttonText = String.valueOf(button.getText());
+                        if (buttonText.contains("·")) {
+                            fieldDatabaseHelper.addData(selectedId, i, j, 0);
+                        } else if (buttonText.contains("🌱")) {
+                            fieldDatabaseHelper.addData(selectedId, i, j, 1);
+                        } else if (buttonText.contains("💧")) {
+                            fieldDatabaseHelper.addData(selectedId, i, j, 2);
+                        }
+                        Log.d("fieldDefinition", "buttonId" + k);
+                        k++;
+                    }
+                }
+                Intent intent = new Intent(fieldDefinition.this, CoordinateAActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         Intent receivedIntent = getIntent();
@@ -153,8 +176,10 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
                 Log.d("fieldDefinition", "onClick:" + buttonText);
             }
         }
-        if (v.getId() == R.id.nextButton) ;
+        /*if (v.getId() == R.id.nextButton)
         {
+            Intent intent = new Intent(this, );
+            startActivity(intent);
             int k = 1;
             for (int i = 1; i <= selectedRow; i++) {
                 for (int j = 1; j <= selectedColumn; j++) {
@@ -171,8 +196,6 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
                     k++;
                 }
             }
-
-        }
-
+        }*/
     }
 }
