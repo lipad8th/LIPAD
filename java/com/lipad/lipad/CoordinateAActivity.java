@@ -2,6 +2,7 @@ package com.lipad.lipad;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,6 +30,7 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
     Button compassBButton;
     Button compassCButton;
     Button compassDButton;
+    Button coordinateANextButton;
     EditText latitudeAEditText;
     EditText longitudeAEditText;
     EditText latitudeBEditText;
@@ -37,6 +39,11 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
     EditText longitudeCEditText;
     EditText latitudeDEditText;
     EditText longitudeDEditText;
+    String coordinateA;
+    String coordinateB;
+    String coordinateC;
+    String coordinateD;
+    DatabaseHelper databaseHelper;
 
     GoogleApiClient googleApiClient;
     LocationRequest locationRequest;
@@ -58,6 +65,9 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
         longitudeBEditText = findViewById(R.id.longitudeBEditText);
         longitudeCEditText = findViewById(R.id.longitudeCEditText);
         longitudeDEditText = findViewById(R.id.longitudeDEditText);
+        coordinateANextButton = findViewById(R.id.coordinateANextButton);
+
+        databaseHelper = new DatabaseHelper(this);
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -69,6 +79,36 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
         locationRequest.setInterval(1000);
         locationRequest.setFastestInterval(500);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        Cursor coordinateAData = databaseHelper.getCoordinateData(fieldDefinition.selectedId, "A");
+        Cursor coordinateBData = databaseHelper.getCoordinateData(fieldDefinition.selectedId, "B");
+        Cursor coordinateCData = databaseHelper.getCoordinateData(fieldDefinition.selectedId, "C");
+        Cursor coordinateDData = databaseHelper.getCoordinateData(fieldDefinition.selectedId, "D");
+
+        while (coordinateAData.moveToNext()) {
+            String coordinateAString = coordinateAData.getString(0);
+            String[] coordinateAValue = coordinateAString.split(",");
+            latitudeAEditText.setText(coordinateAValue[0]);
+            longitudeAEditText.setText(coordinateAValue[1]);
+        }
+        while (coordinateBData.moveToNext()) {
+            String coordinateBString = coordinateBData.getString(0);
+            String[] coordinateBValue = coordinateBString.split(",");
+            latitudeBEditText.setText(coordinateBValue[0]);
+            longitudeBEditText.setText(coordinateBValue[1]);
+        }
+        while (coordinateCData.moveToNext()) {
+            String coordinateCString = coordinateCData.getString(0);
+            String[] coordinateCValue = coordinateCString.split(",");
+            latitudeCEditText.setText(coordinateCValue[0]);
+            longitudeCEditText.setText(coordinateCValue[1]);
+        }
+        while (coordinateDData.moveToNext()) {
+            String coordinateDString = coordinateDData.getString(0);
+            String[] coordinateDValue = coordinateDString.split(",");
+            latitudeDEditText.setText(coordinateDValue[0]);
+            longitudeDEditText.setText(coordinateDValue[1]);
+        }
 
         compassAButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +139,20 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
             public void onClick(View v) {
                 latitudeDEditText.setText(fetchWeather.latitudeValue);
                 longitudeDEditText.setText(fetchWeather.longitudeValue);
+            }
+        });
+
+        coordinateANextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coordinateA = latitudeAEditText.getText() + "," + longitudeAEditText.getText();
+                coordinateB = latitudeBEditText.getText() + "," + longitudeBEditText.getText();
+                coordinateC = latitudeCEditText.getText() + "," + longitudeCEditText.getText();
+                coordinateD = latitudeDEditText.getText() + "," + longitudeDEditText.getText();
+                databaseHelper.addCoordinateData(fieldDefinition.selectedId, "A", coordinateA);
+                databaseHelper.addCoordinateData(fieldDefinition.selectedId, "B", coordinateB);
+                databaseHelper.addCoordinateData(fieldDefinition.selectedId, "C", coordinateC);
+                databaseHelper.addCoordinateData(fieldDefinition.selectedId, "D", coordinateD);
             }
         });
 

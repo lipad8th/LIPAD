@@ -16,6 +16,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL1 = "field";
     private static final String COL2 = "rows";
     private static final String COL3 = "columns";
+    private static final String COL4 = "coordinateA";
+    private static final String COL5 = "coordinateB";
+    private static final String COL6 = "coordinateC";
+    private static final String COL7 = "coordinateD";
 
     public DatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, 1);
@@ -23,7 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COL1 + " TEXT," + COL2 + " INTEGER," + COL3 + " INTEGER)";
+        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COL1 + " TEXT," + COL2 + " INTEGER,"
+                + COL3 + " INTEGER," + COL4 + " TEXT," + COL5 + " TEXT," + COL6 + " TEXT," + COL7 + " TEXT)";
         db.execSQL(createTable);
 
     }
@@ -78,6 +83,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + COL3 + " FROM " + TABLE_NAME +
                 " WHERE " + COL1 + " = '" + name + "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    public void addCoordinateData(int fieldId, String coordinateX, String coordinates) {
+        //UPDATE field_table SET coordinateA = "1.23,4.56" WHERE ID == 1
+        SQLiteDatabase db = this.getWritableDatabase();
+        String dataEntry = "UPDATE field_table SET coordinate" + coordinateX + " = \""
+                + coordinates + "\" WHERE ID == " + fieldId;
+        db.execSQL(dataEntry);
+    }
+
+    public Cursor getCoordinateData(int fieldId, String coordinateX){
+        //SELECT coordinateA FROM field_table WHERE ID == 1
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT coordinate" + coordinateX + " FROM field_table WHERE ID == "
+                + fieldId;
         Cursor data = db.rawQuery(query, null);
         return data;
     }
