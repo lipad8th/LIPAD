@@ -63,6 +63,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public Cursor getRowData(int fieldId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE ID == " + fieldId;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
     public Cursor getItemId(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + COL0 + " FROM " + TABLE_NAME +

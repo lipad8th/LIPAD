@@ -1,6 +1,7 @@
 package com.lipad.lipad;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
@@ -87,27 +88,35 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
 
         while (coordinateAData.moveToNext()) {
             String coordinateAString = coordinateAData.getString(0);
-            String[] coordinateAValue = coordinateAString.split(",");
-            latitudeAEditText.setText(coordinateAValue[0]);
-            longitudeAEditText.setText(coordinateAValue[1]);
+            if (coordinateAString != null) {
+                String[] coordinateAValue = coordinateAString.split(",");
+                latitudeAEditText.setText(coordinateAValue[0]);
+                longitudeAEditText.setText(coordinateAValue[1]);
+            }
         }
         while (coordinateBData.moveToNext()) {
             String coordinateBString = coordinateBData.getString(0);
-            String[] coordinateBValue = coordinateBString.split(",");
-            latitudeBEditText.setText(coordinateBValue[0]);
-            longitudeBEditText.setText(coordinateBValue[1]);
+            if (coordinateBString != null) {
+                String[] coordinateBValue = coordinateBString.split(",");
+                latitudeBEditText.setText(coordinateBValue[0]);
+                longitudeBEditText.setText(coordinateBValue[1]);
+            }
         }
         while (coordinateCData.moveToNext()) {
             String coordinateCString = coordinateCData.getString(0);
-            String[] coordinateCValue = coordinateCString.split(",");
-            latitudeCEditText.setText(coordinateCValue[0]);
-            longitudeCEditText.setText(coordinateCValue[1]);
+            if (coordinateCString != null) {
+                String[] coordinateCValue = coordinateCString.split(",");
+                latitudeCEditText.setText(coordinateCValue[0]);
+                longitudeCEditText.setText(coordinateCValue[1]);
+            }
         }
         while (coordinateDData.moveToNext()) {
             String coordinateDString = coordinateDData.getString(0);
-            String[] coordinateDValue = coordinateDString.split(",");
-            latitudeDEditText.setText(coordinateDValue[0]);
-            longitudeDEditText.setText(coordinateDValue[1]);
+            if (coordinateDString != null) {
+                String[] coordinateDValue = coordinateDString.split(",");
+                latitudeDEditText.setText(coordinateDValue[0]);
+                longitudeDEditText.setText(coordinateDValue[1]);
+            }
         }
 
         compassAButton.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +162,8 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
                 databaseHelper.addCoordinateData(fieldDefinition.selectedId, "B", coordinateB);
                 databaseHelper.addCoordinateData(fieldDefinition.selectedId, "C", coordinateC);
                 databaseHelper.addCoordinateData(fieldDefinition.selectedId, "D", coordinateD);
+                Intent intent = new Intent(CoordinateAActivity.this, SendToDrone.class);
+                startActivity(intent);
             }
         });
 
