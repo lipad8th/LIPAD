@@ -30,6 +30,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
@@ -264,21 +265,23 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
 
+        graph.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+
         graph.addSeries(series);
 
         // styling
         series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
             @Override
             public int get(DataPoint data) {
-                return Color.rgb((int) data.getX() * 255 / 4, (int) Math.abs(data.getY() * 255 / 6), 100);
+                return getResources().getColor(R.color.colorGray);
             }
         });
 
-        series.setSpacing(50);
+        series.setSpacing(48);
 
         // draw values on top
         series.setDrawValuesOnTop(true);
-        series.setValuesOnTopColor(Color.RED);
+        series.setValuesOnTopColor(Color.WHITE);
         //series.setValuesOnTopSize(50);
 
 

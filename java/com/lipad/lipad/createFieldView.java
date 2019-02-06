@@ -29,7 +29,7 @@ public class createFieldView extends AppCompatActivity {
         final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(120, 120);
         buttonX = new Button(context);
         buttonX.setLayoutParams(layoutParams);
-        buttonX.setTextColor(Color.rgb(211,211,211)); //17170432
+        buttonX.setTextColor(Color.rgb(0,0,0)); //17170432
         buttonX.setText(String.format(" %s ", text));
         buttonX.setBackgroundResource(R.drawable.cellshape);
         Log.d("createFieldView: ", "createFieldView: " + index);

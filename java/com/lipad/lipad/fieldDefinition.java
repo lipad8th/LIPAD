@@ -6,9 +6,11 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import static com.lipad.lipad.createFieldView.buttonX;
@@ -36,6 +38,8 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
     Button button0;
     Button button1;
     Button button2;
+    ScrollView scrollView01;
+    ScrollView scrollView02;
     private TextView fieldTextView;
     private TextView fieldSizeTextView;
 
@@ -53,6 +57,33 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
         button0 = findViewById(R.id.button0);
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
+
+        scrollView01 = findViewById(R.id.scrollView01);
+        scrollView02 = findViewById(R.id.scrollView02);
+
+        scrollView01.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.v(TAG, "PARENT TOUCH");
+
+                findViewById(R.id.scrollView02).getParent()
+                        .requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+        });
+
+        scrollView02.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.v(TAG, "CHILD TOUCH");
+
+                // Disallow the touch request for parent scroll on touch of  child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override

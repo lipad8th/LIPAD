@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fieldDefinition">
+    tools:context=".fieldDefinition"
+    android:background="#000000">
 
     <TextView
         android:id="@+id/fieldTextView"
@@ -16,7 +16,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/ubuntu_bold"
         android:text="@string/placeholderText"
-        android:textColor="@color/colorText"
+        android:textColor="#ffffff"
         android:textSize="32sp" />
 
     <TextView
@@ -26,6 +26,7 @@
         android:layout_below="@id/fieldTextView"
         android:layout_marginStart="12dp"
         android:fontFamily="@font/ubuntu"
+        android:textColor="#ffffff"
         android:text="@string/placeholderText"
         android:textSize="16sp" />
 
@@ -40,7 +41,7 @@
         android:background="@drawable/buttonshape"
         android:fontFamily="@font/ubuntu_bold"
         android:text="Next"
-        android:textColor="@color/colorText" />
+        android:textColor="@color/colorTextAgainst" />
 
     <ScrollView
         android:id="@+id/scrollView01"
@@ -51,16 +52,22 @@
         android:layout_centerVertical="true"
         android:padding="12dp">
 
-        <GridLayout
-            android:id="@+id/field01grid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alignmentMode="alignBounds"
-            android:columnCount="1"
-            android:paddingTop="2dp"
-            android:paddingBottom="80dp">
+        <ScrollView
+            android:id="@+id/scrollView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        </GridLayout>
+            <GridLayout
+                android:id="@+id/field01grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alignmentMode="alignBounds"
+                android:columnCount="1"
+                android:paddingTop="2dp"
+                android:paddingBottom="80dp">
+
+            </GridLayout>
+        </ScrollView>
     </ScrollView>
 
 
@@ -69,7 +76,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:padding="12dp">
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:background="@color/colorBackground">
 
         <TextView
             android:id="@+id/subTextView"
@@ -77,6 +88,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu_medium"
             android:text="Set all cells as:"
+            android:paddingBottom="2dp"
+            android:textColor="#ffffff"
             android:textAlignment="center" />
 
         <Button
@@ -84,7 +97,11 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_below="@+id/subTextView"
-            android:text="EMPTY" />
+            android:text="EMPTY"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/ubuntu_medium"
+            android:background="@drawable/cellshape"
+            android:layout_marginEnd="4dp"/>
 
         <Button
             android:id="@+id/button1"
@@ -92,7 +109,9 @@
             android:layout_height="48dp"
             android:layout_below="@+id/subTextView"
             android:layout_toEndOf="@id/button0"
-            android:text="🌱" />
+            android:text="🌱"
+            android:background="@drawable/cellshape"
+            android:layout_marginEnd="4dp"/>
 
         <Button
             android:id="@+id/button2"
@@ -100,7 +119,9 @@
             android:layout_height="48dp"
             android:layout_below="@+id/subTextView"
             android:layout_toEndOf="@id/button1"
-            android:text="💧" />
+            android:text="💧"
+            android:background="@drawable/cellshape"
+            android:layout_marginEnd="4dp"/>
 
 
     </RelativeLayout>
