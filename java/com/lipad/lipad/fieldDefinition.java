@@ -33,6 +33,9 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
     Context context;
     FieldDatabaseHelper fieldDatabaseHelper;
     Button nextButton;
+    Button button0;
+    Button button1;
+    Button button2;
     private TextView fieldTextView;
     private TextView fieldSizeTextView;
 
@@ -47,6 +50,9 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
         field01grid = findViewById(R.id.field01grid);
 
         nextButton = findViewById(R.id.nextButton);
+        button0 = findViewById(R.id.button0);
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +77,42 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
             }
         });
+
+        button0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 1; i <= fieldSize; i++) {
+                    Button button = findViewById(i);
+                    button.setText("·");
+
+                }
+
+            }
+        });
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 1; i <= fieldSize; i++) {
+                    Button button = findViewById(i);
+                    button.setText("🌱");
+
+                }
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 1; i <= fieldSize; i++) {
+                    Button button = findViewById(i);
+                    button.setText("💧");
+
+                }
+            }
+        });
+
+
 
 
         Intent receivedIntent = getIntent();

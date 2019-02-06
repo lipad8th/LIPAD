@@ -43,11 +43,12 @@
         android:textColor="@color/colorText" />
 
     <ScrollView
+        android:id="@+id/scrollView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/fieldSizeTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:padding="12dp">
 
         <GridLayout
@@ -55,9 +56,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alignmentMode="alignBounds"
-            android:columnCount="1">
+            android:columnCount="1"
+            android:paddingTop="2dp"
+            android:paddingBottom="80dp">
 
         </GridLayout>
     </ScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/subTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_medium"
+            android:text="Set all cells as:"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/button0"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_below="@+id/subTextView"
+            android:text="EMPTY" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_below="@+id/subTextView"
+            android:layout_toEndOf="@id/button0"
+            android:text="🌱" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_below="@+id/subTextView"
+            android:layout_toEndOf="@id/button1"
+            android:text="💧" />
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
