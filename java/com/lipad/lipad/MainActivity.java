@@ -3,6 +3,8 @@ package com.lipad.lipad;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.location.Location;
 import android.net.Uri;
@@ -27,6 +29,10 @@ import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -68,10 +74,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public static TextView weatherDay23;
     public static TextView startLipadTitle01;
     public static int themeId = 1;
+    public static int[] idList;
+    public static int[] rowList;
+    public static int[] columnList;
+    public static int fields;
+    public static int totalSeeds;
+    public static int totalWater;
     Button weatherButton01;
     Button weatherButton02;
     Button darkSkyDisclaimer;
-
+    DatabaseHelper databaseHelper;
+    FieldDatabaseHelper fieldDatabaseHelper;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private FusedLocationProviderApi locationProvider = LocationServices.FusedLocationApi;
@@ -123,12 +136,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         weatherDay22 = findViewById(R.id.weatherDay22);
         weatherDay23 = findViewById(R.id.weatherDay23);
 
+        databaseHelper = new DatabaseHelper(this);
+        fieldDatabaseHelper = new FieldDatabaseHelper(this);
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
+        totalSeeds = 0;
+        totalWater = 0;
 
         locationRequest = new LocationRequest();
         locationRequest.setInterval(1000);
@@ -138,10 +156,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         card01 = (CardView) findViewById(R.id.card01);
 
         card01.setOnClickListener(this);
-
-        if (themeId == 1) {
-
-        }
 
         fetchWeather.windText = getString(R.string.windText);
         fetchWeather.humidityText = getString(R.string.humidityText);
@@ -183,10 +197,89 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 fetchWeather process = new fetchWeather();
                 process.execute();
                 toastMessage("Updating weather...", "positive");
-                Snackbar.make(view,"Updating weather...", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, "Updating weather...", Snackbar.LENGTH_LONG).show();
             }
         });
 
+        Cursor fieldNumber = databaseHelper.getNumberOfFields();
+        fieldNumber.moveToFirst();
+        fields = fieldNumber.getInt(0);
+
+        Cursor data = databaseHelper.getIdList();
+        int k = 0;
+        idList = new int[fields];
+        rowList = new int[fields];
+        columnList = new int[fields];
+        //cellArray = new int[fieldSize];
+        while (data.moveToNext()) {
+            idList[k] = data.getInt(0);
+            rowList[k] = data.getInt(1);
+            columnList[k] = data.getInt(2);
+            Log.d("MainActivity", "DataCursor " + String.valueOf(idList[k]));
+            k++;
+        }
+
+        int n = 0;
+        for (int l = 1; l <= idList.length; l++) {
+            for (int i = 1; i <= rowList[n]; i++) {
+                for (int j = 1; j <= columnList[n]; j++) {
+                    Cursor fieldData = fieldDatabaseHelper.getData(idList[n], i, j);
+                    fieldData.moveToFirst();
+                    //Log.d("MainActivity", "total seed " + "hello");
+                    int cellValue = fieldData.getInt(0);
+                    if (cellValue == 1) {
+                        totalSeeds++;
+                        Log.d("MainActivity", "total seed " + totalSeeds);
+                    } else if (cellValue == 2) {
+                        totalWater++;
+                        Log.d("MainActivity", "total water " + totalWater);
+                    }
+                }
+            }
+            n++;
+        }
+
+        GraphView graph = (GraphView) findViewById(R.id.graphView01);
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
+                new DataPoint(1, totalSeeds),
+                new DataPoint(2, totalWater)
+        });
+
+        // set manual X bounds
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(0);
+        if (totalSeeds > totalWater) {
+            graph.getViewport().setMaxY(totalSeeds + 1);
+        } else if (totalWater > totalSeeds) {
+            graph.getViewport().setMaxY(totalWater + 1);
+        }
+
+        //graph.getViewport().setMaxY(200);
+
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(3);
+
+        // enable scaling and scrolling
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScalableY(true);
+
+        graph.addSeries(series);
+
+        // styling
+        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+            @Override
+            public int get(DataPoint data) {
+                return Color.rgb((int) data.getX() * 255 / 4, (int) Math.abs(data.getY() * 255 / 6), 100);
+            }
+        });
+
+        series.setSpacing(50);
+
+        // draw values on top
+        series.setDrawValuesOnTop(true);
+        series.setValuesOnTopColor(Color.RED);
+        //series.setValuesOnTopSize(50);
 
 
     }
@@ -296,4 +389,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         toast.show();
     }
+
+
 }

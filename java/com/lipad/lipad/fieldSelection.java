@@ -32,8 +32,8 @@ public class fieldSelection extends AppCompatActivity implements classDialog.Exa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field_selection);
 
-        listView01 = (ListView) findViewById(R.id.listView01);
-        card01 = (CardView) findViewById(R.id.card01);
+        listView01 = findViewById(R.id.listView01);
+        card01 = findViewById(R.id.card01);
         card01.setOnClickListener(this);
         databaseHelper = new DatabaseHelper(this);
         fieldDatabaseHelper = new FieldDatabaseHelper(this);

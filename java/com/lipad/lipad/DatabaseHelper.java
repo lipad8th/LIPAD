@@ -110,4 +110,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query, null);
         return data;
     }
+
+    public Cursor getIdList(){
+        //SELECT ID FROM field_table
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT ID, rows, columns FROM field_table";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    public Cursor getNumberOfFields(){
+        //SELECT COUNT (*)
+        //  FROM field_table
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT COUNT (*) FROM field_table";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
 }

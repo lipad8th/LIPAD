@@ -41,12 +41,12 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field_definition);
 
-        fieldTextView = (TextView) findViewById(R.id.fieldTextView);
-        fieldSizeTextView = (TextView) findViewById(R.id.fieldSizeTextView);
+        fieldTextView = findViewById(R.id.fieldTextView);
+        fieldSizeTextView = findViewById(R.id.fieldSizeTextView);
         fieldDatabaseHelper = new FieldDatabaseHelper(this);
-        field01grid = (GridLayout) findViewById(R.id.field01grid);
+        field01grid = findViewById(R.id.field01grid);
 
-        nextButton = (Button) findViewById(R.id.nextButton);
+        nextButton = findViewById(R.id.nextButton);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +54,7 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
                 int k = 1;
                 for (int i = 1; i <= selectedRow; i++) {
                     for (int j = 1; j <= selectedColumn; j++) {
-                        Button button = (Button) findViewById(k);
+                        Button button = findViewById(k);
                         String buttonText = String.valueOf(button.getText());
                         if (buttonText.contains("·")) {
                             fieldDatabaseHelper.addData(selectedId, i, j, 0);
@@ -164,7 +164,7 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
         }*/
         for (int i = 1; i <= fieldSize; i++) {
             if ((v.getId()) == i) {
-                Button button = (Button) findViewById(v.getId());
+                Button button = findViewById(v.getId());
                 String buttonText = String.valueOf(button.getText());
                 if (buttonText.contains("·")) {
                     button.setText("🌱");

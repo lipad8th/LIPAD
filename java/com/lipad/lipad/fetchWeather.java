@@ -17,19 +17,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class fetchWeather extends AsyncTask<Void, Void, Void> {
-    public static String longitudeValue;
-    public static String latitudeValue;
-    public static String windText;
-    public static String humidityText;
-    public static String chanceOfRainText;
-    public static String humidityInitial;
-    public static String chanceOfRainInitial;
-    public static String partlyCloudyText;
-    public static String mostlyCloudyText;
-    public static String clearText;
-    public static String drizzleText;
-    public static String breezyPartlyCloudyText;
-    public static String breezyMostlyCloudyText;
+    //initially public static
+    static String longitudeValue;
+    static String latitudeValue;
+    static String windText;
+    static String humidityText;
+    static String chanceOfRainText;
+    static String humidityInitial;
+    static String chanceOfRainInitial;
+    static String partlyCloudyText;
+    static String mostlyCloudyText;
+    static String clearText;
+    static String drizzleText;
+    static String breezyPartlyCloudyText;
+    static String breezyMostlyCloudyText;
     String darkSkyData = "";
     String mapQuestData = "";
     private String weatherTitle01 = "";
