@@ -1,6 +1,9 @@
 package com.lipad.lipad;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -30,10 +33,11 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+
+import java.util.Calendar;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -81,21 +85,27 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public static int fields;
     public static int totalSeeds;
     public static int totalWater;
+    public static String tomorrowHigh;
+    public static String tomorrowLow;
+    public static Context publicContext;
+    public static Button weatherButton03;
     Button weatherButton01;
     Button weatherButton02;
     Button darkSkyDisclaimer;
     DatabaseHelper databaseHelper;
     FieldDatabaseHelper fieldDatabaseHelper;
+    MiscDatabaseHelper miscDatabaseHelper;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private FusedLocationProviderApi locationProvider = LocationServices.FusedLocationApi;
-
     private CardView card01;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        publicContext = this;
 
         weatherButton01 = findViewById(R.id.weatherButton01);
         weatherButton02 = findViewById(R.id.weatherButton02);
@@ -136,9 +146,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         weatherDay21 = findViewById(R.id.weatherDay21);
         weatherDay22 = findViewById(R.id.weatherDay22);
         weatherDay23 = findViewById(R.id.weatherDay23);
+        weatherButton03 = findViewById(R.id.weatherButton03);
 
         databaseHelper = new DatabaseHelper(this);
+        miscDatabaseHelper = new MiscDatabaseHelper(this);
         fieldDatabaseHelper = new FieldDatabaseHelper(this);
+
+        miscDatabaseHelper.initializeTable();
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -199,6 +213,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 process.execute();
                 toastMessage("Updating weather...", "positive");
                 Snackbar.make(view, "Updating weather...", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+        weatherButton03.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createAlarm();
             }
         });
 
@@ -265,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
 
-        graph.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+        graph.setBackgroundColor(getResources().getColor(R.color.colorCard));
 
         graph.addSeries(series);
 
@@ -284,6 +305,39 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         series.setValuesOnTopColor(Color.WHITE);
         //series.setValuesOnTopSize(50);
 
+    }
+
+    public void createAlarm() {
+        miscDatabaseHelper = new MiscDatabaseHelper(this);
+        miscDatabaseHelper.addTomorrowHigh(fetchWeather.tomorrowHigh);
+        miscDatabaseHelper.addTomorrowLow(fetchWeather.tomorrowLow);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 5);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        startAlarm(calendar);
+    }
+
+    public void startAlarm(Calendar calendar) {
+        Cursor data = miscDatabaseHelper.getTomorrowData();
+        data.moveToFirst();
+        tomorrowHigh = data.getString(0);
+        tomorrowLow = data.getString(1);
+        Log.d("MainActivity", "High and Low Text: " + tomorrowHigh + " " + tomorrowLow);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        if (calendar.before(Calendar.getInstance())) {
+            calendar.add(Calendar.DATE, 1);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
 
     }
 

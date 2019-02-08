@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CoordinateAActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CoordinateAActivity"
+    android:background="@color/colorBackground">
 
     <TextView
         android:id="@+id/coordinateATextView"
@@ -25,7 +27,8 @@
         android:layout_below="@id/coordinateATextView"
         android:layout_marginStart="12dp"
         android:fontFamily="@font/ubuntu"
-        android:text="Set top-left / bottom-left coordinates"
+        android:textColor="@color/colorGray"
+        android:text="Set each corner's coordinates"
         android:textSize="16sp" />
 
     <Button
@@ -39,7 +42,7 @@
         android:background="@drawable/buttonshape"
         android:fontFamily="@font/ubuntu_bold"
         android:text="Next"
-        android:textColor="@color/colorText" />
+        android:textColor="@color/colorTextAgainst" />
 
     <Button
         android:id="@+id/compassAButton"
@@ -49,7 +52,7 @@
         android:layout_marginTop="150dp"
         android:background="@drawable/ic_compass" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/latitudeAEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,9 +62,12 @@
         android:ems="9"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Latitude A"
-        android:inputType="numberSigned" />
+        android:textColorHint="@color/colorGray"
+        android:inputType="numberSigned"
+        android:textColor="@color/colorText"
+        app:backgroundTint="@color/colorAccent"/>
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/longitudeAEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,9 +75,12 @@
         android:ems="9"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Longitude A"
+        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textColor="@color/colorText"
         android:layout_toEndOf="@id/compassAButton"
-        android:layout_marginStart="8dp"/>
+        android:layout_marginStart="8dp"
+        app:backgroundTint="@color/colorAccent"/>
 
     <Button
         android:id="@+id/compassBButton"
@@ -81,7 +90,7 @@
         android:layout_marginTop="250dp"
         android:background="@drawable/ic_compass" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/latitudeBEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,9 +100,12 @@
         android:ems="9"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Latitude B"
-        android:inputType="numberSigned" />
+        android:textColorHint="@color/colorGray"
+        android:inputType="numberSigned"
+        android:textColor="@color/colorText"
+        app:backgroundTint="@color/colorAccent"/>
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/longitudeBEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,9 +113,12 @@
         android:ems="9"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Longitude B"
+        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textColor="@color/colorText"
         android:layout_toEndOf="@id/compassBButton"
-        android:layout_marginStart="8dp"/>
+        android:layout_marginStart="8dp"
+        app:backgroundTint="@color/colorAccent"/>
 
     <Button
         android:id="@+id/compassCButton"
@@ -113,7 +128,7 @@
         android:layout_marginTop="350dp"
         android:background="@drawable/ic_compass" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/latitudeCEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,9 +138,12 @@
         android:ems="9"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Latitude C"
-        android:inputType="numberSigned" />
+        android:textColorHint="@color/colorGray"
+        android:inputType="numberSigned"
+        android:textColor="@color/colorText"
+        app:backgroundTint="@color/colorAccent"/>
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/longitudeCEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -133,9 +151,12 @@
         android:ems="9"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Longitude C"
+        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textColor="@color/colorText"
         android:layout_toEndOf="@id/compassBButton"
-        android:layout_marginStart="8dp"/>
+        android:layout_marginStart="8dp"
+        app:backgroundTint="@color/colorAccent"/>
 
     <Button
         android:id="@+id/compassDButton"
@@ -145,7 +166,7 @@
         android:layout_marginTop="450dp"
         android:background="@drawable/ic_compass" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/latitudeDEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,9 +176,12 @@
         android:ems="9"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Latitude D"
-        android:inputType="numberSigned" />
+        android:textColorHint="@color/colorGray"
+        android:inputType="numberSigned"
+        android:textColor="@color/colorText"
+        app:backgroundTint="@color/colorAccent"/>
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/longitudeDEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -165,9 +189,12 @@
         android:ems="9"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Longitude D"
+        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textColor="@color/colorText"
         android:layout_toEndOf="@id/compassBButton"
-        android:layout_marginStart="8dp"/>
+        android:layout_marginStart="8dp"
+        app:backgroundTint="@color/colorAccent"/>
 
 
 

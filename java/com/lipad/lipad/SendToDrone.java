@@ -60,18 +60,20 @@ public class SendToDrone extends AppCompatActivity {
                 }
                 getIPandPort();
                 Socket_AsyncTask cmd_send_data = new Socket_AsyncTask();
-                CMD = "(" + coordinateA + "),(" + coordinateB + "),(" + coordinateC + "),(" + coordinateD + "),(";
+                //CMD = "(" + coordinateA + "),(" + coordinateB + "),(" + coordinateC + "),(" + coordinateD + "),(";
+                CMD = coordinateA + ";" + coordinateB + ";" + coordinateC + ";" + coordinateD + ";";
                 for (int i = 1; i <= fieldDefinition.selectedRow; i++) {
                     for (int j = 1; j <= fieldDefinition.selectedColumn; j++) {
                         Cursor fieldData = fieldDatabaseHelper.getData(fieldDefinition.selectedId, i, j);
                         fieldData.moveToNext();
-                        CMD = CMD + String.valueOf(fieldData.getInt(0)) + ")";
+                        CMD = CMD + String.valueOf(fieldData.getInt(0));
                         if (i * j != fieldDefinition.selectedRow * fieldDefinition.selectedColumn){
-                            CMD = CMD + ",(";
+                            CMD = CMD + ";";
                         }
 
                     }
                 }
+                Log.d("SendToDrone", "CMD = " + CMD);
                 cmd_send_data.execute();
                 //CMD = "startLipad";
                 //cmd_send_data.execute();

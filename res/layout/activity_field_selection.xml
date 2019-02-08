@@ -79,7 +79,7 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:background="@color/colorBackground"
-        android:divider="@color/colorGray"
+        android:divider="@color/colorText"
         android:dividerHeight="1dp">
 
     </ListView>

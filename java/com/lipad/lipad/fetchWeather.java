@@ -1,6 +1,7 @@
 package com.lipad.lipad;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class fetchWeather extends AsyncTask<Void, Void, Void> {
+    public static String tomorrowHigh = "";
+    public static String tomorrowLow = "";
     //initially public static
     static String longitudeValue;
     static String latitudeValue;
@@ -33,6 +36,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     static String breezyMostlyCloudyText;
     String darkSkyData = "";
     String mapQuestData = "";
+    MiscDatabaseHelper miscDatabaseHelper;
     private String weatherTitle01 = "";
     private String weatherSub01 = "";
     private String weatherSub11 = "";
@@ -115,11 +119,11 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
 
         try {
 
-            JSONObject JMap = (JSONObject) new JSONObject(mapQuestData);
-            JSONArray JResults = (JSONArray) JMap.getJSONArray("results");
-            JSONObject JResultsElement = (JSONObject) JResults.getJSONObject(0);
-            JSONArray JLocations = (JSONArray) JResultsElement.getJSONArray("locations");
-            JSONObject JLocationsElement = (JSONObject) JLocations.getJSONObject(0);
+            JSONObject JMap = new JSONObject(mapQuestData);
+            JSONArray JResults = JMap.getJSONArray("results");
+            JSONObject JResultsElement = JResults.getJSONObject(0);
+            JSONArray JLocations = JResultsElement.getJSONArray("locations");
+            JSONObject JLocationsElement = JLocations.getJSONObject(0);
 
             weatherTitle01 = "" + JLocationsElement.getString("adminArea5");
 
@@ -129,22 +133,23 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
 
         try {
 
-            JSONObject JDark = (JSONObject) new JSONObject(darkSkyData);
-            JSONObject JCurrently = (JSONObject) JDark.getJSONObject("currently");
-            JSONObject JHourly = (JSONObject) JDark.getJSONObject("hourly");
-            JSONObject JDaily = (JSONObject) JDark.getJSONObject("daily");
+            JSONObject JDark = new JSONObject(darkSkyData);
+            JSONObject JCurrently = JDark.getJSONObject("currently");
+            JSONObject JHourly = JDark.getJSONObject("hourly");
+            JSONObject JDaily = JDark.getJSONObject("daily");
 
-            JSONArray JHourlyData = (JSONArray) JHourly.getJSONArray("data");
-            JSONObject JHourly11 = (JSONObject) JHourlyData.getJSONObject(1);
-            JSONObject JHourly12 = (JSONObject) JHourlyData.getJSONObject(2);
-            JSONObject JHourly13 = (JSONObject) JHourlyData.getJSONObject(3);
-            JSONObject JHourly14 = (JSONObject) JHourlyData.getJSONObject(4);
-            JSONObject JHourly15 = (JSONObject) JHourlyData.getJSONObject(5);
+            JSONArray JHourlyData = JHourly.getJSONArray("data");
+            JSONObject JHourly11 = JHourlyData.getJSONObject(1);
+            JSONObject JHourly12 = JHourlyData.getJSONObject(2);
+            JSONObject JHourly13 = JHourlyData.getJSONObject(3);
+            JSONObject JHourly14 = JHourlyData.getJSONObject(4);
+            JSONObject JHourly15 = JHourlyData.getJSONObject(5);
 
-            JSONArray JDailyData = (JSONArray) JDaily.getJSONArray("data");
-            JSONObject JDaily21 = (JSONObject) JDailyData.getJSONObject(1);
-            JSONObject JDaily22 = (JSONObject) JDailyData.getJSONObject(2);
-            JSONObject JDaily23 = (JSONObject) JDailyData.getJSONObject(3);
+            JSONArray JDailyData = JDaily.getJSONArray("data");
+            JSONObject JDaily20 = JDailyData.getJSONObject(0);
+            JSONObject JDaily21 = JDailyData.getJSONObject(1);
+            JSONObject JDaily22 = JDailyData.getJSONObject(2);
+            JSONObject JDaily23 = JDailyData.getJSONObject(3);
 
             weatherTemp01 = Math.round(JCurrently.getDouble("temperature")) + "°C";
             weatherTemp11 = Math.round(JHourly11.getDouble("temperature")) + "°C";
@@ -156,6 +161,21 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             weatherTemp21 = Math.round(JDaily21.getDouble("temperatureHigh")) + "°C" + " / " + Math.round(JDaily21.getDouble("temperatureLow")) + "°C";
             weatherTemp22 = Math.round(JDaily22.getDouble("temperatureHigh")) + "°C" + " / " + Math.round(JDaily22.getDouble("temperatureLow")) + "°C";
             weatherTemp23 = Math.round(JDaily23.getDouble("temperatureHigh")) + "°C" + " / " + Math.round(JDaily23.getDouble("temperatureLow")) + "°C";
+
+            String time0 = String.valueOf(Math.round(JDaily20.getDouble("time")));
+            Long tsLong = System.currentTimeMillis() / 1000;
+            String ts = tsLong.toString();
+
+            if ((Integer.parseInt(ts) - Integer.parseInt(time0)) <= 18000) {
+                tomorrowHigh = String.valueOf(Math.round(JDaily20.getDouble("temperatureHigh"))) + "°C";
+                tomorrowLow = String.valueOf(Math.round(JDaily20.getDouble("temperatureLow"))) + "°C";
+                Log.d("fetchWeather", "High and low: " + tomorrowHigh + " " + tomorrowLow);
+
+            } else {
+                tomorrowHigh = String.valueOf(Math.round(JDaily21.getDouble("temperatureHigh"))) + "°C";
+                tomorrowLow = String.valueOf(Math.round(JDaily21.getDouble("temperatureLow"))) + "°C";
+                Log.d("fetchWeather", "High and low: " + tomorrowHigh + " " + tomorrowLow);
+            }
 
             String weatherCondition = "" + JCurrently.get("summary");
             switch (weatherCondition) {
@@ -557,8 +577,6 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
         MainActivity.weatherDay22.setText(this.weatherDay22);
         MainActivity.weatherDay23.setText(this.weatherDay23);
 
-
     }
-
 
 }

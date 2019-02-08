@@ -5,8 +5,8 @@
 
     <!--Light theme-->
     <color name="colorAccent">#75ce93</color> //309f28 // #86e096
-    <color name="colorText">#ffffff</color> //#081d36
-    <color name="colorCard">#000000</color>
+    <color name="colorText">#d3d3d3</color> //#081d36
+    <color name="colorCard">#0c0c0c</color>
     <color name="colorBackground">#000000</color>
     <color name="colorTextAgainst">#081d36</color> //081d36
     <color name="colorGray">#d3d3d3</color>

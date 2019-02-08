@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SendToDrone">
+    tools:context=".SendToDrone"
+    android:background="@color/colorBackground">
 
     <TextView
         android:id="@+id/sendTextView"
@@ -27,7 +28,8 @@
         android:layout_marginStart="12dp"
         android:fontFamily="@font/ubuntu"
         android:text="Set IP Address to connect"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="@color/colorGray"/>
 
     <Button
         android:id="@+id/sendButton"
@@ -40,17 +42,21 @@
         android:background="@drawable/buttonshape"
         android:fontFamily="@font/ubuntu_bold"
         android:text="Send"
-        android:textColor="@color/colorText" />
+        android:textColor="@color/colorTextAgainst" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/ipAddressEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="9"
-        android:hint="IP Address / Port"
-        android:fontFamily="@font/ubuntu_medium"
         android:layout_below="@id/sendTextSub"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="48dp"/>
+        android:layout_marginTop="48dp"
+        android:ems="9"
+        android:fontFamily="@font/ubuntu_medium"
+        android:hint="IP Address / Port"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccentDark" />
 
 </RelativeLayout>
