@@ -56,6 +56,7 @@ public class NotificationHelper extends ContextWrapper {
                 .setContentText("Today's high will be " + MainActivity.tomorrowHigh + " while the low will be " + MainActivity.tomorrowLow + ".")
                 .setSmallIcon(R.drawable.notif)
                 .setContentIntent(pendingIntentx)
+                .addAction(R.drawable.ic_add, "OPEN APP", pendingIntentx)
                 .setAutoCancel(true);
     }
 }

@@ -72,6 +72,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     private String weatherDay23 = "";
     private String darkSkyURL = "";
     private String mapQuestURL = "";
+    MainActivity mainActivity;
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -576,6 +577,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
         MainActivity.weatherDay21.setText(this.weatherDay21);
         MainActivity.weatherDay22.setText(this.weatherDay22);
         MainActivity.weatherDay23.setText(this.weatherDay23);
+
 
     }
 

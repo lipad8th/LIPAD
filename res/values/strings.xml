@@ -26,7 +26,7 @@
     <string name="editString">EDIT</string>
     <string name="selectString">SELECT</string>
     <string name="breezyPartlyCloudyText">Breezy and Partly Cloudy</string>
-    <string name="breezyMostlyCloudyText">Breezy and Partly Cloudy</string>
+    <string name="breezyMostlyCloudyText">Breezy and Mostly Cloudy</string>
     <string name="addFieldText">Add a field</string>
     <string name="fieldNameText">Field name</string>
     <string name="rowText">Rows</string>
