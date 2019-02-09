@@ -117,11 +117,11 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
             public void onClick(View v) {
                 databaseHelper.deleteField(selectedId, selectedField);
                 fieldDatabaseHelper.removeTable(selectedId);
-                finishAffinity();
                 Intent intent = new Intent(fieldDefinition.this, MainActivity.class);
                 startActivity(intent);
                 Intent intent1 = new Intent(fieldDefinition.this, fieldSelection.class);
                 startActivity(intent1);
+                finishAffinity();
             }
         });
 
