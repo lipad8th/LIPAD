@@ -44,39 +44,37 @@ public class SendToDrone extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
         fieldDatabaseHelper = new FieldDatabaseHelper(this);
 
+        Cursor data = databaseHelper.getRowData(fieldDefinition.selectedId);
+        while (data.moveToNext()) {
+            fieldId = String.valueOf(data.getInt(0));
+            fieldName = data.getString(1);
+            fieldRows = String.valueOf(data.getInt(2));
+            fieldColumns = String.valueOf(data.getInt(3));
+            coordinateA = data.getString(4);
+            coordinateB = data.getString(5);
+            coordinateC = data.getString(6);
+            coordinateD = data.getString(7);
+        }
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cursor data = databaseHelper.getRowData(fieldDefinition.selectedId);
-                while (data.moveToNext()) {
-                    fieldId = String.valueOf(data.getInt(0));
-                    fieldName = data.getString(1);
-                    fieldRows = String.valueOf(data.getInt(2));
-                    fieldColumns = String.valueOf(data.getInt(3));
-                    coordinateA = data.getString(4);
-                    coordinateB = data.getString(5);
-                    coordinateC = data.getString(6);
-                    coordinateD = data.getString(7);
-                }
                 getIPandPort();
-                Socket_AsyncTask cmd_send_data = new Socket_AsyncTask();
-                //CMD = "(" + coordinateA + "),(" + coordinateB + "),(" + coordinateC + "),(" + coordinateD + "),(";
-                CMD = coordinateA + ";" + coordinateB + ";" + coordinateC + ";" + coordinateD + ";";
+                CMD = " " + coordinateA + ";" + coordinateB + ";" + coordinateC + ";" + coordinateD + ";";
                 for (int i = 1; i <= fieldDefinition.selectedRow; i++) {
                     for (int j = 1; j <= fieldDefinition.selectedColumn; j++) {
                         Cursor fieldData = fieldDatabaseHelper.getData(fieldDefinition.selectedId, i, j);
                         fieldData.moveToNext();
                         CMD = CMD + String.valueOf(fieldData.getInt(0));
-                        if (i * j != fieldDefinition.selectedRow * fieldDefinition.selectedColumn){
+                        if (i * j != fieldDefinition.selectedRow * fieldDefinition.selectedColumn) {
                             CMD = CMD + ";";
                         }
 
                     }
                 }
                 Log.d("SendToDrone", "CMD = " + CMD);
+                Socket_AsyncTask cmd_send_data = new Socket_AsyncTask();
                 cmd_send_data.execute();
-                //CMD = "startLipad";
-                //cmd_send_data.execute();
             }
         });
 
