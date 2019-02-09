@@ -20,6 +20,9 @@ import java.util.Date;
 public class fetchWeather extends AsyncTask<Void, Void, Void> {
     public static String tomorrowHigh = "";
     public static String tomorrowLow = "";
+    public static String nextState = "";
+    public static String nextParameter = "";
+    public static String nextTime = "";
     //initially public static
     static String longitudeValue;
     static String latitudeValue;
@@ -45,7 +48,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     private String weatherSub13 = "";
     private String weatherSub14 = "";
     private String weatherSub15 = "";
-    private String weatherTemp01 = "";
+    private static String weatherTemp01 = "";
     private String weatherTemp11 = "";
     private String weatherTemp12 = "";
     private String weatherTemp13 = "";
@@ -68,6 +71,11 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     private String weatherTime13 = "";
     private String weatherTime14 = "";
     private String weatherTime15 = "";
+    private String nextTime11 = "";
+    private String nextTime12 = "";
+    private String nextTime13 = "";
+    private String nextTime14 = "";
+    private String nextTime15 = "";
     private String weatherDay21 = "";
     private String weatherDay22 = "";
     private String weatherDay23 = "";
@@ -78,7 +86,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -152,12 +160,12 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             JSONObject JDaily22 = JDailyData.getJSONObject(2);
             JSONObject JDaily23 = JDailyData.getJSONObject(3);
 
-            weatherTemp01 = Math.round(JCurrently.getDouble("temperature")) + "°C";
-            weatherTemp11 = Math.round(JHourly11.getDouble("temperature")) + "°C";
-            weatherTemp12 = Math.round(JHourly12.getDouble("temperature")) + "°C";
-            weatherTemp13 = Math.round(JHourly13.getDouble("temperature")) + "°C";
-            weatherTemp14 = Math.round(JHourly14.getDouble("temperature")) + "°C";
-            weatherTemp15 = Math.round(JHourly15.getDouble("temperature")) + "°C";
+            weatherTemp01 = String.valueOf(Math.round(JCurrently.getDouble("temperature")));
+            weatherTemp11 = String.valueOf(Math.round(JHourly11.getDouble("temperature")));
+            weatherTemp12 = String.valueOf(Math.round(JHourly12.getDouble("temperature")));
+            weatherTemp13 = String.valueOf(Math.round(JHourly13.getDouble("temperature")));
+            weatherTemp14 = String.valueOf(Math.round(JHourly14.getDouble("temperature")));
+            weatherTemp15 = String.valueOf(Math.round(JHourly15.getDouble("temperature")));
 
             weatherTemp21 = Math.round(JDaily21.getDouble("temperatureHigh")) + "°C" + " / " + Math.round(JDaily21.getDouble("temperatureLow")) + "°C";
             weatherTemp22 = Math.round(JDaily22.getDouble("temperatureHigh")) + "°C" + " / " + Math.round(JDaily22.getDouble("temperatureLow")) + "°C";
@@ -234,26 +242,31 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
             long unixTime11 = Long.valueOf(weatherTime11) * 1000;
             Date javaTime11 = new java.util.Date(unixTime11);
             weatherTime11 = new SimpleDateFormat("ha").format(javaTime11);
+            nextTime11 = new SimpleDateFormat("H").format(javaTime11);
 
             weatherTime12 = JHourly12.getString("time") + "";
             long unixTime12 = Long.valueOf(weatherTime12) * 1000;
             Date javaTime12 = new java.util.Date(unixTime12);
             weatherTime12 = new SimpleDateFormat("ha").format(javaTime12);
+            nextTime12 = new SimpleDateFormat("H").format(javaTime12);
 
             weatherTime13 = JHourly13.getString("time") + "";
             long unixTime13 = Long.valueOf(weatherTime13) * 1000;
             Date javaTime13 = new java.util.Date(unixTime13);
             weatherTime13 = new SimpleDateFormat("ha").format(javaTime13);
+            nextTime13 = new SimpleDateFormat("H").format(javaTime13);
 
             weatherTime14 = JHourly14.getString("time") + "";
             long unixTime14 = Long.valueOf(weatherTime14) * 1000;
             Date javaTime14 = new java.util.Date(unixTime14);
             weatherTime14 = new SimpleDateFormat("ha").format(javaTime14);
+            nextTime14 = new SimpleDateFormat("H").format(javaTime14);
 
             weatherTime15 = JHourly15.getString("time") + "";
             long unixTime15 = Long.valueOf(weatherTime15) * 1000;
             Date javaTime15 = new java.util.Date(unixTime15);
             weatherTime15 = new SimpleDateFormat("ha").format(javaTime15);
+            nextTime15 = new SimpleDateFormat("H").format(javaTime15);
 
             weatherDay21 = JDaily21.getString("time") + "";
             long unixTime21 = Long.valueOf(weatherDay21) * 1000;
@@ -313,94 +326,42 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
                 break;
         }
 
-        switch (weatherImage11) {
+        switch (weatherImage15) {
             case "clear-night":
-                MainActivity.weatherImage11.setImageResource(R.drawable.ic_clearnight);
+                MainActivity.weatherImage15.setImageResource(R.drawable.ic_clearnight);
                 break;
             case "clear-day":
-                MainActivity.weatherImage11.setImageResource(R.drawable.ic_clearday);
+                MainActivity.weatherImage15.setImageResource(R.drawable.ic_clearday);
                 break;
             case "rain":
-                MainActivity.weatherImage11.setImageResource(R.drawable.ic_rain);
+                MainActivity.weatherImage15.setImageResource(R.drawable.ic_rain);
                 break;
             case "wind":
-                MainActivity.weatherImage11.setImageResource(R.drawable.ic_wind);
+                MainActivity.weatherImage15.setImageResource(R.drawable.ic_wind);
                 break;
             case "fog":
-                MainActivity.weatherImage11.setImageResource(R.drawable.ic_fog);
+                MainActivity.weatherImage15.setImageResource(R.drawable.ic_fog);
+                fetchWeather.nextState = "fog";
+                fetchWeather.nextTime = nextTime15;
                 break;
             case "cloudy":
-                MainActivity.weatherImage11.setImageResource(R.drawable.ic_cloudy);
+                MainActivity.weatherImage15.setImageResource(R.drawable.ic_cloudy);
                 break;
             case "partly-cloudy-day":
-                MainActivity.weatherImage11.setImageResource(R.drawable.ic_partlycloudyday);
+                MainActivity.weatherImage15.setImageResource(R.drawable.ic_partlycloudyday);
                 break;
             case "partly-cloudy-night":
-                MainActivity.weatherImage11.setImageResource(R.drawable.ic_partlycloudynight);
+                MainActivity.weatherImage15.setImageResource(R.drawable.ic_partlycloudynight);
                 break;
             case "thunderstorm":
-                MainActivity.weatherImage11.setImageResource(R.drawable.ic_thunderstorm);
+                MainActivity.weatherImage15.setImageResource(R.drawable.ic_thunderstorm);
                 break;
         }
 
-        switch (weatherImage12) {
-            case "clear-night":
-                MainActivity.weatherImage12.setImageResource(R.drawable.ic_clearnight);
-                break;
-            case "clear-day":
-                MainActivity.weatherImage12.setImageResource(R.drawable.ic_clearday);
-                break;
-            case "rain":
-                MainActivity.weatherImage12.setImageResource(R.drawable.ic_rain);
-                break;
-            case "wind":
-                MainActivity.weatherImage12.setImageResource(R.drawable.ic_wind);
-                break;
-            case "fog":
-                MainActivity.weatherImage12.setImageResource(R.drawable.ic_fog);
-                break;
-            case "cloudy":
-                MainActivity.weatherImage12.setImageResource(R.drawable.ic_cloudy);
-                break;
-            case "partly-cloudy-day":
-                MainActivity.weatherImage12.setImageResource(R.drawable.ic_partlycloudyday);
-                break;
-            case "partly-cloudy-night":
-                MainActivity.weatherImage12.setImageResource(R.drawable.ic_partlycloudynight);
-                break;
-            case "thunderstorm":
-                MainActivity.weatherImage12.setImageResource(R.drawable.ic_thunderstorm);
-                break;
-        }
-
-        switch (weatherImage13) {
-            case "clear-night":
-                MainActivity.weatherImage13.setImageResource(R.drawable.ic_clearnight);
-                break;
-            case "clear-day":
-                MainActivity.weatherImage13.setImageResource(R.drawable.ic_clearday);
-                break;
-            case "rain":
-                MainActivity.weatherImage13.setImageResource(R.drawable.ic_rain);
-                break;
-            case "wind":
-                MainActivity.weatherImage13.setImageResource(R.drawable.ic_wind);
-                break;
-            case "fog":
-                MainActivity.weatherImage13.setImageResource(R.drawable.ic_fog);
-                break;
-            case "cloudy":
-                MainActivity.weatherImage13.setImageResource(R.drawable.ic_cloudy);
-                break;
-            case "partly-cloudy-day":
-                MainActivity.weatherImage13.setImageResource(R.drawable.ic_partlycloudyday);
-                break;
-            case "partly-cloudy-night":
-                MainActivity.weatherImage13.setImageResource(R.drawable.ic_partlycloudynight);
-                break;
-            case "thunderstorm":
-                MainActivity.weatherImage13.setImageResource(R.drawable.ic_thunderstorm);
-                break;
+        if (!weatherTemp15.isEmpty() && Integer.parseInt(weatherTemp15) >= 32) {
+            fetchWeather.nextState = "hot";
+            fetchWeather.nextParameter = weatherTemp15 + "°C";
+            fetchWeather.nextTime = nextTime15;
         }
 
         switch (weatherImage14) {
@@ -418,6 +379,8 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
                 break;
             case "fog":
                 MainActivity.weatherImage14.setImageResource(R.drawable.ic_fog);
+                fetchWeather.nextState = "fog";
+                fetchWeather.nextTime = nextTime14;
                 break;
             case "cloudy":
                 MainActivity.weatherImage14.setImageResource(R.drawable.ic_cloudy);
@@ -433,34 +396,124 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
                 break;
         }
 
-        switch (weatherImage15) {
+        if (!weatherTemp14.isEmpty() && Integer.parseInt(weatherTemp14) >= 32) {
+            fetchWeather.nextState = "hot";
+            fetchWeather.nextParameter = weatherTemp14 + "°C";
+            fetchWeather.nextTime = nextTime14;
+        }
+
+        switch (weatherImage13) {
             case "clear-night":
-                MainActivity.weatherImage15.setImageResource(R.drawable.ic_clearnight);
+                MainActivity.weatherImage13.setImageResource(R.drawable.ic_clearnight);
                 break;
             case "clear-day":
-                MainActivity.weatherImage15.setImageResource(R.drawable.ic_clearday);
+                MainActivity.weatherImage13.setImageResource(R.drawable.ic_clearday);
                 break;
             case "rain":
-                MainActivity.weatherImage15.setImageResource(R.drawable.ic_rain);
+                MainActivity.weatherImage13.setImageResource(R.drawable.ic_rain);
                 break;
             case "wind":
-                MainActivity.weatherImage15.setImageResource(R.drawable.ic_wind);
+                MainActivity.weatherImage13.setImageResource(R.drawable.ic_wind);
                 break;
             case "fog":
-                MainActivity.weatherImage15.setImageResource(R.drawable.ic_fog);
+                MainActivity.weatherImage13.setImageResource(R.drawable.ic_fog);
+                fetchWeather.nextState = "fog";
+                fetchWeather.nextTime = nextTime13;
                 break;
             case "cloudy":
-                MainActivity.weatherImage15.setImageResource(R.drawable.ic_cloudy);
+                MainActivity.weatherImage13.setImageResource(R.drawable.ic_cloudy);
                 break;
             case "partly-cloudy-day":
-                MainActivity.weatherImage15.setImageResource(R.drawable.ic_partlycloudyday);
+                MainActivity.weatherImage13.setImageResource(R.drawable.ic_partlycloudyday);
                 break;
             case "partly-cloudy-night":
-                MainActivity.weatherImage15.setImageResource(R.drawable.ic_partlycloudynight);
+                MainActivity.weatherImage13.setImageResource(R.drawable.ic_partlycloudynight);
                 break;
             case "thunderstorm":
-                MainActivity.weatherImage15.setImageResource(R.drawable.ic_thunderstorm);
+                MainActivity.weatherImage13.setImageResource(R.drawable.ic_thunderstorm);
                 break;
+        }
+
+        if (!weatherTemp13.isEmpty() && Integer.parseInt(weatherTemp13) >= 32) {
+            fetchWeather.nextState = "hot";
+            fetchWeather.nextParameter = weatherTemp13 + "°C";
+            fetchWeather.nextTime = nextTime13;
+        }
+
+        switch (weatherImage12) {
+            case "clear-night":
+                MainActivity.weatherImage12.setImageResource(R.drawable.ic_clearnight);
+                break;
+            case "clear-day":
+                MainActivity.weatherImage12.setImageResource(R.drawable.ic_clearday);
+                break;
+            case "rain":
+                MainActivity.weatherImage12.setImageResource(R.drawable.ic_rain);
+                break;
+            case "wind":
+                MainActivity.weatherImage12.setImageResource(R.drawable.ic_wind);
+                break;
+            case "fog":
+                MainActivity.weatherImage12.setImageResource(R.drawable.ic_fog);
+                fetchWeather.nextState = "fog";
+                fetchWeather.nextTime = nextTime12;
+                break;
+            case "cloudy":
+                MainActivity.weatherImage12.setImageResource(R.drawable.ic_cloudy);
+                break;
+            case "partly-cloudy-day":
+                MainActivity.weatherImage12.setImageResource(R.drawable.ic_partlycloudyday);
+                break;
+            case "partly-cloudy-night":
+                MainActivity.weatherImage12.setImageResource(R.drawable.ic_partlycloudynight);
+                break;
+            case "thunderstorm":
+                MainActivity.weatherImage12.setImageResource(R.drawable.ic_thunderstorm);
+                break;
+        }
+
+        if (!weatherTemp12.isEmpty() && Integer.parseInt(weatherTemp12) >= 32) {
+            fetchWeather.nextState = "hot";
+            fetchWeather.nextParameter = weatherTemp12 + "°C";
+            fetchWeather.nextTime = nextTime12;
+        }
+
+        switch (weatherImage11) {
+            case "clear-night":
+                MainActivity.weatherImage11.setImageResource(R.drawable.ic_clearnight);
+                break;
+            case "clear-day":
+                MainActivity.weatherImage11.setImageResource(R.drawable.ic_clearday);
+                break;
+            case "rain":
+                MainActivity.weatherImage11.setImageResource(R.drawable.ic_rain);
+                break;
+            case "wind":
+                MainActivity.weatherImage11.setImageResource(R.drawable.ic_wind);
+                break;
+            case "fog":
+                MainActivity.weatherImage11.setImageResource(R.drawable.ic_fog);
+                fetchWeather.nextState = "fog";
+                fetchWeather.nextTime = nextTime11;
+                break;
+            case "cloudy":
+                MainActivity.weatherImage11.setImageResource(R.drawable.ic_cloudy);
+                break;
+            case "partly-cloudy-day":
+                MainActivity.weatherImage11.setImageResource(R.drawable.ic_partlycloudyday);
+                break;
+            case "partly-cloudy-night":
+                MainActivity.weatherImage11.setImageResource(R.drawable.ic_partlycloudynight);
+                break;
+            case "thunderstorm":
+                MainActivity.weatherImage11.setImageResource(R.drawable.ic_thunderstorm);
+                break;
+        }
+
+        if (!weatherTemp11.isEmpty() && Integer.parseInt(weatherTemp11) >= 32) {
+            fetchWeather.nextState = "hot";
+            fetchWeather.nextParameter = weatherTemp11 + "°C";
+            fetchWeather.nextTime = nextTime11;
         }
 
         switch (weatherImage21) {
@@ -555,12 +608,12 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
 
         MainActivity.weatherTitle01.setText(this.weatherTitle01);
         MainActivity.weatherSub01.setText(this.weatherSub01);
-        MainActivity.weatherTemp01.setText(this.weatherTemp01);
-        MainActivity.weatherTemp11.setText(this.weatherTemp11);
-        MainActivity.weatherTemp12.setText(this.weatherTemp12);
-        MainActivity.weatherTemp13.setText(this.weatherTemp13);
-        MainActivity.weatherTemp14.setText(this.weatherTemp14);
-        MainActivity.weatherTemp15.setText(this.weatherTemp15);
+        MainActivity.weatherTemp01.setText(String.format("%s°C", weatherTemp01));
+        MainActivity.weatherTemp11.setText(String.format("%s°C", this.weatherTemp11));
+        MainActivity.weatherTemp12.setText(String.format("%s°C", this.weatherTemp12));
+        MainActivity.weatherTemp13.setText(String.format("%s°C", this.weatherTemp13));
+        MainActivity.weatherTemp14.setText(String.format("%s°C", this.weatherTemp14));
+        MainActivity.weatherTemp15.setText(String.format("%s°C", this.weatherTemp15));
         MainActivity.weatherSub21.setText(this.weatherTemp21);
         MainActivity.weatherSub22.setText(this.weatherTemp22);
         MainActivity.weatherSub23.setText(this.weatherTemp23);
@@ -577,7 +630,34 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
         MainActivity.weatherDay21.setText(this.weatherDay21);
         MainActivity.weatherDay22.setText(this.weatherDay22);
         MainActivity.weatherDay23.setText(this.weatherDay23);
+        MainActivity.weatherFailedTitle.setText(null);
+        MainActivity.weatherFailedSub.setText(null);
 
+        if (fetchWeather.nextState.isEmpty())
+            fetchWeather.nextState = "0";
+        if (fetchWeather.nextParameter.isEmpty())
+            fetchWeather.nextParameter = "0";
+        if (fetchWeather.nextTime.isEmpty())
+            fetchWeather.nextTime = "0";
+
+        if (!fetchWeather.tomorrowHigh.isEmpty() && !fetchWeather.tomorrowLow.isEmpty() && !fetchWeather.weatherTemp01.isEmpty()) {
+            miscDatabaseHelper = new MiscDatabaseHelper(MainActivity.publicContext);
+            miscDatabaseHelper.addTomorrowHigh(fetchWeather.tomorrowHigh);
+            miscDatabaseHelper.addTomorrowLow(fetchWeather.tomorrowLow);
+            miscDatabaseHelper.addNextState(fetchWeather.nextState);
+            miscDatabaseHelper.addNextParameter(fetchWeather.nextParameter);
+            miscDatabaseHelper.addNextTime(fetchWeather.nextTime);
+            Log.d("fetchWeather", "tomorrowHigh and tomorrowLow: " + tomorrowHigh + " " + tomorrowLow);
+        } else {
+            MainActivity.weatherFailedTitle.setText("Failed to update.");
+            MainActivity.weatherFailedSub.setText("To check the weather, connect to the internet.");
+            MainActivity.weatherTemp01.setText("");
+            MainActivity.weatherTemp11.setText("");
+            MainActivity.weatherTemp12.setText("");
+            MainActivity.weatherTemp13.setText("");
+            MainActivity.weatherTemp14.setText("");
+            MainActivity.weatherTemp15.setText("");
+        }
 
     }
 

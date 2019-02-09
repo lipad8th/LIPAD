@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/headerView"
@@ -107,7 +107,6 @@
                         android:layout_marginTop="16dp"
                         android:layout_toEndOf="@+id/weatherImage01"
                         android:fontFamily="@font/ubuntu_bold"
-                        android:text="@string/weatherTitle01"
                         android:textColor="@color/colorText"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -121,7 +120,6 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherSub01"
                         android:textColor="@color/colorText" />
 
                     <TextView
@@ -132,7 +130,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="144dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherSub21"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -145,7 +143,7 @@
                         android:layout_marginTop="144dp"
                         android:layout_toEndOf="@id/weatherDay22"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherSub21"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -158,7 +156,7 @@
                         android:layout_marginEnd="24dp"
                         android:layout_toStartOf="@+id/weatherDay22"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherSub21"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -170,7 +168,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="194dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTemp01"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -182,7 +180,7 @@
                         android:layout_alignTop="@+id/separator"
                         android:layout_marginTop="194dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTemp01"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -195,7 +193,7 @@
                         android:layout_marginTop="194dp"
                         android:layout_toEndOf="@+id/weatherImage01"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTemp01"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -207,7 +205,7 @@
                         android:layout_alignEnd="@id/weatherSub12"
                         android:layout_marginEnd="64dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherSub11"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -219,7 +217,7 @@
                         android:layout_alignEnd="@id/weatherSub13"
                         android:layout_marginEnd="64dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherSub11"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -230,7 +228,7 @@
                         android:layout_below="@+id/weatherTemp13"
                         android:layout_centerHorizontal="true"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherSub11"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -242,7 +240,7 @@
                         android:layout_alignStart="@id/weatherTemp13"
                         android:layout_marginStart="64dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherSub11"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -254,7 +252,7 @@
                         android:layout_alignStart="@id/weatherTime14"
                         android:layout_marginStart="64dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherSub11"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -267,8 +265,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
                         android:contentDescription="@string/weatherImage01"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_cloud" />
+                        android:scaleType="center" />
 
                     <TextView
                         android:id="@+id/weatherTemp01"
@@ -279,7 +276,7 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="-8dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTemp01"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -291,7 +288,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="76dp"
                         android:layout_marginRight="16dp"
-                        android:background="@android:color/darker_gray" />
+                        android:background="@color/colorGray"/>
 
                     <TextView
                         android:id="@+id/weatherTime11"
@@ -302,9 +299,8 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="64dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTime11"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorText" />
+                        android:textColor="@color/colorText"
+                        android:textAlignment="center" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/weatherImage11"
@@ -315,8 +311,7 @@
                         android:layout_marginTop="-8dp"
                         android:layout_marginEnd="64dp"
                         android:contentDescription="@string/weatherImage01"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_cloud" />
+                        android:scaleType="center" />
 
                     <TextView
                         android:id="@+id/weatherTemp11"
@@ -327,7 +322,7 @@
                         android:layout_marginTop="-8dp"
                         android:layout_marginEnd="64dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTemp01"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -340,7 +335,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="64dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTime11"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -353,8 +348,7 @@
                         android:layout_marginTop="-8dp"
                         android:layout_marginEnd="64dp"
                         android:contentDescription="@string/weatherImage01"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_cloud" />
+                        android:scaleType="center" />
 
                     <TextView
                         android:id="@+id/weatherTemp12"
@@ -365,7 +359,7 @@
                         android:layout_marginTop="-8dp"
                         android:layout_marginEnd="64dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTemp01"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -377,7 +371,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTime11"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -389,8 +383,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="-8dp"
                         android:contentDescription="@string/weatherImage01"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_cloud" />
+                        android:scaleType="center" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/weatherImage22"
@@ -400,8 +393,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="123dp"
                         android:contentDescription="@string/weatherImage01"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_cloud" />
+                        android:scaleType="center" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/weatherImage23"
@@ -411,8 +403,7 @@
                         android:layout_alignStart="@id/weatherDay23"
                         android:layout_marginTop="123dp"
                         android:contentDescription="@string/weatherImage01"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_cloud" />
+                        android:scaleType="center" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/weatherImage21"
@@ -423,8 +414,7 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="123dp"
                         android:contentDescription="@string/weatherImage01"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_cloud" />
+                        android:scaleType="center" />
 
                     <TextView
                         android:id="@+id/weatherTemp13"
@@ -434,7 +424,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="-8dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTemp01"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -447,7 +437,6 @@
                         android:layout_marginStart="64dp"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTime11"
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -460,8 +449,7 @@
                         android:layout_marginStart="64dp"
                         android:layout_marginTop="-8dp"
                         android:contentDescription="@string/weatherImage01"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_cloud" />
+                        android:scaleType="center" />
 
                     <TextView
                         android:id="@+id/weatherTemp14"
@@ -472,7 +460,7 @@
                         android:layout_marginStart="64dp"
                         android:layout_marginTop="-8dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTemp01"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -485,7 +473,7 @@
                         android:layout_marginStart="64dp"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTime11"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -498,8 +486,7 @@
                         android:layout_marginStart="64dp"
                         android:layout_marginTop="-8dp"
                         android:contentDescription="@string/weatherImage01"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_cloud" />
+                        android:scaleType="center" />
 
                     <TextView
                         android:id="@+id/weatherTemp15"
@@ -510,7 +497,7 @@
                         android:layout_marginStart="64dp"
                         android:layout_marginTop="-8dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="@string/weatherTemp01"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
 
@@ -535,8 +522,8 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="0dp"
-                        android:fontFamily="@font/ubuntu_bold"
                         android:layout_toStartOf="@id/weatherButton02"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:text="GET NOTIFIED"
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
@@ -554,6 +541,28 @@
                         android:text="@string/weatherButton02"
                         android:textAlignment="center"
                         android:textColor="@color/colorText" />
+
+                    <TextView
+                        android:id="@+id/weatherFailedTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/weatherTitle01"
+                        android:textColor="@color/colorText"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/weatherFailedSub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/weatherFailedTitle"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="@color/colorText"
+                        android:text="@string/weatherSub01"/>
 
 
                 </RelativeLayout>
@@ -592,7 +601,7 @@
                         android:id="@+id/graphView01"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
-                        android:layout_alignParentBottom="true"/>
+                        android:layout_alignParentBottom="true" />
 
 
                 </RelativeLayout>

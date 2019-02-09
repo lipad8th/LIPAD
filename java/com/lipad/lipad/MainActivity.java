@@ -60,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public static TextView weatherTemp13;
     public static TextView weatherTemp14;
     public static TextView weatherTemp15;
+    public static TextView weatherFailedTitle;
+    public static TextView weatherFailedSub;
+    public static View separator;
+    public static int separatorColor;
     public static AppCompatImageView weatherImage01;
     public static AppCompatImageView weatherImage11;
     public static AppCompatImageView weatherImage12;
@@ -87,6 +91,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public static int totalWater;
     public static String tomorrowHigh;
     public static String tomorrowLow;
+    public static String nextState;
+    public static String nextParameter;
+    public static String nextTime;
+    public static String notificationType;
     public static Context publicContext;
     public static Button weatherButton03;
     Button weatherButton01;
@@ -123,6 +131,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         weatherSub21 = findViewById(R.id.weatherSub21);
         weatherSub22 = findViewById(R.id.weatherSub22);
         weatherSub23 = findViewById(R.id.weatherSub23);
+        separator = findViewById(R.id.separator);
+        weatherFailedTitle = findViewById(R.id.weatherFailedTitle);
+        weatherFailedSub = findViewById(R.id.weatherFailedSub);
         weatherTemp01 = findViewById(R.id.weatherTemp01);
         weatherTemp11 = findViewById(R.id.weatherTemp11);
         weatherTemp12 = findViewById(R.id.weatherTemp12);
@@ -147,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         weatherDay22 = findViewById(R.id.weatherDay22);
         weatherDay23 = findViewById(R.id.weatherDay23);
         weatherButton03 = findViewById(R.id.weatherButton03);
+
+        separatorColor = R.color.colorGray;
 
         databaseHelper = new DatabaseHelper(this);
         miscDatabaseHelper = new MiscDatabaseHelper(this);
@@ -308,24 +321,51 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     public void createAlarm() {
-        miscDatabaseHelper = new MiscDatabaseHelper(this);
-        miscDatabaseHelper.addTomorrowHigh(fetchWeather.tomorrowHigh);
-        miscDatabaseHelper.addTomorrowLow(fetchWeather.tomorrowLow);
-
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 5);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
 
         startAlarm(calendar);
+
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.set(Calendar.HOUR_OF_DAY, Integer.parseInt(fetchWeather.nextTime));
+        calendar1.set(Calendar.MINUTE, 0);
+        calendar1.set(Calendar.SECOND, 0);
+
+        startAlert(calendar1);
     }
 
     public void startAlarm(Calendar calendar) {
+        notificationType = "alarm";
         Cursor data = miscDatabaseHelper.getTomorrowData();
         data.moveToFirst();
         tomorrowHigh = data.getString(0);
         tomorrowLow = data.getString(1);
         Log.d("MainActivity", "High and Low Text: " + tomorrowHigh + " " + tomorrowLow);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        if (calendar.before(Calendar.getInstance())) {
+            calendar.add(Calendar.DATE, 1);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
+
+    }
+
+    public void startAlert(Calendar calendar) {
+        notificationType = "alert";
+        Cursor data = miscDatabaseHelper.getNextData();
+        data.moveToFirst();
+        nextState = data.getString(0);
+        nextParameter = data.getString(1);
+        nextTime = data.getString(2);
+        Log.d("MainActivity", "State to time: " + nextState + " " + nextParameter + " " + nextTime);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
