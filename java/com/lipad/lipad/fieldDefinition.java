@@ -35,6 +35,7 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
     Context context;
     FieldDatabaseHelper fieldDatabaseHelper;
     Button nextButton;
+    Button deleteButton;
     Button button0;
     Button button1;
     Button button2;
@@ -50,10 +51,12 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
 
         fieldTextView = findViewById(R.id.fieldTextView);
         fieldSizeTextView = findViewById(R.id.fieldSizeTextView);
+        databaseHelper = new DatabaseHelper(this);
         fieldDatabaseHelper = new FieldDatabaseHelper(this);
         field01grid = findViewById(R.id.field01grid);
 
         nextButton = findViewById(R.id.nextButton);
+        deleteButton = findViewById(R.id.deleteButton);
         button0 = findViewById(R.id.button0);
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
@@ -106,6 +109,19 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
                 }
                 Intent intent = new Intent(fieldDefinition.this, CoordinateAActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseHelper.deleteField(selectedId, selectedField);
+                fieldDatabaseHelper.removeTable(selectedId);
+                finishAffinity();
+                Intent intent = new Intent(fieldDefinition.this, MainActivity.class);
+                startActivity(intent);
+                Intent intent1 = new Intent(fieldDefinition.this, fieldSelection.class);
+                startActivity(intent1);
             }
         });
 

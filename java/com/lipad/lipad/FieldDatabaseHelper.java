@@ -72,4 +72,10 @@ public class FieldDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(dataEntry);
     }
 
+    public void removeTable(int fieldId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DROP TABLE field" + fieldId;
+        db.execSQL(query);
+    }
+
 }

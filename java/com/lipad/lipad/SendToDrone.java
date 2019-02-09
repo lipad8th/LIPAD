@@ -60,7 +60,7 @@ public class SendToDrone extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getIPandPort();
-                CMD = " " + coordinateA + ";" + coordinateB + ";" + coordinateC + ";" + coordinateD + ";";
+                CMD = ";" + coordinateA + ";" + coordinateB + ";" + coordinateC + ";" + coordinateD + ";";
                 for (int i = 1; i <= fieldDefinition.selectedRow; i++) {
                     for (int j = 1; j <= fieldDefinition.selectedColumn; j++) {
                         Cursor fieldData = fieldDatabaseHelper.getData(fieldDefinition.selectedId, i, j);
