@@ -22,7 +22,7 @@ public class createFieldView extends AppCompatActivity {
 
     public Button button(Context context, String text, int index) {
 
-        final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(120, 120);
+        final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(96, 96);
         buttonX = new Button(context);
         buttonX.setLayoutParams(layoutParams);
         buttonX.setTextColor(Color.rgb(0,0,0)); //17170432

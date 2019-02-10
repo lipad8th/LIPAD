@@ -1,6 +1,7 @@
 package com.lipad.lipad;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -27,6 +29,12 @@ import static com.lipad.lipad.MainActivity.RequestPermissionCode;
 
 public class CoordinateAActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
+    String coordinateA;
+    String coordinateB;
+    String coordinateC;
+    String coordinateD;
+    String altitudeValue;
+    String groundSpeedValue;
     Button compassAButton;
     Button compassBButton;
     Button compassCButton;
@@ -40,15 +48,12 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
     EditText longitudeCEditText;
     EditText latitudeDEditText;
     EditText longitudeDEditText;
-    String coordinateA;
-    String coordinateB;
-    String coordinateC;
-    String coordinateD;
     DatabaseHelper databaseHelper;
-
     GoogleApiClient googleApiClient;
     LocationRequest locationRequest;
     FusedLocationProviderApi locationProviderApi = LocationServices.FusedLocationApi;
+    EditText altitudeEditText;
+    EditText groundSpeedEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,8 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
         longitudeBEditText = findViewById(R.id.longitudeBEditText);
         longitudeCEditText = findViewById(R.id.longitudeCEditText);
         longitudeDEditText = findViewById(R.id.longitudeDEditText);
+        altitudeEditText = findViewById(R.id.altitudeEditText);
+        groundSpeedEditText = findViewById(R.id.groundSpeedEditText);
         coordinateANextButton = findViewById(R.id.coordinateANextButton);
 
         databaseHelper = new DatabaseHelper(this);
@@ -85,6 +92,8 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
         Cursor coordinateBData = databaseHelper.getCoordinateData(fieldDefinition.selectedId, "B");
         Cursor coordinateCData = databaseHelper.getCoordinateData(fieldDefinition.selectedId, "C");
         Cursor coordinateDData = databaseHelper.getCoordinateData(fieldDefinition.selectedId, "D");
+        Cursor altitudeData = databaseHelper.getAltitudeData(fieldDefinition.selectedId);
+        Cursor groundSpeedData = databaseHelper.getGroundSpeedData(fieldDefinition.selectedId);
 
         while (coordinateAData.moveToNext()) {
             String coordinateAString = coordinateAData.getString(0);
@@ -117,6 +126,14 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
                 latitudeDEditText.setText(coordinateDValue[0]);
                 longitudeDEditText.setText(coordinateDValue[1]);
             }
+        }
+
+        while (altitudeData.moveToNext()) {
+            altitudeEditText.setText(altitudeData.getString(0));
+        }
+
+        while (groundSpeedData.moveToNext()) {
+            groundSpeedEditText.setText(groundSpeedData.getString(0));
         }
 
         compassAButton.setOnClickListener(new View.OnClickListener() {
@@ -158,12 +175,106 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
                 coordinateB = latitudeBEditText.getText() + "," + longitudeBEditText.getText();
                 coordinateC = latitudeCEditText.getText() + "," + longitudeCEditText.getText();
                 coordinateD = latitudeDEditText.getText() + "," + longitudeDEditText.getText();
+                altitudeValue = String.valueOf(altitudeEditText.getText());
+                groundSpeedValue = String.valueOf(groundSpeedEditText.getText());
                 databaseHelper.addCoordinateData(fieldDefinition.selectedId, "A", coordinateA);
                 databaseHelper.addCoordinateData(fieldDefinition.selectedId, "B", coordinateB);
                 databaseHelper.addCoordinateData(fieldDefinition.selectedId, "C", coordinateC);
                 databaseHelper.addCoordinateData(fieldDefinition.selectedId, "D", coordinateD);
+                databaseHelper.addAltitudeData(fieldDefinition.selectedId, altitudeValue);
+                databaseHelper.addGroundSpeedData(fieldDefinition.selectedId, groundSpeedValue);
                 Intent intent = new Intent(CoordinateAActivity.this, SendToDrone.class);
                 startActivity(intent);
+            }
+        });
+
+        latitudeAEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        latitudeBEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        latitudeCEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        latitudeDEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        longitudeAEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        longitudeBEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        longitudeCEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        longitudeDEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        altitudeEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        groundSpeedEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
             }
         });
 
@@ -233,4 +344,10 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         }
     }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
 }

@@ -7,6 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
@@ -20,6 +24,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL5 = "coordinateB";
     private static final String COL6 = "coordinateC";
     private static final String COL7 = "coordinateD";
+    private static final String COL8 = "creationDate";
+    private static final String COL9 = "latestDate";
+    private static final String COL10 = "altitude";
+    private static final String COL11 = "groundSpeed";
 
     public DatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, 1);
@@ -28,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COL1 + " TEXT," + COL2 + " INTEGER,"
-                + COL3 + " INTEGER," + COL4 + " TEXT," + COL5 + " TEXT," + COL6 + " TEXT," + COL7 + " TEXT)";
+                + COL3 + " INTEGER," + COL4 + " TEXT," + COL5 + " TEXT," + COL6 + " TEXT," + COL7 + " TEXT," + COL8 + " TEXT," + COL9 + " TEXT," + COL10 + " TEXT," + COL11 + " TEXT)";
         db.execSQL(createTable);
 
     }
@@ -41,10 +49,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean addData(String fieldNameString, String rowValue, String columnValue) {
         SQLiteDatabase db = this.getWritableDatabase();
+
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        String dateToday = df.format(Calendar.getInstance().getTime());
+
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL1, fieldNameString);
         contentValues.put(COL2, rowValue);
         contentValues.put(COL3, columnValue);
+        contentValues.put(COL8, dateToday);
 
         Log.d(TAG, "addData: Adding " + fieldNameString + " to " + TABLE_NAME);
 
@@ -102,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(dataEntry);
     }
 
-    public Cursor getCoordinateData(int fieldId, String coordinateX){
+    public Cursor getCoordinateData(int fieldId, String coordinateX) {
         //SELECT coordinateA FROM field_table WHERE ID == 1
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT coordinate" + coordinateX + " FROM field_table WHERE ID == "
@@ -111,7 +124,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
-    public Cursor getIdList(){
+    public void addAltitudeData(int fieldId, String altitude) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String dataEntry = "UPDATE field_table SET altitude = \"" + altitude + "\" WHERE ID == " + fieldId;
+        db.execSQL(dataEntry);
+    }
+
+    public Cursor getAltitudeData(int fieldId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT altitude FROM field_table WHERE ID == " + fieldId;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    public void addGroundSpeedData(int fieldId, String groundSpeed) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String dataEntry = "UPDATE field_table SET groundSpeed = \"" + groundSpeed + "\" WHERE ID == " + fieldId;
+        db.execSQL(dataEntry);
+    }
+
+    public Cursor getGroundSpeedData(int fieldId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT groundSpeed FROM field_table WHERE ID == " + fieldId;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    public Cursor getIdList() {
         //SELECT ID FROM field_table
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT ID, rows, columns FROM field_table";
@@ -119,7 +158,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
-    public Cursor getNumberOfFields(){
+    public Cursor getNumberOfFields() {
         //SELECT COUNT (*)
         //  FROM field_table
         SQLiteDatabase db = this.getWritableDatabase();
@@ -149,4 +188,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
 
     }
+
+    public void addLatestDate(String fieldId, String currentDate) {
+        //UPDATE field_table SET latestDate = "yyyy/MM/dd" WHERE ID == 1
+        SQLiteDatabase db = this.getWritableDatabase();
+        String dataEntry = "UPDATE " + TABLE_NAME + " SET " + COL9 + " = \"" + currentDate + "\" WHERE " + COL0 + " == " + fieldId;
+        db.execSQL(dataEntry);
+    }
+
 }

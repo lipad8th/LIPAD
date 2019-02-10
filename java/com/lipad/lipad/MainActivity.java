@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public static int fields;
     public static int totalSeeds;
     public static int totalWater;
+    public static int lifetimeSeeds;
+    public static int lifetimeWater;
     public static String tomorrowHigh;
     public static String tomorrowLow;
     public static String nextState;
@@ -107,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private LocationRequest locationRequest;
     private FusedLocationProviderApi locationProvider = LocationServices.FusedLocationApi;
     private CardView card01;
+    private CardView card04;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,9 +184,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         locationRequest.setFastestInterval(500);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-        card01 = (CardView) findViewById(R.id.card01);
+        card01 = findViewById(R.id.card01);
+        card04 = findViewById(R.id.card04);
 
         card01.setOnClickListener(this);
+        card04.setOnClickListener(this);
 
         fetchWeather.windText = getString(R.string.windText);
         fetchWeather.humidityText = getString(R.string.humidityText);
@@ -276,26 +281,23 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         GraphView graph = (GraphView) findViewById(R.id.graphView01);
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(1, totalSeeds),
-                new DataPoint(2, totalWater)
+                new DataPoint(1, lifetimeSeeds),
+                new DataPoint(2, lifetimeWater)
         });
 
         // set manual X bounds
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
-        if (totalSeeds > totalWater) {
-            graph.getViewport().setMaxY(totalSeeds + 1);
-        } else if (totalWater > totalSeeds) {
-            graph.getViewport().setMaxY(totalWater + 1);
+        if (lifetimeSeeds > lifetimeWater) {
+            graph.getViewport().setMaxY(lifetimeSeeds + 1);
+        } else if (lifetimeWater > lifetimeSeeds) {
+            graph.getViewport().setMaxY(lifetimeWater + 1);
         }
-
-        //graph.getViewport().setMaxY(200);
 
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(3);
 
-        // enable scaling and scrolling
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
 
@@ -303,7 +305,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         graph.addSeries(series);
 
-        // styling
         series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
             @Override
             public int get(DataPoint data) {
@@ -313,10 +314,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         series.setSpacing(48);
 
-        // draw values on top
         series.setDrawValuesOnTop(true);
         series.setValuesOnTopColor(Color.WHITE);
-        //series.setValuesOnTopSize(50);
 
     }
 
@@ -454,6 +453,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         switch (v.getId()) {
             case R.id.card01:
                 i = new Intent(this, fieldSelection.class);
+                startActivity(i);
+                break;
+            case R.id.card04:
+                i = new Intent(this, ViewFieldSelection.class);
                 startActivity(i);
                 break;
             default:

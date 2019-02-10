@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fieldDefinition"
+    android:background="#000000">
+
+    <TextView
+        android:id="@+id/fieldTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="@string/placeholderText"
+        android:textColor="@color/colorText"
+        android:textSize="32sp" />
+
+    <TextView
+        android:id="@+id/fieldSizeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/fieldTextView"
+        android:fontFamily="@font/ubuntu"
+        android:textColor="@color/colorText"
+        android:text="@string/placeholderText"
+        android:textSize="16sp" />
+
+    <ScrollView
+        android:id="@+id/scrollView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fieldSizeTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:padding="12dp">
+
+        <ScrollView
+            android:id="@+id/scrollView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:id="@+id/field01grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alignmentMode="alignBounds"
+                android:columnCount="1"
+                android:paddingTop="2dp"
+                android:paddingBottom="80dp">
+
+            </GridLayout>
+        </ScrollView>
+    </ScrollView>
+
+</RelativeLayout>

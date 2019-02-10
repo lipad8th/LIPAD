@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".CoordinateAActivity"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:onClick="stealFocusFromEditTexts"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".CoordinateAActivity">
 
     <TextView
         android:id="@+id/coordinateATextView"
@@ -27,8 +30,8 @@
         android:layout_below="@id/coordinateATextView"
         android:layout_marginStart="12dp"
         android:fontFamily="@font/ubuntu"
-        android:textColor="@color/colorGray"
         android:text="Set each corner's coordinates"
+        android:textColor="@color/colorGray"
         android:textSize="16sp" />
 
     <Button
@@ -48,154 +51,222 @@
         android:id="@+id/compassAButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="150dp"
-        android:background="@drawable/ic_compass" />
+        android:layout_below="@id/CoordinateASub"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/ic_pin_2" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/latitudeAEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/compassAButton"
-        android:layout_marginStart="8dp"
-        android:layout_toEndOf="@id/compassAButton"
-        android:ems="9"
+        android:layout_below="@id/compassAButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:ems="7"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Latitude A"
-        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textAlignment="center"
         android:textColor="@color/colorText"
-        app:backgroundTint="@color/colorAccent"/>
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccent" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/longitudeAEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/latitudeAEditText"
-        android:ems="9"
+        android:layout_marginStart="24dp"
+        android:ems="7"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Longitude A"
-        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textAlignment="center"
         android:textColor="@color/colorText"
-        android:layout_toEndOf="@id/compassAButton"
-        android:layout_marginStart="8dp"
-        app:backgroundTint="@color/colorAccent"/>
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccent" />
 
     <Button
         android:id="@+id/compassBButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="250dp"
-        android:background="@drawable/ic_compass" />
+        android:layout_below="@id/CoordinateASub"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="84dp"
+        android:background="@drawable/ic_pin_2" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/latitudeBEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/compassBButton"
+        android:layout_below="@id/compassBButton"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="8dp"
-        android:layout_toEndOf="@id/compassBButton"
-        android:ems="9"
+        android:layout_marginEnd="24dp"
+        android:ems="7"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Latitude B"
-        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textAlignment="center"
         android:textColor="@color/colorText"
-        app:backgroundTint="@color/colorAccent"/>
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccent" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/longitudeBEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/latitudeBEditText"
-        android:ems="9"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
+        android:ems="7"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Longitude B"
-        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textAlignment="center"
         android:textColor="@color/colorText"
-        android:layout_toEndOf="@id/compassBButton"
-        android:layout_marginStart="8dp"
-        app:backgroundTint="@color/colorAccent"/>
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccent" />
 
     <Button
         android:id="@+id/compassCButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="350dp"
-        android:background="@drawable/ic_compass" />
+        android:layout_below="@id/longitudeAEditText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/ic_pin_2" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/latitudeCEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/compassCButton"
-        android:layout_marginStart="8dp"
-        android:layout_toEndOf="@id/compassCButton"
-        android:ems="9"
+        android:layout_below="@id/compassCButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:ems="7"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Latitude C"
-        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textAlignment="center"
         android:textColor="@color/colorText"
-        app:backgroundTint="@color/colorAccent"/>
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccent" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/longitudeCEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/latitudeCEditText"
-        android:ems="9"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:ems="7"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Longitude C"
-        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textAlignment="center"
         android:textColor="@color/colorText"
-        android:layout_toEndOf="@id/compassBButton"
-        android:layout_marginStart="8dp"
-        app:backgroundTint="@color/colorAccent"/>
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccent" />
 
     <Button
         android:id="@+id/compassDButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="450dp"
-        android:background="@drawable/ic_compass" />
+        android:layout_below="@id/longitudeBEditText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="84dp"
+        android:background="@drawable/ic_pin_2" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/latitudeDEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/compassDButton"
+        android:layout_below="@id/compassDButton"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="8dp"
-        android:layout_toEndOf="@id/compassDButton"
-        android:ems="9"
+        android:layout_marginEnd="24dp"
+        android:ems="7"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Latitude D"
-        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textAlignment="center"
         android:textColor="@color/colorText"
-        app:backgroundTint="@color/colorAccent"/>
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccent" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/longitudeDEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/latitudeDEditText"
-        android:ems="9"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
+        android:ems="7"
         android:fontFamily="@font/ubuntu_medium"
         android:hint="Longitude D"
-        android:textColorHint="@color/colorGray"
         android:inputType="numberSigned"
+        android:textAlignment="center"
         android:textColor="@color/colorText"
-        android:layout_toEndOf="@id/compassBButton"
-        android:layout_marginStart="8dp"
-        app:backgroundTint="@color/colorAccent"/>
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccent" />
 
+    <ImageView
+        android:id="@+id/altitudeIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/longitudeCEditText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="60dp"
+        app:srcCompat="@drawable/ic_arrow_up" />
 
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/altitudeEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/altitudeIcon"
+        android:layout_marginStart="24dp"
+        android:ems="7"
+        android:fontFamily="@font/ubuntu_medium"
+        android:hint="Altitude"
+        android:inputType="numberSigned"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccent" />
+
+    <ImageView
+        android:id="@+id/groundSpeedIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/longitudeCEditText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="84dp"
+        app:srcCompat="@drawable/ic_mail_4" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/groundSpeedEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/groundSpeedIcon"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:ems="7"
+        android:fontFamily="@font/ubuntu_medium"
+        android:hint="Ground speed"
+        android:inputType="numberSigned"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorGray"
+        app:backgroundTint="@color/colorAccent" />
 
 </RelativeLayout>

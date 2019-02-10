@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class SendToDrone extends AppCompatActivity {
 
@@ -28,6 +31,8 @@ public class SendToDrone extends AppCompatActivity {
     public static String coordinateB;
     public static String coordinateC;
     public static String coordinateD;
+    public static String altitudeValue;
+    public static String groundSpeedValue;
     DatabaseHelper databaseHelper;
     FieldDatabaseHelper fieldDatabaseHelper;
     Button sendButton;
@@ -54,24 +59,35 @@ public class SendToDrone extends AppCompatActivity {
             coordinateB = data.getString(5);
             coordinateC = data.getString(6);
             coordinateD = data.getString(7);
+            altitudeValue = data.getString(10);
+            groundSpeedValue = data.getString(11);
         }
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getIPandPort();
-                CMD = ";" + coordinateA + ";" + coordinateB + ";" + coordinateC + ";" + coordinateD + ";";
+                CMD = ";" + coordinateA + ";" + coordinateB + ";" + coordinateC + ";" + coordinateD + ";" + altitudeValue + ";" + groundSpeedValue + ";";
                 for (int i = 1; i <= fieldDefinition.selectedRow; i++) {
                     for (int j = 1; j <= fieldDefinition.selectedColumn; j++) {
                         Cursor fieldData = fieldDatabaseHelper.getData(fieldDefinition.selectedId, i, j);
                         fieldData.moveToNext();
                         CMD = CMD + String.valueOf(fieldData.getInt(0));
+                        if (fieldData.getInt(0) == 1){
+                            MainActivity.lifetimeSeeds++;
+                        } else if (fieldData.getInt(0) == 2) {
+                            MainActivity.lifetimeWater++;
+                            DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                            String currentDate = df.format(Calendar.getInstance().getTime());
+                            databaseHelper.addLatestDate(fieldId, currentDate);
+                        }
                         if (i * j != fieldDefinition.selectedRow * fieldDefinition.selectedColumn) {
                             CMD = CMD + ";";
                         }
 
                     }
                 }
+                Log.d("SendToDrone", "lifetimeSeeds/Water = " + MainActivity.lifetimeSeeds + " " + MainActivity.lifetimeWater);
                 Log.d("SendToDrone", "CMD = " + CMD);
                 Socket_AsyncTask cmd_send_data = new Socket_AsyncTask();
                 cmd_send_data.execute();

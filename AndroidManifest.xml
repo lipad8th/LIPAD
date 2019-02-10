@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LIPADTheme">
-        <activity android:name=".SendToDrone"></activity>
+        <activity android:name=".ViewFieldDefinition"></activity>
+        <activity android:name=".ViewFieldSelection" />
+        <activity android:name=".SendToDrone" />
         <activity android:name=".CoordinateAActivity" />
         <activity android:name=".fieldDefinition" />
         <activity android:name=".SplashScreen">
