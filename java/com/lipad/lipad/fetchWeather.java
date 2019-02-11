@@ -48,7 +48,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
     private String weatherSub13 = "";
     private String weatherSub14 = "";
     private String weatherSub15 = "";
-    private static String weatherTemp01 = "";
+    private String weatherTemp01 = "";
     private String weatherTemp11 = "";
     private String weatherTemp12 = "";
     private String weatherTemp13 = "";
@@ -609,7 +609,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
 
         MainActivity.weatherTitle01.setText(this.weatherTitle01);
         MainActivity.weatherSub01.setText(this.weatherSub01);
-        MainActivity.weatherTemp01.setText(String.format("%s°C", weatherTemp01));
+        MainActivity.weatherTemp01.setText(String.format("%s°C", this.weatherTemp01));
         MainActivity.weatherTemp11.setText(String.format("%s°C", this.weatherTemp11));
         MainActivity.weatherTemp12.setText(String.format("%s°C", this.weatherTemp12));
         MainActivity.weatherTemp13.setText(String.format("%s°C", this.weatherTemp13));
@@ -641,7 +641,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
         if (fetchWeather.nextTime.isEmpty())
             fetchWeather.nextTime = "0";
 
-        if (!fetchWeather.tomorrowHigh.isEmpty() && !fetchWeather.tomorrowLow.isEmpty() && !fetchWeather.weatherTemp01.isEmpty()) {
+        if (!fetchWeather.tomorrowHigh.isEmpty() && !fetchWeather.tomorrowLow.isEmpty() && !MainActivity.weatherTemp01.getText().toString().isEmpty()) {
             miscDatabaseHelper = new MiscDatabaseHelper(MainActivity.publicContext);
             miscDatabaseHelper.addTomorrowHigh(fetchWeather.tomorrowHigh);
             miscDatabaseHelper.addTomorrowLow(fetchWeather.tomorrowLow);

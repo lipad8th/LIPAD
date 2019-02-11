@@ -94,7 +94,7 @@ public class ViewFieldSelection extends AppCompatActivity implements classDialog
                 }
                 if (fieldID > -1) {
                     Log.d(TAG, "onItemClick: The ID is: " + fieldID);
-                    Intent editFieldIntent = new Intent(ViewFieldSelection.this, fieldDefinition.class); //TODO: Edit.
+                    Intent editFieldIntent = new Intent(ViewFieldSelection.this, ViewFieldDefinition.class); //TODO: Edit.
                     editFieldIntent.putExtra("id", fieldID);
                     editFieldIntent.putExtra("name", fieldName);
                     editFieldIntent.putExtra("rows", rowValue);

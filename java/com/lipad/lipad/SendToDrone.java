@@ -73,8 +73,11 @@ public class SendToDrone extends AppCompatActivity {
                         Cursor fieldData = fieldDatabaseHelper.getData(fieldDefinition.selectedId, i, j);
                         fieldData.moveToNext();
                         CMD = CMD + String.valueOf(fieldData.getInt(0));
-                        if (fieldData.getInt(0) == 1){
+                        if (fieldData.getInt(0) == 1) {
                             MainActivity.lifetimeSeeds++;
+                            DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                            String currentDate = df.format(Calendar.getInstance().getTime());
+                            databaseHelper.addLatestDate(fieldId, currentDate);
                         } else if (fieldData.getInt(0) == 2) {
                             MainActivity.lifetimeWater++;
                             DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
