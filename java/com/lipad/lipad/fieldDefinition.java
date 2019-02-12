@@ -13,6 +13,10 @@ import android.widget.GridLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import static com.lipad.lipad.createFieldView.buttonX;
 
 public class fieldDefinition extends AppCompatActivity implements View.OnClickListener {
@@ -39,6 +43,7 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
     Button button0;
     Button button1;
     Button button2;
+    Button button3;
     ScrollView scrollView01;
     ScrollView scrollView02;
     private TextView fieldTextView;
@@ -60,6 +65,7 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
         button0 = findViewById(R.id.button0);
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
+        button3 = findViewById(R.id.button3);
 
         scrollView01 = findViewById(R.id.scrollView01);
         scrollView02 = findViewById(R.id.scrollView02);
@@ -100,13 +106,19 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
                             fieldDatabaseHelper.addData(selectedId, i, j, 0);
                         } else if (buttonText.contains("🌱")) {
                             fieldDatabaseHelper.addData(selectedId, i, j, 1);
-                        } else if (buttonText.contains("💧")) {
+                        } else if (buttonText.contains("🌾")) {
                             fieldDatabaseHelper.addData(selectedId, i, j, 2);
+                        } else if (buttonText.contains("💧")) {
+                            fieldDatabaseHelper.addData(selectedId, i, j, 3);
                         }
                         Log.d("fieldDefinition", "buttonId" + k);
                         k++;
                     }
                 }
+                DateFormat df = new SimpleDateFormat("MM/dd h:mma");
+                String dateNow = df.format(Calendar.getInstance().getTime());
+                databaseHelper.addLatestDate(selectedId, dateNow);
+
                 Intent intent = new Intent(fieldDefinition.this, CoordinateAActivity.class);
                 startActivity(intent);
             }
@@ -159,7 +171,15 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 1; i <= fieldSize; i++) {
+                    Button button = findViewById(i);
+                    button.setText("🌾");
+                }
+            }
+        });
 
 
         Intent receivedIntent = getIntent();
@@ -191,6 +211,9 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
                     buttonText = "🌱";
                     break;
                 case 2:
+                    buttonText = "🌾";
+                    break;
+                case 3:
                     buttonText = "💧";
                     break;
             }
@@ -258,6 +281,8 @@ public class fieldDefinition extends AppCompatActivity implements View.OnClickLi
                 if (buttonText.contains("·")) {
                     button.setText("🌱");
                 } else if (buttonText.contains("🌱")) {
+                    button.setText("🌾");
+                } else if (buttonText.contains("🌾")) {
                     button.setText("💧");
                 } else if (buttonText.contains("")) {
                     button.setText("·");

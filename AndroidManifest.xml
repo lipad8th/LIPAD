@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LIPADTheme">
-        <activity android:name=".ViewFieldDefinition"></activity>
+        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".ViewFieldDefinition" />
         <activity android:name=".ViewFieldSelection" />
         <activity android:name=".SendToDrone" />
         <activity android:name=".CoordinateAActivity" />
@@ -29,7 +30,6 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/LIPADThemeFresh" />
-        <activity android:name=".lipadPanel" />
 
         <meta-data
             android:name="preloaded_fonts"

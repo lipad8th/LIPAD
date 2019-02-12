@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.location.Location;
 import android.net.Uri;
@@ -15,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -32,10 +30,6 @@ import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.ValueDependentColor;
-import com.jjoe64.graphview.series.BarGraphSeries;
-import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.Calendar;
 
@@ -91,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public static int totalWater;
     public static int lifetimeSeeds;
     public static int lifetimeWater;
+    public static int seedsPrice;
     public static String tomorrowHigh;
     public static String tomorrowLow;
     public static String nextState;
@@ -99,12 +94,22 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public static String notificationType;
     public static Context publicContext;
     public static Button weatherButton03;
+    public static TextView seedsValueTextView;
     Button weatherButton01;
     Button weatherButton02;
     Button darkSkyDisclaimer;
     DatabaseHelper databaseHelper;
     FieldDatabaseHelper fieldDatabaseHelper;
     MiscDatabaseHelper miscDatabaseHelper;
+    TextView pesosTextView;
+    TextView seedsTextView;
+    TextView pesosValueTextView;
+    TextView pesosValueTextView2;
+    TextView seedsValueTextView2;
+    Button settingsButton;
+    TextView totalPesosTextView;
+    TextView totalValueTextView;
+    TextView totalValueTextView2;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private FusedLocationProviderApi locationProvider = LocationServices.FusedLocationApi;
@@ -161,6 +166,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         weatherDay22 = findViewById(R.id.weatherDay22);
         weatherDay23 = findViewById(R.id.weatherDay23);
         weatherButton03 = findViewById(R.id.weatherButton03);
+
+        pesosTextView = findViewById(R.id.pesosTextView);
+        seedsTextView = findViewById(R.id.seedsTextView);
+        pesosValueTextView = findViewById(R.id.pesosValueTextView);
+        seedsValueTextView = findViewById(R.id.seedsValueTextView);
+        totalPesosTextView = findViewById(R.id.totalPesosTextView);
+        totalValueTextView = findViewById(R.id.totalValueTextView);
+
+        pesosValueTextView2 = findViewById(R.id.pesosValueTextView2);
+        seedsValueTextView2 = findViewById(R.id.seedsValueTextView2);
+        totalValueTextView2 = findViewById(R.id.totalValueTextView2);
+
+        settingsButton = findViewById(R.id.settingsButton);
 
         separatorColor = R.color.colorGray;
 
@@ -230,7 +248,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 fetchWeather process = new fetchWeather();
                 process.execute();
                 toastMessage("Updating weather...", "positive");
-                Snackbar.make(view, "Updating weather...", Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -238,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             @Override
             public void onClick(View v) {
                 createAlarm();
+                toastMessage("You will now receive notifications based on local weather forecasts.", "positive");
             }
         });
 
@@ -279,7 +297,33 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             n++;
         }
 
-        GraphView graph = (GraphView) findViewById(R.id.graphView01);
+        Cursor seedsData = miscDatabaseHelper.getLifetimeSeeds();
+        seedsData.moveToNext();
+        seedsValueTextView.setText(seedsData.getString(0));
+
+        Cursor pesosData = miscDatabaseHelper.getSeedPrice();
+        pesosData.moveToNext();
+        pesosValueTextView.setText(pesosData.getString(0));
+        totalValueTextView.setText(String.valueOf(Double.parseDouble(pesosData.getString(0)) * Integer.parseInt(seedsData.getString(0))));
+
+        Cursor seeds2Data = miscDatabaseHelper.getLifetimeSeeds2();
+        seeds2Data.moveToNext();
+        seedsValueTextView2.setText(seeds2Data.getString(0));
+
+        Cursor pesos2Data = miscDatabaseHelper.getSeed2Price();
+        pesos2Data.moveToNext();
+        pesosValueTextView2.setText(pesos2Data.getString(0));
+        totalValueTextView2.setText(String.valueOf(Double.parseDouble(pesos2Data.getString(0)) * Integer.parseInt(seeds2Data.getString(0))));
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /*GraphView graph = (GraphView) findViewById(R.id.graphView01);
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
                 new DataPoint(1, lifetimeSeeds),
                 new DataPoint(2, lifetimeWater)
@@ -315,7 +359,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         series.setSpacing(48);
 
         series.setDrawValuesOnTop(true);
-        series.setValuesOnTopColor(Color.WHITE);
+        series.setValuesOnTopColor(Color.WHITE);*/
 
     }
 

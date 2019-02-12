@@ -96,8 +96,13 @@ public class ViewFieldDefinition extends AppCompatActivity implements View.OnCli
 
         fieldSize = selectedRow * selectedColumn;
 
+        Cursor dates = databaseHelper.getDates(selectedId);
+        dates.moveToFirst();
+        String originalDate = dates.getString(0);
+        String newDate = dates.getString(1);
+
         fieldTextView.setText(selectedField);
-        fieldSizeTextView.setText(selectedRow + "×" + selectedColumn + " field");
+        fieldSizeTextView.setText(originalDate + " | Last edited: " +newDate);
 
         initializeDatabase();
         initializeGrid();

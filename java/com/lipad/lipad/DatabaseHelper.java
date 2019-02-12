@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addData(String fieldNameString, String rowValue, String columnValue) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat df = new SimpleDateFormat("MM/dd h:mma");
         String dateToday = df.format(Calendar.getInstance().getTime());
 
         ContentValues contentValues = new ContentValues();
@@ -58,6 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL2, rowValue);
         contentValues.put(COL3, columnValue);
         contentValues.put(COL8, dateToday);
+        contentValues.put(COL9, dateToday);
 
         Log.d(TAG, "addData: Adding " + fieldNameString + " to " + TABLE_NAME);
 
@@ -189,11 +190,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addLatestDate(String fieldId, String currentDate) {
+    public void addLatestDate(int fieldId, String currentDate) {
         //UPDATE field_table SET latestDate = "yyyy/MM/dd" WHERE ID == 1
         SQLiteDatabase db = this.getWritableDatabase();
         String dataEntry = "UPDATE " + TABLE_NAME + " SET " + COL9 + " = \"" + currentDate + "\" WHERE " + COL0 + " == " + fieldId;
         db.execSQL(dataEntry);
+    }
+
+    public Cursor getDates(int fieldId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL8 + ", " + COL9 + " FROM field_table WHERE ID == " + fieldId;
+        Cursor data = db.rawQuery(query, null);
+        return data;
     }
 
 }

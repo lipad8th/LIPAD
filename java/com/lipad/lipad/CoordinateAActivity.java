@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.PorterDuff;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +18,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -171,20 +175,26 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
         coordinateANextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                coordinateA = latitudeAEditText.getText() + "," + longitudeAEditText.getText();
-                coordinateB = latitudeBEditText.getText() + "," + longitudeBEditText.getText();
-                coordinateC = latitudeCEditText.getText() + "," + longitudeCEditText.getText();
-                coordinateD = latitudeDEditText.getText() + "," + longitudeDEditText.getText();
-                altitudeValue = String.valueOf(altitudeEditText.getText());
-                groundSpeedValue = String.valueOf(groundSpeedEditText.getText());
-                databaseHelper.addCoordinateData(fieldDefinition.selectedId, "A", coordinateA);
-                databaseHelper.addCoordinateData(fieldDefinition.selectedId, "B", coordinateB);
-                databaseHelper.addCoordinateData(fieldDefinition.selectedId, "C", coordinateC);
-                databaseHelper.addCoordinateData(fieldDefinition.selectedId, "D", coordinateD);
-                databaseHelper.addAltitudeData(fieldDefinition.selectedId, altitudeValue);
-                databaseHelper.addGroundSpeedData(fieldDefinition.selectedId, groundSpeedValue);
-                Intent intent = new Intent(CoordinateAActivity.this, SendToDrone.class);
-                startActivity(intent);
+                if (String.valueOf(latitudeAEditText.getText()).equals("") || String.valueOf(latitudeBEditText.getText()).equals("")
+                        || String.valueOf(latitudeCEditText.getText()).equals("") || String.valueOf(latitudeDEditText.getText()).equals("")
+                        || String.valueOf(altitudeEditText.getText()).equals("") || String.valueOf(groundSpeedEditText.getText()).equals("")) {
+                    toastMessage("Incomplete details.", "negative");
+                } else {
+                    coordinateA = latitudeAEditText.getText() + "," + longitudeAEditText.getText();
+                    coordinateB = latitudeBEditText.getText() + "," + longitudeBEditText.getText();
+                    coordinateC = latitudeCEditText.getText() + "," + longitudeCEditText.getText();
+                    coordinateD = latitudeDEditText.getText() + "," + longitudeDEditText.getText();
+                    altitudeValue = String.valueOf(altitudeEditText.getText());
+                    groundSpeedValue = String.valueOf(groundSpeedEditText.getText());
+                    databaseHelper.addCoordinateData(fieldDefinition.selectedId, "A", coordinateA);
+                    databaseHelper.addCoordinateData(fieldDefinition.selectedId, "B", coordinateB);
+                    databaseHelper.addCoordinateData(fieldDefinition.selectedId, "C", coordinateC);
+                    databaseHelper.addCoordinateData(fieldDefinition.selectedId, "D", coordinateD);
+                    databaseHelper.addAltitudeData(fieldDefinition.selectedId, altitudeValue);
+                    databaseHelper.addGroundSpeedData(fieldDefinition.selectedId, groundSpeedValue);
+                    Intent intent = new Intent(CoordinateAActivity.this, SendToDrone.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -348,6 +358,31 @@ public class CoordinateAActivity extends AppCompatActivity implements GoogleApiC
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    private void toastMessage(String message, String messageType) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        View toastView = toast.getView();
+
+        TextView text = toastView.findViewById(android.R.id.message);
+
+        switch (messageType) {
+            case "positive":
+                text.setTextColor(getResources().getColor(R.color.colorAccentDark));
+                toastView.getBackground().setColorFilter(getResources().getColor(R.color.colorBackgroundDark), PorterDuff.Mode.SRC_IN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text.setTypeface(getResources().getFont(R.font.ubuntu_medium));
+                }
+                break;
+            case "negative":
+                text.setTextColor(getResources().getColor(R.color.colorBackgroundDark));
+                toastView.getBackground().setColorFilter(getResources().getColor(R.color.colorAccentDark), PorterDuff.Mode.SRC_IN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text.setTypeface(getResources().getFont(R.font.ubuntu_medium));
+                }
+        }
+
+        toast.show();
     }
 
 }

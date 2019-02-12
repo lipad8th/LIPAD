@@ -29,12 +29,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/settingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="SETTINGS"
+                android:textAlignment="textEnd"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="12dp"
+                android:textColor="@color/colorText"
+                android:fontFamily="@font/ubuntu_medium"
+                android:background="@color/colorBackground"/>
+
             <android.support.v7.widget.CardView
                 android:id="@+id/card01"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="12dp"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -604,7 +616,6 @@
             </android.support.v7.widget.CardView>
 
 
-
             <android.support.v7.widget.CardView
                 android:id="@+id/card03"
                 android:layout_width="match_parent"
@@ -621,7 +632,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="390dp"
+                    android:layout_height="370dp"
                     android:background="@color/colorCard"
                     android:padding="12dp">
 
@@ -630,20 +641,218 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ubuntu_bold"
                         android:padding="12dp"
-                        android:text="Stats"
+                        android:text="Expenses"
                         android:textColor="@color/colorText"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
-                    <com.jjoe64.graphview.GraphView
-                        android:id="@+id/graphView01"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="60dp"
+                        android:text="🌱"
+                        android:textColor="@color/colorText"/>
+
+                    <TextView
+                        android:id="@+id/pesosTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="84dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="PESOS"
+                        android:textColor="@color/colorText"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/seedsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pesosTextView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="SEEDS"
+                        android:textColor="@color/colorText"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/pesosValueTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/pesosTextView"
+                        android:layout_marginEnd="12dp"
+                        android:layout_toStartOf="@id/pesosTextView"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="0.08"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_alignBaseline="@id/seedsTextView"
+                        android:text="✖"
+                        android:textColor="@color/colorText"/>
+
+                    <TextView
+                        android:id="@+id/seedsValueTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/seedsTextView"
+                        android:layout_marginEnd="12dp"
+                        android:layout_toStartOf="@id/seedsTextView"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="456"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/totalPesosTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/separator2"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="PESOS"
+                        android:textColor="@color/colorText"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/totalValueTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/totalPesosTextView"
+                        android:layout_marginEnd="12dp"
+                        android:layout_toStartOf="@id/totalPesosTextView"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="789"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+
+                    <View
+                        android:id="@+id/separator2"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:layout_alignParentBottom="true" />
+                        android:layout_height="1dp"
+                        android:layout_below="@id/seedsTextView"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@color/colorGray" />
+
+                    <!-- Next -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="200dp"
+                        android:text="🌾"
+                        android:textColor="@color/colorText"/>
+
+                    <TextView
+                        android:id="@+id/pesosTextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="222dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="PESOS"
+                        android:textColor="@color/colorText"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/seedsTextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pesosTextView2"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="SEEDS"
+                        android:textColor="@color/colorText"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/pesosValueTextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/pesosTextView2"
+                        android:layout_marginEnd="12dp"
+                        android:layout_toStartOf="@id/pesosTextView2"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="0.08"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_alignBaseline="@id/seedsTextView2"
+                        android:text="✖"
+                        android:textColor="@color/colorText"/>
+
+                    <TextView
+                        android:id="@+id/seedsValueTextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/seedsTextView2"
+                        android:layout_marginEnd="12dp"
+                        android:layout_toStartOf="@id/seedsTextView2"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="456"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/totalPesosTextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/separator3"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="PESOS"
+                        android:textColor="@color/colorText"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/totalValueTextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/totalPesosTextView2"
+                        android:layout_marginEnd="12dp"
+                        android:layout_toStartOf="@id/totalPesosTextView2"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="789"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+
+                    <View
+                        android:id="@+id/separator3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/seedsTextView2"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@color/colorGray" />
 
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
-
 
             <Button
                 android:id="@+id/darkSkyDisclaimer"

@@ -33,8 +33,11 @@ public class SendToDrone extends AppCompatActivity {
     public static String coordinateD;
     public static String altitudeValue;
     public static String groundSpeedValue;
+    int seeds;
+    int seeds2;
     DatabaseHelper databaseHelper;
     FieldDatabaseHelper fieldDatabaseHelper;
+    MiscDatabaseHelper miscDatabaseHelper;
     Button sendButton;
     EditText ipAddressEditText;
     Socket myAppSocket = null;
@@ -45,9 +48,9 @@ public class SendToDrone extends AppCompatActivity {
         setContentView(R.layout.activity_send_to_drone);
 
         sendButton = findViewById(R.id.sendButton);
-        ipAddressEditText = findViewById(R.id.ipAddressEditText);
         databaseHelper = new DatabaseHelper(this);
         fieldDatabaseHelper = new FieldDatabaseHelper(this);
+        miscDatabaseHelper = new MiscDatabaseHelper(this);
 
         Cursor data = databaseHelper.getRowData(fieldDefinition.selectedId);
         while (data.moveToNext()) {
@@ -63,6 +66,14 @@ public class SendToDrone extends AppCompatActivity {
             groundSpeedValue = data.getString(11);
         }
 
+        Cursor seedData = miscDatabaseHelper.getLifetimeSeeds();
+        seedData.moveToNext();
+        seeds = Integer.parseInt(seedData.getString(0));
+
+        Cursor seed2Data = miscDatabaseHelper.getLifetimeSeeds2();
+        seed2Data.moveToNext();
+        seeds2 = Integer.parseInt(seed2Data.getString(0));
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,14 +86,14 @@ public class SendToDrone extends AppCompatActivity {
                         CMD = CMD + String.valueOf(fieldData.getInt(0));
                         if (fieldData.getInt(0) == 1) {
                             MainActivity.lifetimeSeeds++;
-                            DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-                            String currentDate = df.format(Calendar.getInstance().getTime());
-                            databaseHelper.addLatestDate(fieldId, currentDate);
+                            seeds++;
+                            Log.d("SendToDrone", "seeds: " + seeds);
+                            miscDatabaseHelper.addLifetimeSeeds(String.valueOf(seeds));
                         } else if (fieldData.getInt(0) == 2) {
                             MainActivity.lifetimeWater++;
-                            DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-                            String currentDate = df.format(Calendar.getInstance().getTime());
-                            databaseHelper.addLatestDate(fieldId, currentDate);
+                            seeds2++;
+                            Log.d("SendToDrone", "seeds2: " + seeds2);
+                            miscDatabaseHelper.addLifetimeSeeds2(String.valueOf(seeds2));
                         }
                         if (i * j != fieldDefinition.selectedRow * fieldDefinition.selectedColumn) {
                             CMD = CMD + ";";
@@ -100,7 +111,9 @@ public class SendToDrone extends AppCompatActivity {
     }
 
     public void getIPandPort() {
-        String iPandPort = ipAddressEditText.getText().toString();
+        Cursor ipData = miscDatabaseHelper.getIpAddress();
+        ipData.moveToNext();
+        String iPandPort = ipData.getString(0);
         Log.d("MYTEST", "IP String: " + iPandPort);
         String temp[] = iPandPort.split(":");
         wifiModuleIp = temp[0];
