@@ -30,6 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
         ipAddEditText = findViewById(R.id.ipAddEditText);
         saveButton = findViewById(R.id.saveButton);
 
+
         miscDatabaseHelper = new MiscDatabaseHelper(this);
 
         Cursor seedData = miscDatabaseHelper.getSeedPrice();
@@ -74,7 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void toastMessage(String message, String messageType) {
-        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
         View toastView = toast.getView();
 
         TextView text = toastView.findViewById(android.R.id.message);

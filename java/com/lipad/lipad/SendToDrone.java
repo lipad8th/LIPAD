@@ -1,22 +1,26 @@
 package com.lipad.lipad;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class SendToDrone extends AppCompatActivity {
 
@@ -39,6 +43,7 @@ public class SendToDrone extends AppCompatActivity {
     FieldDatabaseHelper fieldDatabaseHelper;
     MiscDatabaseHelper miscDatabaseHelper;
     Button sendButton;
+    TextView connectText;
     EditText ipAddressEditText;
     Socket myAppSocket = null;
 
@@ -51,6 +56,7 @@ public class SendToDrone extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
         fieldDatabaseHelper = new FieldDatabaseHelper(this);
         miscDatabaseHelper = new MiscDatabaseHelper(this);
+        connectText = findViewById(R.id.connectText);
 
         Cursor data = databaseHelper.getRowData(fieldDefinition.selectedId);
         while (data.moveToNext()) {
@@ -73,6 +79,10 @@ public class SendToDrone extends AppCompatActivity {
         Cursor seed2Data = miscDatabaseHelper.getLifetimeSeeds2();
         seed2Data.moveToNext();
         seeds2 = Integer.parseInt(seed2Data.getString(0));
+
+        Cursor ipData = miscDatabaseHelper.getIpAddress();
+        ipData.moveToNext();
+        connectText.setText("Connect to: " + ipData.getString(0));
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +115,10 @@ public class SendToDrone extends AppCompatActivity {
                 Log.d("SendToDrone", "CMD = " + CMD);
                 Socket_AsyncTask cmd_send_data = new Socket_AsyncTask();
                 cmd_send_data.execute();
+                Intent intent = new Intent(SendToDrone.this, MainActivity.class);
+                startActivity(intent);
+                finishAffinity();
+                toastMessage("Details sent to drone successfully. Drone will now start.", "positive");
             }
         });
 
@@ -120,6 +134,31 @@ public class SendToDrone extends AppCompatActivity {
         wifiModulePort = Integer.valueOf(temp[1]);
         Log.d("MY TEST", "IP:" + wifiModuleIp);
         Log.d("MY TEST", "PORT:" + wifiModulePort);
+    }
+
+    private void toastMessage(String message, String messageType) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        View toastView = toast.getView();
+
+        TextView text = toastView.findViewById(android.R.id.message);
+
+        switch (messageType) {
+            case "positive":
+                text.setTextColor(getResources().getColor(R.color.colorAccentDark));
+                toastView.getBackground().setColorFilter(getResources().getColor(R.color.colorBackgroundDark), PorterDuff.Mode.SRC_IN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text.setTypeface(getResources().getFont(R.font.ubuntu_medium));
+                }
+                break;
+            case "negative":
+                text.setTextColor(getResources().getColor(R.color.colorBackgroundDark));
+                toastView.getBackground().setColorFilter(getResources().getColor(R.color.colorAccentDark), PorterDuff.Mode.SRC_IN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    text.setTypeface(getResources().getFont(R.font.ubuntu_medium));
+                }
+        }
+
+        toast.show();
     }
 
     public class Socket_AsyncTask extends AsyncTask<Void, Void, Void> {

@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SendToDrone"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    tools:context=".SendToDrone">
 
     <TextView
         android:id="@+id/sendTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/ubuntu_bold"
         android:text="Send to drone"
-        android:layout_centerHorizontal="true"
         android:textColor="@color/colorText"
         android:textSize="32sp" />
 
@@ -26,16 +25,40 @@
         android:layout_below="@id/sendTextView"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/ubuntu"
-        android:text="Set IP Address to connect"
-        android:textSize="16sp"
-        android:textColor="@color/colorGray"/>
+        android:text="Tap the button to send data to drone"
+        android:textColor="@color/colorGray"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/connectText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ipDisclaimer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="Connect to: "
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/ipDisclaimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/sendButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/ubuntu"
+        android:text="Head to settings to change IP address."
+        android:textColor="@color/colorText" />
 
     <Button
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:background="@drawable/buttonshape"
         android:fontFamily="@font/ubuntu_bold"
         android:text="Send"
