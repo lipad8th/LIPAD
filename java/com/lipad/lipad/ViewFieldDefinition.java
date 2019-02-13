@@ -122,6 +122,9 @@ public class ViewFieldDefinition extends AppCompatActivity implements View.OnCli
                     buttonText = "🌱";
                     break;
                 case 2:
+                    buttonText = "🌾";
+                    break;
+                case 3:
                     buttonText = "💧";
                     break;
             }
@@ -189,6 +192,8 @@ public class ViewFieldDefinition extends AppCompatActivity implements View.OnCli
                 if (buttonText.contains("·")) {
                     button.setText("🌱");
                 } else if (buttonText.contains("🌱")) {
+                    button.setText("🌾");
+                } else if (buttonText.contains("🌾")) {
                     button.setText("💧");
                 } else if (buttonText.contains("")) {
                     button.setText("·");

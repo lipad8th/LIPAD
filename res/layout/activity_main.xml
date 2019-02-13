@@ -745,7 +745,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginRight="16dp"
-                        android:background="@color/colorGray" />
+                        android:background="z" />
 
                     <!-- Next -->
                     <TextView

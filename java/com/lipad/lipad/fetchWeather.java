@@ -206,7 +206,7 @@ public class fetchWeather extends AsyncTask<Void, Void, Void> {
                 case "Breezy and Mostly Cloudy":
                     weatherCondition = breezyMostlyCloudyText;
                     break;
-                //TODO: Humid and Partly/Mostly Cloudy
+                //TODO: Humid and Partly/Mostly Cloudy || Humid and Overcast
             }
 
             weatherSub01 = "" + weatherCondition + "\n" +

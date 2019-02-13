@@ -31,6 +31,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -304,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         Cursor pesosData = miscDatabaseHelper.getSeedPrice();
         pesosData.moveToNext();
         pesosValueTextView.setText(pesosData.getString(0));
-        totalValueTextView.setText(String.valueOf(Double.parseDouble(pesosData.getString(0)) * Integer.parseInt(seedsData.getString(0))));
+        totalValueTextView.setText(String.valueOf(new DecimalFormat("0.00").format(Double.parseDouble(pesosData.getString(0)) * Integer.parseInt(seedsData.getString(0)))));
 
         Cursor seeds2Data = miscDatabaseHelper.getLifetimeSeeds2();
         seeds2Data.moveToNext();
@@ -313,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         Cursor pesos2Data = miscDatabaseHelper.getSeed2Price();
         pesos2Data.moveToNext();
         pesosValueTextView2.setText(pesos2Data.getString(0));
-        totalValueTextView2.setText(String.valueOf(Double.parseDouble(pesos2Data.getString(0)) * Integer.parseInt(seeds2Data.getString(0))));
+        totalValueTextView2.setText(String.valueOf(new DecimalFormat("0.00").format(Double.parseDouble(pesos2Data.getString(0)) * Integer.parseInt(seeds2Data.getString(0)))));
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
